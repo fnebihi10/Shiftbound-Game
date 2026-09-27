@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Shiftbound/Scenes/SkylineRooftops.unity
-    guid: 0df328ecf2cc87a499fa6c88080d5c6c
+    path: Assets/Shiftbound/Scenes/GoldenRooftops.unity
+    guid: 3f4f4186372bf614cb17a441bcae4a1a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

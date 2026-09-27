@@ -1,15 +1,19 @@
 ﻿# Shiftbound
 
-Shiftbound is a Unity 6.3 LTS / URP third-person rooftop platformer prototype. The player jumps between two versions of the same city and switches worlds to reach the goal.
+Shiftbound is a Unity 6.3 LTS / URP third-person rooftop platformer prototype. The player runs, jumps, and shifts between a contemporary city and its overgrown counterpart to reach the goal.
 
-**Current state:** The mechanics are playable, but the graphics and animation are an early prototype. The approved [visual target](ArtDirection/visual-target-gameview-v2.png) is concept art, not a Unity render. Compare it with the [actual Unity preview](ArtDirection/SkylineRooftops-editor-preview.png). The current scene does not yet meet the target's character, environment, lighting, or animation quality.
+## Current playable scene
 
-## Open the game
+Open `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity`. This V4 scene keeps the existing puzzles and adds paired distant city backdrops, licensed PBR rooftop and building materials, more rooftop detail and foliage, a smaller courier backpack, and adjusted camera and animation tuning. V3 `SkylineRooftops.unity` remains available for comparison.
+
+Compare the approved [concept image](ArtDirection/visual-target-gameview-v2.png) with the [actual V4 Windows-player capture](ArtDirection/GoldenRooftops-player-capture.png). V4 is visibly closer in its skyline and materials, but its character, nearby architecture, vegetation, and overall finish are still below the concept. The distant city is a camera-facing 2D matte layer behind real playable 3D rooftops; it cannot be explored as a 3D city. This is still a prototype, not a finished store game.
+
+## Open and test
 
 1. In Unity Hub, add the **UnityProject** folder inside this repository. Open it with **Unity 6.3 LTS (6000.3.25f1)**.
-2. In Unity's Project panel, open **Assets > Shiftbound > Scenes > SkylineRooftops**. This is the latest scene and the one included in Build Profiles. Older scenes are kept for comparison.
-3. Click the **Game** tab, press the **Play** button at the top, and click inside the Game view to focus input.
-4. Press **Play** again to leave Play mode. Changes made during Play mode are not saved.
+2. In Unity's Project panel, open **Assets > Shiftbound > Scenes > GoldenRooftops**. Confirm the Hierarchy title says **GoldenRooftops**.
+3. Click the **Game** tab and press the **Play** triangle. Click in the Game view to focus controls.
+4. Press **Play** again to exit Play mode. Changes made while playing are not saved.
 
 | Action | Keyboard / mouse | Gamepad |
 | --- | --- | --- |
@@ -20,22 +24,18 @@ Shiftbound is a Unity 6.3 LTS / URP third-person rooftop platformer prototype. T
 | Pause / resume | Escape | Start |
 | Restart | R | Select / Back |
 
-The first slice contains checkpoints, quick respawn, a blocked-shift check, a midair shift, a route puzzle, and a goal. See [GAME_DESIGN.md](GAME_DESIGN.md) for intended rules. The game currently targets Windows for testing. It does not yet have mobile touch controls or store-ready builds.
-
-## Visual review and next work
-
-Read [ART_DIRECTION.md](ART_DIRECTION.md) before changing the art. It separates the approved concept from the current scene and records the quality bar, gaps, and production order. A reviewer can use [CLAUDE_REVIEW.md](CLAUDE_REVIEW.md) as a concrete audit brief. The main goal is a convincing, cohesive 3D character and rooftop world that approach the approved image in a real Unity Game view, followed by movement and animation refinement. A still image alone cannot supply rigged geometry, animation, lighting, and a playable environment.
+A local Windows test build is at `UnityProject/Builds/WindowsV4/Shiftbound.exe` when built on this machine. GitHub stores the Unity source, not the generated Windows build. The project does not yet have mobile touch controls or store-ready builds.
 
 ## Project layout
 
-- `UnityProject/Assets/Shiftbound/Scenes/SkylineRooftops.unity` — latest playable scene.
-- `UnityProject/Assets/Shiftbound/Scripts/` — player, camera, world switching, checkpoints, game flow, and animation scripts.
-- `UnityProject/Assets/Shiftbound/Editor/` — scene generation and diagnostic tools. The build menus can regenerate scenes; save manual edits in a separate scene before using them.
-- `UnityProject/Assets/Shiftbound/ThirdParty/` — selected Quaternius character and animation source assets. See [THIRD_PARTY.md](THIRD_PARTY.md).
-- `ArtDirection/` — concept references and a real Unity preview, labeled separately.
+- `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity` — latest playable scene.
+- `UnityProject/Assets/Shiftbound/Scripts/` — player, camera, world switching, checkpoints, game flow, animation, and V4 backdrop/state scripts.
+- `UnityProject/Assets/Shiftbound/Editor/BuildArtPassV4.cs` — V4 scene generator. It creates `GoldenRooftops` from V3 and will overwrite manual edits to that generated scene; save a new scene before running it after manual work.
+- `UnityProject/Assets/Shiftbound/TexturesV4/` and `MaterialsV4/` — paired city images and licensed surface materials.
+- `ArtDirection/` — approved concept and real player capture, labeled separately.
 
-Unity-generated `Library`, `Temp`, `Logs`, `Builds`, IDE files, and downloaded source archives are excluded from Git. Keep Unity `.meta` files with their assets; Unity uses them to maintain references.
+Read [GAME_DESIGN.md](GAME_DESIGN.md) for mechanics, [ART_DIRECTION.md](ART_DIRECTION.md) for the production target, [CLAUDE_REVIEW.md](CLAUDE_REVIEW.md) for a reviewer brief, and [THIRD_PARTY.md](THIRD_PARTY.md) for asset sources. Keep Unity `.meta` files with their assets.
 
-## Verification
+## Verification and remaining work
 
-The V3 scene compiled in Unity 6.3 LTS and a Windows player build completed locally. A headless smoke run covered safe and blocked shifts, a midair shift, checkpoint respawn, and goal state. The user has run the scene in the Editor and confirmed that the visuals still fall well short of the approved concept. Full level traversal, visual quality, mobile controls, device performance, and store release requirements remain unverified.
+V4 compiled in Unity 6.3 LTS, a Windows player build completed, and an offscreen render from that player produced the linked capture. The V4 player smoke check passed blocked and safe world shifts, a midair shift, checkpoint respawn, and goal state. This does not verify that a person can comfortably traverse the full level. Mobile controls, mobile performance, polished character modeling and animation, authored environment assets, finished audio, and store requirements remain open.

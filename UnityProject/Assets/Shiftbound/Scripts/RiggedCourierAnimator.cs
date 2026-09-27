@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Shiftbound
 {
@@ -27,13 +27,13 @@ namespace Shiftbound
             animator = GetComponent<Animator>();
             animator.applyRootMotion = false;
             currentState = Idle;
-            wasGrounded = motor != null && motor.Controller.isGrounded;
+            wasGrounded = motor != null && motor.IsGrounded;
         }
 
         private void Update()
         {
             if (motor == null || animator.runtimeAnimatorController == null) return;
-            bool grounded = motor.Controller.isGrounded;
+            bool grounded = motor.IsGrounded;
             if (!grounded) airTime += Time.deltaTime;
             if (grounded && !wasGrounded && airTime > 0.18f)
                 landingUntil = Time.time + landingDuration;
@@ -48,8 +48,8 @@ namespace Shiftbound
                 animator.CrossFadeInFixedTime(wanted, transitionDuration);
                 currentState = wanted;
             }
-            animator.speed = wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) : 1f;
+            animator.speed = wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :
+                wanted == Sprint ? Mathf.Clamp(speed / 7f, 0.75f, 1.2f) : 1f;
         }
     }
 }
-

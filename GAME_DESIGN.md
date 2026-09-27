@@ -1,6 +1,6 @@
-﻿# Shiftbound - game design, first playable slice
+# Shiftbound - game design, first playable slice
 
-Status: SkylineRooftops V3 scene and Windows test build generated. Automated checks cover core world switching and flow; the user has opened and played the scene in Unity and found that the graphics remain far below the approved concept. Full interactive route and Android testing are pending. Working title, tuning values, and visuals may change after player tests.
+Status: GoldenRooftops V4 scene and Windows test build generated. Automated checks cover core world switching and game flow; an actual V4 player render was captured. The user has not yet played the V4 scene interactively. Graphics remain below the approved concept.
 
 ## Player experience
 
@@ -72,6 +72,3 @@ After each increment, record what changed, required Editor steps, and exactly wh
 ## Player validation
 
 First ask 5-10 people to play without coaching. Watch for confusion about controls, active surfaces, and Shift timing. Observe whether anyone voluntarily replays to improve a run. Revise the mechanic and level before creating a large content set if the first slice is unclear or not enjoyable.
-
-
-

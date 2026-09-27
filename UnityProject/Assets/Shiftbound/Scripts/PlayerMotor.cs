@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Shiftbound
 {
@@ -32,6 +32,7 @@ namespace Shiftbound
 
         public Vector3 HorizontalVelocity => horizontalVelocity;
         public CharacterController Controller => controller;
+        public bool IsGrounded { get; private set; }
 
         private void Awake()
         {
@@ -45,11 +46,12 @@ namespace Shiftbound
             float dt = Time.deltaTime;
             bool grounded = Physics.CheckSphere(transform.position + Vector3.up * 0.08f, 0.23f,
                 groundMask, QueryTriggerInteraction.Ignore);
+            IsGrounded = grounded;
             if (grounded)
             {
                 coyoteLeft = coyoteTime;
                 if (!wasGrounded && visual != null) visual.localScale = new Vector3(
-                    visualBaseScale.x * 1.14f, visualBaseScale.y * 0.82f, visualBaseScale.z * 1.14f);
+                    visualBaseScale.x * 1.025f, visualBaseScale.y * 0.96f, visualBaseScale.z * 1.025f);
                 if (verticalVelocity < 0f) verticalVelocity = -2f;
             }
             else coyoteLeft -= dt;
@@ -64,6 +66,7 @@ namespace Shiftbound
                 bufferLeft = 0f;
                 coyoteLeft = 0f;
                 wasGrounded = false;
+                IsGrounded = false;
             }
             if (input.JumpReleased && verticalVelocity > 0f)
                 verticalVelocity *= releasedJumpMultiplier;
@@ -103,6 +106,7 @@ namespace Shiftbound
             coyoteLeft = 0f;
             bufferLeft = 0f;
             wasGrounded = false;
+            IsGrounded = false;
         }
     }
 }
