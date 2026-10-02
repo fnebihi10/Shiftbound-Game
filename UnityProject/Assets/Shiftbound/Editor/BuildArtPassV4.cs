@@ -19,6 +19,8 @@ public static class BuildArtPassV4
     [MenuItem("Shiftbound/Build Golden Rooftops V4")]
     public static void Build()
     {
+        if (AssetDatabase.LoadAssetAtPath<SceneAsset>(Target) != null)
+            throw new InvalidOperationException("GoldenRooftops already exists. Duplicate or move the authored scene before regenerating V4.");
         if (!AssetDatabase.IsValidFolder(Materials)) AssetDatabase.CreateFolder(Root, "MaterialsV4");
         EditorSceneManager.OpenScene(Source, OpenSceneMode.Single);
         Transform v3 = GameObject.Find("City art V3").transform;
@@ -137,6 +139,11 @@ public static class BuildArtPassV4
         if (normal && importer.textureType != TextureImporterType.NormalMap)
         {
             importer.textureType = TextureImporterType.NormalMap;
+            changed = true;
+        }
+        if (normal && !importer.flipGreenChannel)
+        {
+            importer.flipGreenChannel = true; // Poly Haven source is DirectX; Unity expects +Y.
             changed = true;
         }
         if (importer.maxTextureSize != 2048) { importer.maxTextureSize = 2048; changed = true; }
@@ -435,7 +442,8 @@ public static class BuildArtPassV4
         Texture2D image = new Texture2D(1280, 720, TextureFormat.RGB24, false);
         image.ReadPixels(new Rect(0, 0, 1280, 720), 0, 0);
         image.Apply();
-        string output = "C:/Users/Admin/Desktop/LINDI/Shiftbound-Game/ArtDirection/GoldenRooftops-editor-preview.png";
+        string output = System.IO.Path.GetFullPath(System.IO.Path.Combine(
+            Application.dataPath, "../../ArtDirection/GoldenRooftops-editor-preview.png"));
         System.IO.File.WriteAllBytes(output, image.EncodeToPNG());
         camera.targetTexture = null;
         RenderTexture.active = null;

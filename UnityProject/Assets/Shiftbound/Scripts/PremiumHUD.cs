@@ -14,6 +14,22 @@ namespace Shiftbound
         private GUIStyle center;
         private Texture2D pillTexture;
         private Texture2D darkTexture;
+        private bool gamepadPrompts;
+
+        public static string FormatTime(float seconds)
+        {
+            int totalTenths = Mathf.Max(0, Mathf.FloorToInt(seconds * 10f));
+            return string.Format("{0:00}:{1:00}.{2}", totalTenths / 600,
+                (totalTenths / 10) % 60, totalTenths % 10);
+        }
+
+        private void Update()
+        {
+            if (UnityEngine.InputSystem.Gamepad.current != null &&
+                UnityEngine.InputSystem.Gamepad.current.wasUpdatedThisFrame) gamepadPrompts = true;
+            if (UnityEngine.InputSystem.Keyboard.current != null &&
+                UnityEngine.InputSystem.Keyboard.current.wasUpdatedThisFrame) gamepadPrompts = false;
+        }
 
         private void EnsureStyles()
         {
@@ -80,10 +96,11 @@ namespace Shiftbound
                 worlds.IsAltered ? "OVERGROWN" : "PRESENT", title);
             GUI.Box(new Rect(w - pad - 147f, pad, 147f, 58f), GUIContent.none, pill);
             GUI.Label(new Rect(w - pad - 130f, pad + 12f, 120f, 34f),
-                flow.Elapsed.ToString("00:00.0"), timer);
+                FormatTime(flow.Elapsed), timer);
 
             GUI.Box(new Rect(pad, h - pad - 42f, 430f, 42f), GUIContent.none, pill);
             GUI.Label(new Rect(pad + 14f, h - pad - 39f, 410f, 34f),
+                gamepadPrompts ? "LEFT STICK  MOVE     A  JUMP     X  SWITCH" :
                 "WASD  MOVE     SPACE  JUMP     SHIFT  SWITCH", controls);
 
             if (!string.IsNullOrEmpty(flow.ActiveNotice))
@@ -99,9 +116,13 @@ namespace Shiftbound
                     GUIContent.none, new GUIStyle(pill) { normal = { background = darkTexture } });
                 GUI.Label(new Rect(w / 2f - 185f, h / 2f - 55f, 370f, 100f),
                     flow.IsComplete
-                        ? "ROOFTOP CLEARED\n" + flow.Elapsed.ToString("0.0") + " seconds\nR / Select to retry"
-                        : "PAUSED\nEscape / Start to resume\nR / Select to restart",
+                        ? "ROOFTOP CLEARED\n" + FormatTime(flow.Elapsed) + "\nRetry below"
+                        : "PAUSED\nResume or restart below",
                     center);
+                if (flow.IsPaused && GUI.Button(new Rect(w / 2f - 178f, h / 2f + 48f, 160f, 34f), "RESUME"))
+                    flow.TogglePause();
+                if (GUI.Button(new Rect(w / 2f + 18f, h / 2f + 48f, 160f, 34f), "RETRY"))
+                    flow.Restart();
             }
             GUI.matrix = previous;
         }

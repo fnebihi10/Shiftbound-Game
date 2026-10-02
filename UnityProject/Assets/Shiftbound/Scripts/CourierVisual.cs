@@ -23,10 +23,10 @@ namespace Shiftbound
         private void LateUpdate()
         {
             if (motor == null) return;
-            float speed = motor.HorizontalVelocity.magnitude;
+            float speed = new Vector2(motor.ActualVelocity.x, motor.ActualVelocity.z).magnitude;
             float weight = Mathf.Clamp01(speed / Mathf.Max(0.1f, motor.maxSpeed));
             phase += Time.deltaTime * strideFrequency * Mathf.Max(0.3f, weight);
-            bool grounded = motor.Controller.isGrounded;
+            bool grounded = motor.IsGrounded;
             float swing = Mathf.Sin(phase) * strideAngle * weight;
             if (!grounded) swing = 22f;
             if (leftLeg != null) leftLeg.localRotation = Quaternion.Euler(swing, 0f, 0f);

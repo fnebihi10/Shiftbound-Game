@@ -9,6 +9,8 @@ namespace Shiftbound
         private AudioClip denied;
         private AudioClip checkpoint;
         private AudioClip goal;
+        private AudioClip footstep;
+        private AudioClip landing;
 
         private void Awake()
         {
@@ -18,6 +20,8 @@ namespace Shiftbound
             denied = Tone("Blocked", 170f, 0.16f);
             checkpoint = Tone("Checkpoint", 710f, 0.16f);
             goal = Tone("Goal", 900f, 0.35f);
+            footstep = Tone("Footstep", 125f, 0.055f);
+            landing = Tone("Landing", 95f, 0.13f);
         }
 
         private static AudioClip Tone(string name, float frequency, float duration)
@@ -40,5 +44,7 @@ namespace Shiftbound
         public void Denied() => source.PlayOneShot(denied);
         public void Checkpoint() => source.PlayOneShot(checkpoint);
         public void Goal() => source.PlayOneShot(goal);
+        public void Footstep() => source.PlayOneShot(footstep, 0.45f);
+        public void Landing() => source.PlayOneShot(landing, 0.75f);
     }
 }

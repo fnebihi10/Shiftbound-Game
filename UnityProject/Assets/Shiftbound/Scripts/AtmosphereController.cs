@@ -19,6 +19,9 @@ namespace Shiftbound
             float t = 1f - Mathf.Exp(-transitionSpeed * Time.unscaledDeltaTime);
             RenderSettings.fogColor = Color.Lerp(RenderSettings.fogColor, wantedFog, t);
             RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, wantedAmbient, t);
+            if (worlds.sun != null)
+                worlds.sun.color = Color.Lerp(worlds.sun.color,
+                    worlds.IsAltered ? worlds.alteredLight : worlds.presentLight, t);
         }
     }
 }

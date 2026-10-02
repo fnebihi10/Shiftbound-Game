@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Shiftbound
 {
+    [DefaultExecutionOrder(100)]
     [RequireComponent(typeof(Animator))]
     public sealed class RiggedCourierAnimator : MonoBehaviour
     {
@@ -40,7 +41,7 @@ namespace Shiftbound
             if (grounded) airTime = 0f;
             wasGrounded = grounded;
 
-            float speed = motor.HorizontalVelocity.magnitude;
+            float speed = new Vector2(motor.ActualVelocity.x, motor.ActualVelocity.z).magnitude;
             int wanted = !grounded ? Jump : Time.time < landingUntil ? Land :
                 speed >= sprintThreshold ? Sprint : speed >= jogThreshold ? Jog : Idle;
             if (wanted != currentState)

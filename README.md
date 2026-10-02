@@ -1,5 +1,7 @@
 ﻿# Shiftbound
 
+Current branch work and exact verification limits are recorded in [SLICE_AUDIT.md](SLICE_AUDIT.md). The checked-in Windows build is older than the current source. With an active Editor license, use **Shiftbound > Validate Golden Rooftops** followed by **Shiftbound > Build Windows Playable Slice** for a new build.
+
 Shiftbound is a Unity 6.3 LTS / URP third-person rooftop platformer prototype. The player runs, jumps, and shifts between a contemporary city and its overgrown counterpart to reach the goal.
 
 ## Current playable scene
