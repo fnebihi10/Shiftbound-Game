@@ -1,6 +1,6 @@
 # Shiftbound playable slice audit
 
-Baseline: `main` at `13ee1039b90b9e897a62ea831491d7da2ed4083b` (clean before work). Work branch: `polish-playable-slice`. Target scene: `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity`.
+Baseline: `main` at `13ee1039b90b9e897a62ea831491d7da2ed4083b` (clean before work). Development branch: `polish-playable-slice`. Target scene: `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity`.
 
 ## Observed and confirmed
 
@@ -28,11 +28,10 @@ Baseline: `main` at `13ee1039b90b9e897a62ea831491d7da2ed4083b` (clean before wor
 
 - Read the five root guidance files, V4 scene, generators, input, runtime scripts, material imports, URP PC asset and project quality settings.
 - Compiled all runtime and Editor C# sources using `dotnet build` against the installed Unity 6000.3.25f1 managed assemblies: zero warnings and errors. This is a syntax/type check, not a Unity Editor import or player build.
-- Unity batch Editor run reached Package Manager but exited with `No valid Unity Editor license found` and code 198. It therefore did not save an Editor scene or produce a new player.
-- The existing Windows player launched with D3D11 on an AMD Radeon RX 7600 (8 GB reported VRAM), but the smoke and capture commands did not reach their completion markers before they were stopped. Their result is inconclusive. No new gameplay recording, after capture or frame-time distribution exists.
-- New `SmokeRunner.cs` checks jump stepping at 30, 60, 120 and 144 simulated steps/s and material restoration, but it has **not run** in a rebuilt player. The Editor scene validator also has **not run**.
+- A later Unity batch Editor run passed `SliceDelivery.ValidateScene`. Both retained scenes built successfully as separate Windows players. Their headless smoke checks passed, including jump stepping at 30, 60, 120 and 144 simulated steps/s and material restoration.
+- The two Windows players completed the same fixed-step opening path through the first overgrown bridge. See [SCENE_COMPARISON.md](SCENE_COMPARISON.md) for captures and exact limits. No full-level human playthrough, continuous video, presented frame-time comparison or GPU profile exists.
 
-## Rebuild and test when Unity is licensed
+## Manual verification still required
 
 1. Open `UnityProject` with Unity 6000.3.25f1. Open `Assets/Shiftbound/Scenes/GoldenRooftops.unity`.
 2. Run **Shiftbound > Validate Golden Rooftops**. Run the scene in Play mode and traverse start, first gap, alternate bridge, midair crossing, route choice, final crossing and goal using the controls in `README.md`. Test wall/corner shifts, floor contact, airborne and rapid shifts, camera walls and respawn.
