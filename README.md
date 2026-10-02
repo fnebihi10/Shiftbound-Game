@@ -1,6 +1,6 @@
 ﻿# Shiftbound
 
-Current branch work and exact verification limits are recorded in [SLICE_AUDIT.md](SLICE_AUDIT.md). The checked-in Windows build is older than the current source. With an active Editor license, use **Shiftbound > Validate Golden Rooftops** followed by **Shiftbound > Build Windows Playable Slice** for a new build.
+Slice changes and exact verification limits are recorded in [SLICE_AUDIT.md](SLICE_AUDIT.md) and [SCENE_COMPARISON.md](SCENE_COMPARISON.md). The checked-in Windows build is older than the current source. With an active Editor license, use **Shiftbound > Validate Golden Rooftops** followed by **Shiftbound > Build Windows Playable Slice** for a new build.
 
 Shiftbound is a Unity 6.3 LTS / URP third-person rooftop platformer prototype. The player runs, jumps, and shifts between a contemporary city and its overgrown counterpart to reach the goal.
 
@@ -32,7 +32,7 @@ A local Windows test build is at `UnityProject/Builds/WindowsV4/Shiftbound.exe` 
 
 - `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity` — latest playable scene.
 - `UnityProject/Assets/Shiftbound/Scripts/` — player, camera, world switching, checkpoints, game flow, animation, and V4 backdrop/state scripts.
-- `UnityProject/Assets/Shiftbound/Editor/BuildArtPassV4.cs` — V4 scene generator. It creates `GoldenRooftops` from V3 and will overwrite manual edits to that generated scene; save a new scene before running it after manual work.
+- `UnityProject/Assets/Shiftbound/Editor/BuildArtPassV4.cs` — V4 scene generator. It reads `SkylineRooftops` and refuses to replace the existing authored `GoldenRooftops` scene.
 - `UnityProject/Assets/Shiftbound/TexturesV4/` and `MaterialsV4/` — paired city images and licensed surface materials.
 - `ArtDirection/` — approved concept and real player capture, labeled separately.
 

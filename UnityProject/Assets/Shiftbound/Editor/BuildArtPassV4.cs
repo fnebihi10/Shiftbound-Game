@@ -79,10 +79,10 @@ public static class BuildArtPassV4
         AddCourierAccents(runner, bag, metalEdge, scarf);
         artState.overgrownOnly = onlyOvergrown.ToArray();
 
-        cameraRig.distance = 4.9f;
-        cameraRig.lookHeight = 1.35f;
-        cameraRig.lookAhead = 0.55f;
-        camera.fieldOfView = 60f;
+        cameraRig.distance = 8f;
+        cameraRig.lookHeight = 1.45f;
+        cameraRig.lookAhead = 2.3f;
+        camera.fieldOfView = 66f;
         camera.farClipPlane = 245f;
         RenderSettings.fogStartDistance = 120f;
         RenderSettings.fogEndDistance = 235f;

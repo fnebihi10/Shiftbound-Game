@@ -2,7 +2,7 @@
 
 Please inspect this Unity project as a working prototype. The user wants the **second concept image** at `ArtDirection/visual-target-gameview-v2.png` to define the visual direction. `ArtDirection/GoldenRooftops-player-capture.png` is an actual V4 Windows-player render. Do not describe the concept as implemented or assume the distant matte is an explorable 3D city.
 
-Start with `README.md`, `GAME_DESIGN.md`, `ART_DIRECTION.md`, and `THIRD_PARTY.md`. Inspect the latest `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity`, runtime scripts, editor generator, packages, and third-party assets. Older scenes are prototypes kept for comparison.
+Start with `README.md`, `GAME_DESIGN.md`, `ART_DIRECTION.md`, and `THIRD_PARTY.md`. Inspect the latest `UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity`, runtime scripts, editor generator, packages, and third-party assets. `SkylineRooftops.unity` is the retained prototype for comparison.
 
 Please report:
 

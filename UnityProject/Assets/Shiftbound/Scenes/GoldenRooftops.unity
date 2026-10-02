@@ -29359,9 +29359,9 @@ MonoBehaviour:
   target: {fileID: 603412840}
   input: {fileID: 1700806237}
   motor: {fileID: 603412841}
-  distance: 4.9
-  lookHeight: 1.35
-  lookAhead: 0.55
+  distance: 8
+  lookHeight: 1.45
+  lookAhead: 2.3
   collisionRadius: 0.26
   positionSharpness: 10
   mouseSensitivity: 0.16
@@ -29425,7 +29425,7 @@ Camera:
     height: 1
   near clip plane: 0.12
   far clip plane: 245
-  field of view: 60
+  field of view: 66
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
