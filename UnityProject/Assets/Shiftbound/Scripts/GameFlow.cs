@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace Shiftbound
 {
+    [DefaultExecutionOrder(-200)]
     public sealed class GameFlow : MonoBehaviour
     {
         public static GameFlow Instance { get; private set; }
@@ -44,8 +45,7 @@ namespace Shiftbound
         {
             if (input.PausePressed && !completed)
             {
-                paused = !paused;
-                Time.timeScale = paused ? 0f : 1f;
+                TogglePause();
             }
             if (input.RestartPressed) Restart();
             if (!IsPlaying) return;
@@ -85,6 +85,13 @@ namespace Shiftbound
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        public void TogglePause()
+        {
+            if (completed) return;
+            paused = !paused;
+            Time.timeScale = paused ? 0f : 1f;
         }
 
         private void OnGUI()

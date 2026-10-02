@@ -25,6 +25,8 @@ namespace Shiftbound
                 Fail("Missing scene systems");
                 yield break;
             }
+            Renderer presentRenderer = world.presentRoot.GetComponentInChildren<Renderer>();
+            Material[] originalSlots = presentRenderer.sharedMaterials;
 
             player.Teleport(new Vector3(2.5f, 0.08f, 3f));
             Collider wall = world.alteredRoot.Find("Alternate wall test").GetComponent<Collider>();
@@ -44,6 +46,11 @@ namespace Shiftbound
                 Fail("Safe ground shift was rejected");
                 yield break;
             }
+            if (presentRenderer.sharedMaterials.Length != originalSlots.Length)
+            {
+                Fail("Inactive world lost a material slot");
+                yield break;
+            }
 
             player.Teleport(new Vector3(0f, 3f, 18f));
             world.TrySwitch();
@@ -52,6 +59,49 @@ namespace Shiftbound
                 Fail("Safe midair shift was rejected");
                 yield break;
             }
+            Material[] restoredSlots = presentRenderer.sharedMaterials;
+            for (int slot = 0; slot < originalSlots.Length; slot++)
+                if (restoredSlots[slot] != originalSlots[slot])
+                {
+                    Fail("World shift did not restore material slot " + slot);
+                    yield break;
+                }
+
+            player.enabled = false;
+            foreach (int fps in new[] { 30, 60, 120, 144 })
+            {
+                float dt = 1f / fps;
+                player.Teleport(new Vector3(0f, 0.08f, 3f));
+                player.Step(dt, Vector2.zero, false, false);
+                if (!player.IsGrounded)
+                {
+                    Fail("Ground probe failed at " + fps + " FPS");
+                    yield break;
+                }
+                player.Step(dt, Vector2.zero, true, false);
+                if (player.VerticalVelocity <= 0f)
+                {
+                    Fail("Jump failed at " + fps + " FPS");
+                    yield break;
+                }
+                for (int frame = 0; frame < 3; frame++)
+                    player.Step(dt, Vector2.zero, false, false);
+                float beforeRepeat = player.VerticalVelocity;
+                player.Step(dt, Vector2.zero, true, false);
+                if (player.VerticalVelocity >= beforeRepeat)
+                {
+                    Fail("Ascent refreshed jump at " + fps + " FPS");
+                    yield break;
+                }
+                for (int frame = 0; frame < fps * 2 && !player.IsGrounded; frame++)
+                    player.Step(dt, Vector2.zero, false, false);
+                if (!player.IsGrounded)
+                {
+                    Fail("Jump did not land at " + fps + " FPS");
+                    yield break;
+                }
+            }
+            player.enabled = true;
 
             Vector3 checkpoint = new Vector3(0f, 0.2f, 30f);
             flow.SetCheckpoint(checkpoint);
@@ -70,7 +120,7 @@ namespace Shiftbound
                 yield break;
             }
 
-            Debug.Log("SHIFTBOUND SMOKE PASSED: blocked shift, safe ground shift, midair shift, checkpoint respawn, goal.");
+            Debug.Log("SHIFTBOUND SMOKE PASSED: blocked shift, safe ground shift, midair shift, material slots, jumps at 30/60/120/144 steps, checkpoint respawn, goal.");
             Application.Quit(0);
         }
 

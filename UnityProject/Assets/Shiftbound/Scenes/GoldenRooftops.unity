@@ -25171,6 +25171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shiftbound.StageTrigger
   kind: 0
+  hasCheckpointPosition: 1
+  checkpointPosition: {x: 0, y: 0.12, z: 30.35}
 --- !u!65 &385099283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67392,6 +67394,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shiftbound.StageTrigger
   kind: 0
+  hasCheckpointPosition: 1
+  checkpointPosition: {x: 0, y: 0.12, z: 42.35}
 --- !u!65 &1121918733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67999,6 +68003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shiftbound.StageTrigger
   kind: 0
+  hasCheckpointPosition: 1
+  checkpointPosition: {x: 0, y: 0.12, z: 10.35}
 --- !u!65 &1127270480
 BoxCollider:
   m_ObjectHideFlags: 0

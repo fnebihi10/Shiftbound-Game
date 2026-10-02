@@ -2,6 +2,7 @@
 
 namespace Shiftbound
 {
+    [DefaultExecutionOrder(-50)]
     public sealed class WorldSwitcher : MonoBehaviour
     {
         public Transform presentRoot;
@@ -17,7 +18,8 @@ namespace Shiftbound
 
         private Collider[][] collisionSets;
         private Renderer[][] renderSets;
-        private Material[][] materialSets;
+        private Material[][][] materialSets;
+        private Material[][][] ghostSets;
         private int activeWorld;
         private float nextSwitch;
         private float rejectionFlash;
@@ -37,12 +39,19 @@ namespace Shiftbound
                 presentRoot.GetComponentsInChildren<Renderer>(true),
                 alteredRoot.GetComponentsInChildren<Renderer>(true)
             };
-            materialSets = new Material[2][];
+            materialSets = new Material[2][][];
+            ghostSets = new Material[2][][];
             for (int world = 0; world < 2; world++)
             {
-                materialSets[world] = new Material[renderSets[world].Length];
+                materialSets[world] = new Material[renderSets[world].Length][];
+                ghostSets[world] = new Material[renderSets[world].Length][];
                 for (int i = 0; i < renderSets[world].Length; i++)
-                    materialSets[world][i] = renderSets[world][i].sharedMaterial;
+                {
+                    materialSets[world][i] = renderSets[world][i].sharedMaterials;
+                    ghostSets[world][i] = new Material[materialSets[world][i].Length];
+                    for (int slot = 0; slot < ghostSets[world][i].Length; slot++)
+                        ghostSets[world][i][slot] = ghostMaterial;
+                }
             }
             Apply();
         }
@@ -99,12 +108,12 @@ namespace Shiftbound
                 bool active = world == activeWorld;
                 foreach (Collider item in collisionSets[world]) item.enabled = active;
                 for (int i = 0; i < renderSets[world].Length; i++)
-                    renderSets[world][i].sharedMaterial = active
-                        ? materialSets[world][i] : ghostMaterial;
+                {
+                    Material[] originals = materialSets[world][i];
+                    if (active) renderSets[world][i].sharedMaterials = originals;
+                    else renderSets[world][i].sharedMaterials = ghostSets[world][i];
+                }
             }
-            if (sun != null) sun.color = activeWorld == 0 ? presentLight : alteredLight;
-            RenderSettings.fogColor = activeWorld == 0
-                ? new Color(0.25f, 0.34f, 0.48f) : new Color(0.30f, 0.36f, 0.27f);
         }
 
         private void OnGUI()
