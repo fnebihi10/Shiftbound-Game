@@ -20,7 +20,18 @@ namespace Shiftbound
         private Material leafLight;
         private Material patch;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Subscribe()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void InstallFirstScene() { Install(); }
+
+        private static void OnSceneLoaded(Scene scene, LoadSceneMode mode) { Install(); }
+
         private static void Install()
         {
             if (SceneManager.GetActiveScene().name != "GoldenRooftops" || GameObject.Find(RootName) != null)
