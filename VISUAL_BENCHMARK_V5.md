@@ -32,7 +32,8 @@ These baseline ratings reflect the repository, prior deterministic test reports,
 
 ## Changes implemented in source
 
-- `OpeningBenchmarkRuntimeV5.cs` constructs visual-only roof coping, layered fascia, parapet piers, chamfered service housings, cooling blades, a grated drain, localized repair marks and irregular leaf clusters. It runs only in Golden Rooftops when no baked V5 root exists. It reuses two procedural meshes and disables their shadow casting. The Overgrown plants join `RooftopWorldArt`'s existing world state list. No gameplay collider is added.
+- `GoldenRooftops.unity` now contains a saved **Visual Benchmark V5 - opening roofs** hierarchy with 98 non-colliding visual pieces: parapet construction, roof-edge layers, service and drainage detail, and rooted growth. The Overgrown pieces join `RooftopWorldArt`'s world state list and are inactive in the default Present state. `Tools/BakeOpeningV5Scene.ps1` records the repeatable source-level bake.
+- `OpeningBenchmarkRuntimeV5.cs` provides a fallback for a Golden Rooftops scene without the saved V5 hierarchy. It reuses two procedural meshes, disables their shadow casting, and adds no gameplay collider. It does not duplicate the saved scene layer.
 - `BuildVisualBenchmarkV5.cs` provides an idempotent Editor command to bake a richer benchmark into the existing scene. It preserves the V4 scene as its source and replaces only its own V5 root on rerun. Its resulting scene still requires licensed Editor validation and a capture.
 - `FeedbackAudio.cs` accepts licensed authored cues and two looping world ambiences, crossfades them on Shift, and retains synthesized sounds as fallbacks. `PlayerMotor.cs` now triggers a jump cue and distinguishes hard landings by fall speed. No production audio files have been added.
 - Project product/company fields and template application identifiers were replaced with provisional Shiftbound values. Confirm an owned identifier and publisher name before distribution.
@@ -41,17 +42,17 @@ These baseline ratings reflect the repository, prior deterministic test reports,
 
 | Type | Result |
 | --- | --- |
-| Automatically verified | Runtime and Editor C# project builds passed with zero warnings/errors against the installed Unity 6000.3.25f1 assemblies. Repository state and prior smoke/comparison reports were inspected. |
+| Automatically verified | Runtime and Editor C# project builds passed with zero warnings/errors against the installed Unity 6000.3.25f1 assemblies. Static scene checks found 98 added visual objects, 31 Overgrown references, no duplicate YAML IDs, no missing new hierarchy references, and no added colliders. Repository state and prior smoke/comparison reports were inspected. |
 | Through Unity Editor | **Unavailable now.** Sandboxed startup failed at Package Manager IPC; elevated startup reached licensing but exited with `No valid Unity Editor license found` (return code 198). |
 | Through standalone build | **Not run for V5.** The existing local Windows build predates these changes. |
 | Visually verified | **V4 only.** The archived player capture was viewed; no V5 Game-view/player image exists. |
 | Not yet verified | V5 shader/material appearance, baked scene, audio mix, full route, Shift bypass, GPU/CPU frame times, mobile device behavior, human comfort/readability. |
 
-The runtime fallback exists so a future licensed build can include the benchmark without running an Editor menu. The Editor bake has more detail than the runtime fallback; select one implementation for final production after visual and performance review. Its generated meshes and runtime materials are small, but the additional renderer submissions are **not** an optimization claim.
+The saved scene layer is directly inspectable in the Hierarchy, even outside Play mode. The Editor bake can replace it with more detailed meshes after a license is available. The saved layer adds 98 renderers; no performance benefit is claimed without a standalone profile.
 
 ## Before and expected V5 difference
 
-The V4 capture shows a textured floor and distant skyline, with boxy service equipment, very regular leaf forms, exposed razor-like edges and little roof construction. V5 source adds near-scale roof assemblies and grounded vegetation across the first traversal segment. Their appearance in a rendered player is still unverified, so no updated screenshot or visual quality score is claimed from them. The character, matte skyline, main IMGUI HUD and basic animation set remain the largest visible gaps.
+The V4 capture shows a textured floor and distant skyline, with boxy service equipment, very regular leaf forms, exposed razor-like edges and little roof construction. The saved V5 scene adds near-scale roof assemblies and grounded vegetation across the first traversal segment. Their appearance in a rendered player is still unverified, so no updated screenshot or visual quality score is claimed from them. The character, matte skyline, main IMGUI HUD and basic animation set remain the largest visible gaps.
 
 ## Updated assessment
 

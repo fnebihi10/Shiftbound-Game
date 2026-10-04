@@ -2,7 +2,7 @@
 
 ## Opening Visual Benchmark V5 (source preview)
 
-Golden Rooftops now has an additive V5 visual benchmark in source. On loading the scene, `OpeningBenchmarkRuntimeV5` builds non-colliding roof construction, service equipment, drainage detail, and rooted Overgrown plant clusters around the start roof and first Shift bridge. The existing collision and route rules remain authoritative. With a licensed Unity Editor, **Shiftbound > Build Opening Visual Benchmark V5** bakes a more detailed version into the scene and disables the runtime fallback for that scene.
+The saved `GoldenRooftops.unity` scene now contains a V5 detail layer under **Visual Benchmark V5 - opening roofs**. Reopen the scene to see non-colliding roof construction, service equipment, drainage detail, and rooted Overgrown plant clusters around the start roof and first Shift bridge. The existing collision and route rules remain authoritative. The plants are inactive in the default Present world and appear after shifting in Play mode. `OpeningBenchmarkRuntimeV5` is a fallback for scene versions without the baked layer. With a licensed Unity Editor, **Shiftbound > Build Opening Visual Benchmark V5** can replace the saved layer with more detailed chamfered meshes.
 
 This change passed an external C# compile check, but this machine's Unity Editor reports no valid license, so V5 could not be imported, rendered, or captured. The V4 player capture below remains the latest verified game image. See [VISUAL_BENCHMARK_V5.md](VISUAL_BENCHMARK_V5.md) for ratings, verification limits, blockers, and acceptance criteria.
 
