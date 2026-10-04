@@ -79,6 +79,7 @@ namespace Shiftbound
                 wasGrounded = false;
                 IsGrounded = false;
                 jumpedSinceGrounded = true;
+                GameFlow.Instance?.feedback?.Jump();
             }
             if (jumpReleased && verticalVelocity > 0f)
                 verticalVelocity *= releasedJumpMultiplier;
@@ -102,7 +103,8 @@ namespace Shiftbound
             bool landed = verticalVelocity <= 0f && ProbeGround();
             if (landed)
             {
-                if (!grounded && verticalVelocity < -4f) GameFlow.Instance?.feedback?.Landing();
+                if (!grounded && verticalVelocity < -4f)
+                    GameFlow.Instance?.feedback?.Landing(verticalVelocity < -11f);
                 if (!grounded) coyoteLeft = coyoteTime;
                 IsGrounded = true;
                 jumpedSinceGrounded = false;
