@@ -1,4 +1,10 @@
-﻿# Shiftbound
+# Shiftbound
+
+## Opening Visual Benchmark V5 (source preview)
+
+Golden Rooftops now has an additive V5 visual benchmark in source. On loading the scene, `OpeningBenchmarkRuntimeV5` builds non-colliding roof construction, service equipment, drainage detail, and rooted Overgrown plant clusters around the start roof and first Shift bridge. The existing collision and route rules remain authoritative. With a licensed Unity Editor, **Shiftbound > Build Opening Visual Benchmark V5** bakes a more detailed version into the scene and disables the runtime fallback for that scene.
+
+This change passed an external C# compile check, but this machine's Unity Editor reports no valid license, so V5 could not be imported, rendered, or captured. The V4 player capture below remains the latest verified game image. See [VISUAL_BENCHMARK_V5.md](VISUAL_BENCHMARK_V5.md) for ratings, verification limits, blockers, and acceptance criteria.
 
 Slice changes and exact verification limits are recorded in [SLICE_AUDIT.md](SLICE_AUDIT.md) and [SCENE_COMPARISON.md](SCENE_COMPARISON.md). The checked-in Windows build is older than the current source. With an active Editor license, use **Shiftbound > Validate Golden Rooftops** followed by **Shiftbound > Build Windows Playable Slice** for a new build.
 
