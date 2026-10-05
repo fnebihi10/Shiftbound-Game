@@ -92,3 +92,7 @@ Scores describe **verified quality**, so the unrendered V5 geometry does not rai
 ## Smallest next milestone and acceptance gate
 
 With a valid Editor entitlement, bake V5, validate Golden Rooftops, build Windows, run `-shiftboundSmoke`, capture **actual** Present and Overgrown player frames at start and the first bridge, and record a continuous 20-second human playthrough. In that pass, verify the first Shift cannot be bypassed from normal takeoff and landing points, the parapets never hide targets, no new visual object blocks the controller or camera, world growth toggles correctly, and the player remains readable. Profile the same build at 1920×1080 on a stated PC, recording CPU/GPU p50 and p95 frame times, draw submissions, GC, and Shift spikes. Review the captures against the concept and archived V4 image before extending V5 elsewhere.
+
+## Courier idle correction
+
+The controller's `Idle` state referenced imported clip `110800004`, which is `Crouch_Idle_Loop`. The original V3 builder selected clips with `EndsWith("Idle_Loop")`, so it could choose that crouched clip before the upright `Idle_Loop`. The controller now references `110800018`, the upright clip; the builder matches a complete clip name; and scene validation checks the Idle state's motion. This mapping was cross-checked against the local Unity import artifact and the existing Jog, Jump and Sprint controller IDs. C# compilation passed, but the corrected pose still needs a Play-mode visual check.

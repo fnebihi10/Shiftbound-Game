@@ -3,6 +3,7 @@ using System.IO;
 using Shiftbound;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using UnityEditor.Animations;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -65,6 +66,22 @@ public static class SliceDelivery
         if (worlds == null || worlds.presentRoot == null || worlds.alteredRoot == null ||
             worlds.playerProbe == null || player == null || cameraRig == null)
             throw new Exception("Core scene references are missing.");
+        RiggedCourierAnimator courier = UnityEngine.Object.FindFirstObjectByType<RiggedCourierAnimator>();
+        AnimatorController motion = courier != null ?
+            courier.GetComponent<Animator>().runtimeAnimatorController as AnimatorController : null;
+        if (motion == null || motion.layers.Length == 0)
+            throw new Exception("Courier animation controller is missing.");
+        bool uprightIdle = false;
+        foreach (ChildAnimatorState entry in motion.layers[0].stateMachine.states)
+        {
+            if (entry.state.name != "Idle" || entry.state.motion == null) continue;
+            string clip = entry.state.motion.name;
+            uprightIdle = clip == "Idle_Loop" ||
+                clip.EndsWith("|Idle_Loop", StringComparison.Ordinal) ||
+                clip.EndsWith("/Idle_Loop", StringComparison.Ordinal);
+        }
+        if (!uprightIdle)
+            throw new Exception("Courier Idle state must use upright Idle_Loop, not Crouch_Idle_Loop.");
         int checkpoints = 0;
         int goals = 0;
         foreach (StageTrigger trigger in UnityEngine.Object.FindObjectsByType<StageTrigger>(FindObjectsSortMode.None))

@@ -553,9 +553,13 @@ public static class BuildArtPassV3
     private static void ConfigureState(AnimatorStateMachine machine, string stateName,
         string animationPath, string clipSuffix)
     {
+        // An EndsWith match picks Crouch_Idle_Loop for Idle_Loop in this library.
+        // Select the named clip exactly so rebuilding cannot reintroduce the crouch.
         AnimationClip clip = AssetDatabase.LoadAllAssetsAtPath(animationPath)
             .OfType<AnimationClip>()
-            .FirstOrDefault(x => x.name.EndsWith(clipSuffix));
+            .FirstOrDefault(x => x.name == clipSuffix ||
+                x.name.EndsWith("|" + clipSuffix, StringComparison.Ordinal) ||
+                x.name.EndsWith("/" + clipSuffix, StringComparison.Ordinal));
         if (clip == null) throw new Exception("Missing animation clip " + clipSuffix);
         AnimatorState state = machine.states.Select(x => x.state)
             .FirstOrDefault(x => x.name == stateName);
