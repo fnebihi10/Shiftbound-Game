@@ -1,6 +1,6 @@
 # Shiftbound - game design, first playable slice
 
-Status: GoldenRooftops V4 scene and Windows test build generated. Automated checks cover core world switching and game flow; an actual V4 player render was captured. The user has not yet played the V4 scene interactively. Graphics remain below the approved concept.
+Status: Milestone 1 repairs implemented in the current authored GoldenRooftops scene. A current Windows build and full scripted route pass at 30/60/120/144 Hz and variable steps. Human comfort and audiovisual polish remain unverified. See [MILESTONE_1_PROGRESS.md](MILESTONE_1_PROGRESS.md) for current evidence and the supported authoring workflow.
 
 ## Player experience
 
@@ -35,11 +35,13 @@ The first slice teaches the controls without a long tutorial. A new player shoul
 | First gap and checkpoint | Test jumping; recover quickly. |
 | Obvious alternate bridge | Show both routes, teach a safe grounded Shift. |
 | Midair bridge swap | Require one readable Shift during a jump. |
-| Small route puzzle | Choose between two visible routes; prevent a simple repeated-switch pattern. |
+| Small route puzzle | Choose the right Overgrown route or the left Present lookout; both are intentional alternatives after the mandatory Shift lessons. |
 | Final combined crossing | Combine jump timing, route reading, and a midair Shift. |
 | Goal rooftop | Show completion, time, retry, and next-step feedback. |
 
 Use frequent checkpoints and a quick respawn. Obstacles should teach one idea, let the player practice it, then combine it with movement.
+
+The first alternate bridge and midair bridge swap have 7.5 m direct bypass gaps. The first Overgrown bridge has forgiving 1.0 m entry and 1.5 m exit gaps; later midair intermediate jumps are 3.5 m. Checkpoint hints explain inactive blue previews, Shift and holding Jump. All checkpoints use shared support with clearance in both worlds. Retry preserves the current world and restores saved facing; a full restart starts Present. Buffered Jump released before landing intentionally becomes a short jump. The public Shift API applies the same debounce to every caller, with immediate collision switching.
 
 ## Visual and audio direction
 
