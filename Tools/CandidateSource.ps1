@@ -3,7 +3,7 @@ function Get-CandidateSource([string]$Root) {
         Get-ChildItem -LiteralPath (Join-Path $Root "UnityProject/$candidateDir") -Recurse -File |
             Where-Object { $_.Name -notin @('CandidateIdentity.json','CandidateIdentity.json.meta','PerformanceTestRunInfo.json','PerformanceTestRunInfo.json.meta','PerformanceTestRunSettings.json','PerformanceTestRunSettings.json.meta') } |
             ForEach-Object {
-                [ordered]@{ path=$_.FullName.Substring($Root.Length+1).Replace('\','/'); sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant() }
+                [ordered]@{ path=$_.FullName.Substring($Root.Length+1).Replace('\','/'); sha256=(Get-CandidateFileHash $_.FullName) }
             }
     }
     $candidateOrdered = [System.Collections.Generic.SortedDictionary[string,string]]::new([StringComparer]::Ordinal)
@@ -12,6 +12,21 @@ function Get-CandidateSource([string]$Root) {
     $candidateHasher = [Security.Cryptography.SHA256]::Create()
     try { return ([BitConverter]::ToString($candidateHasher.ComputeHash([Text.Encoding]::UTF8.GetBytes($candidateText)))).Replace('-','').ToLowerInvariant() }
     finally { $candidateHasher.Dispose() }
+}
+
+function Get-CandidateFileHash([string]$Path) {
+    $candidateBytes = [IO.File]::ReadAllBytes($Path)
+    $candidateExtension = [IO.Path]::GetExtension($Path).ToLowerInvariant()
+    $candidateIsText = $candidateExtension -in @('.cs','.shader','.hlsl','.cginc','.json','.meta','.txt','.md','.xml','.asmdef','.asmref') -or
+        ($candidateExtension -in @('.asset','.mat','.prefab','.unity','.controller') -and $candidateBytes.Length -ge 5 -and [Text.Encoding]::ASCII.GetString($candidateBytes,0,5) -eq '%YAML')
+    if ($candidateIsText) {
+        $candidateUtf8 = [Text.UTF8Encoding]::new($false,$true)
+        $candidateCanonical = $candidateUtf8.GetString($candidateBytes).TrimStart([char]0xFEFF).Replace("`r`n","`n").Replace("`r","`n")
+        $candidateBytes = $candidateUtf8.GetBytes($candidateCanonical)
+    }
+    $candidateSha = [Security.Cryptography.SHA256]::Create()
+    try { ([BitConverter]::ToString($candidateSha.ComputeHash($candidateBytes))).Replace('-','').ToLowerInvariant() }
+    finally { $candidateSha.Dispose() }
 }
 
 function Invoke-CandidateChecked([string]$Executable, [string]$Arguments, [string]$Log, [string]$Marker, [int]$Minutes=20) {

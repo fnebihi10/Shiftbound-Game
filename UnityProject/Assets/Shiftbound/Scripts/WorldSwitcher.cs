@@ -67,7 +67,8 @@ namespace Shiftbound
                 for (int i = 0; i < renderSets[world].Length; i++)
                 {
                     materialSets[world][i] = renderSets[world][i].sharedMaterials;
-                    previewEligible[world][i] = renderSets[world][i].GetComponent<Collider>() != null;
+                    var skin = renderSets[world][i].GetComponent<WorldSurfaceSkin>();
+                    previewEligible[world][i] = renderSets[world][i].GetComponent<Collider>() != null || skin != null && skin.collisionSurface != null;
                     originalVisibility[world][i] = renderSets[world][i].enabled;
                     ghostSets[world][i] = new Material[materialSets[world][i].Length];
                     for (int slot = 0; slot < ghostSets[world][i].Length; slot++)

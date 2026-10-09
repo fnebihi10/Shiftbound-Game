@@ -16,6 +16,9 @@ namespace Shiftbound
         {
             Application.targetFrameRate=60; QualitySettings.vSyncCount=0;
             yield return new WaitForSecondsRealtime(1f);
+            GameFlow.Instance.TogglePause();
+            yield return new WaitForSecondsRealtime(2f);
+            GameFlow.Instance.TogglePause();
             var driver=gameObject.AddComponent<ProductionInputDriver>();
             // Input System gamepad orbit through the normal free camera, no pose snaps.
             driver.SetLook(new Vector2(.6f,0)); yield return new WaitForSecondsRealtime(5.3f);

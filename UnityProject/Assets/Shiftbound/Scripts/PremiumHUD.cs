@@ -91,7 +91,7 @@ namespace Shiftbound
             if (flow == null || worlds == null) return;
             EnsureStyles();
             bool phone = flow.input != null && flow.input.Phone.Visible;
-            if (phone) return; // Phone HUD renders in camera space, including offscreen QA.
+            if (flow.input != null) return; // Production Canvas owns all shipped views.
             float scale = Screen.safeArea.height / 720f;
             Matrix4x4 previous = GUI.matrix;
             GUI.matrix = Matrix4x4.TRS(new Vector3(Screen.safeArea.x, Screen.height - Screen.safeArea.yMax, 0f),
@@ -150,7 +150,7 @@ namespace Shiftbound
                 GUI.Label(new Rect(w / 2f - 200f, 207f, 400f, 38f),
                     flow.ActiveNotice, center);
             }
-            if (!phone && (flow.IsPaused || flow.IsComplete))
+            if (false && !phone && (flow.IsPaused || flow.IsComplete))
             {
                 GUI.Box(new Rect(w / 2f - 240f, 180f, 480f, 370f),
                     GUIContent.none, new GUIStyle(pill) { normal = { background = darkTexture } });

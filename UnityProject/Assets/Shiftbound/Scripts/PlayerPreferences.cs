@@ -14,10 +14,18 @@ namespace Shiftbound
         public static bool InvertY = PlayerPrefs.GetInt("sb.invert", 0) != 0;
         public static bool CameraAssist = PlayerPrefs.GetInt("sb.assist", 1) != 0;
         public static bool LowPower = PlayerPrefs.GetInt("sb.lowpower", 0) != 0;
+        private static string saved = Snapshot();
+        public static int SaveCount { get; private set; }
+        private static string Snapshot() => string.Join("|", TouchSensitivity.ToString("R",System.Globalization.CultureInfo.InvariantCulture),
+            MouseSensitivity.ToString("R",System.Globalization.CultureInfo.InvariantCulture),StickSensitivity.ToString("R",System.Globalization.CultureInfo.InvariantCulture),
+            ControlScale.ToString("R",System.Globalization.CultureInfo.InvariantCulture),ControlInset.ToString("R",System.Globalization.CultureInfo.InvariantCulture),
+            ControlHeight.ToString("R",System.Globalization.CultureInfo.InvariantCulture),Volume.ToString("R",System.Globalization.CultureInfo.InvariantCulture),InvertY,CameraAssist,LowPower);
         private static float Get(string key, float value, float min, float max) =>
             Mathf.Clamp(PlayerPrefs.GetFloat("sb." + key, value), min, max);
         public static void Save()
         {
+            string current = Snapshot();
+            if (current == saved) return;
             PlayerPrefs.SetFloat("sb.touch", TouchSensitivity);
             PlayerPrefs.SetFloat("sb.mouse", MouseSensitivity);
             PlayerPrefs.SetFloat("sb.stick", StickSensitivity);
@@ -29,6 +37,8 @@ namespace Shiftbound
             PlayerPrefs.SetInt("sb.assist", CameraAssist ? 1 : 0);
             PlayerPrefs.SetInt("sb.lowpower", LowPower ? 1 : 0);
             PlayerPrefs.Save();
+            saved = current;
+            SaveCount++;
         }
     }
 }

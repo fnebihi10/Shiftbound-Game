@@ -18,13 +18,15 @@ namespace Shiftbound
         private GUIStyle label;
         private Texture2D disc;
         private int diagnosticTaps;
+        private int menuPointer = -1;
+        private int sliderRow = -1;
         public double LastEventTime { get; private set; }
         public int EventFrame { get; private set; } = -1;
 
         private void OnEnable() { EnhancedTouchSupport.Enable(); }
-        private void Start() { if (Visible) gameObject.AddComponent<PhoneHUDCanvas>(); }
+        private void Start() { gameObject.AddComponent<ProductionHUDCanvas>(); }
         private void OnDisable() { Router.Reset(); EnhancedTouchSupport.Disable(); }
-        public void Cancel() { Router.Reset(); suppressed = true; }
+        public void Cancel() { Router.Reset(); suppressed = true; menuPointer = -1; sliderRow = -1; PlayerPreferences.Save(); }
         public Vector2 ToUI(Vector2 screen) => new Vector2((screen.x - Screen.safeArea.x) / Scale,
             (Screen.safeArea.yMax - screen.y) / Scale);
         public void Layout()
@@ -34,12 +36,12 @@ namespace Shiftbound
             float bottom = Height - 36f - PlayerPreferences.ControlHeight;
             Router.Stick = new Rect(34f + inset, bottom - 192f * s, 192f * s, 192f * s);
             Router.Jump = new Rect(Width - 40f - inset - 124f * s, bottom - 124f * s, 124f * s, 124f * s);
-            Router.Shift = new Rect(Router.Jump.x - 110f * s - 22f, bottom - 100f * s, 100f * s, 100f * s);
+            Router.Shift = new Rect(Router.Jump.x - 82f * s - 12f, bottom - 160f * s, 92f * s, 92f * s);
             Router.Camera = new Rect(Width * .43f, 100f, Width * .57f, Height - 100f);
         }
         private void Update()
         {
-            if (!Visible) return;
+            if (!Visible) { DesktopMenu(); return; }
             Layout(); Router.BeginFrame();
             var contacts = Touch.activeTouches;
             if (suppressed)
@@ -54,17 +56,31 @@ namespace Shiftbound
                 { LastEventTime = touch.time; EventFrame = Time.frameCount; }
                 if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
                 {
-                    if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) { MenuTouch(p, true); continue; }
+                    if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) {
+                        if(menuPointer<0){menuPointer=touch.touchId;MenuTouch(p,true);} continue;
+                    }
                     if (PauseRect.Contains(p)) { GameFlow.Instance?.TogglePause(); Cancel(); break; }
                     if (GameFlow.Instance == null || GameFlow.Instance.IsPlaying) Router.Begin(touch.touchId, p);
                 }
                 else if (touch.phase == UnityEngine.InputSystem.TouchPhase.Ended || touch.phase == UnityEngine.InputSystem.TouchPhase.Canceled)
+                {
                     Router.End(touch.touchId);
-                else if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) MenuTouch(p, false);
+                    if(menuPointer==touch.touchId){menuPointer=-1;sliderRow=-1;PlayerPreferences.Save();}
+                }
+                else if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) {if(menuPointer==touch.touchId)MenuTouch(p,false);}
                 else Router.Drag(touch.touchId, p);
             }
         }
-        private void OnGUI()
+        private void DesktopMenu()
+        {
+            var mouse=UnityEngine.InputSystem.Mouse.current;
+            if(mouse==null || GameFlow.Instance==null || GameFlow.Instance.IsPlaying)return;
+            Vector2 p=ToUI(mouse.position.ReadValue());
+            if(mouse.leftButton.wasPressedThisFrame)MenuTouch(p,true);
+            else if(mouse.leftButton.isPressed)MenuTouch(p,false);
+            if(mouse.leftButton.wasReleasedThisFrame){sliderRow=-1;PlayerPreferences.Save();}
+        }
+        private void LegacyMenu()
         {
             if (!Visible || GameFlow.Instance == null) return;
             if (GameFlow.Instance.IsPlaying) return; // Canvas owns the play HUD.
@@ -95,23 +111,28 @@ namespace Shiftbound
             else DrawMenu();
             GUI.matrix = old;
         }
-        private Rect MenuRect(int row) => new Rect(Width * .5f - 250f, 126f + row * 51f, 500f, 46f);
+        public Rect MenuRect(int row) => new Rect(Width * .5f - 250f, 126f + row * 51f, 500f, 46f);
         private void MenuTouch(Vector2 p, bool began)
         {
+            if(began)sliderRow=-1;
+            if(GameFlow.Instance.IsComplete){if(began&&MenuRect(1).Contains(p)){GameFlow.Instance.Restart();Cancel();}return;}
             if (began && new Rect(Width*.5f-250f,80f,500f,42f).Contains(p)) diagnosticTaps++;
             if (began && MenuRect(0).Contains(p)) { GameFlow.Instance.TogglePause(); Cancel(); return; }
             if (began && MenuRect(1).Contains(p)) { GameFlow.Instance.Restart(); Cancel(); return; }
             for (int row = 2; row <= 7; row++)
             {
                 Rect r = MenuRect(row);
-                if (!r.Contains(p)) continue;
+                if (row==7) { if(began&&r.Contains(p)){PlayerPreferences.CameraAssist=!PlayerPreferences.CameraAssist;PlayerPreferences.Save();} continue; }
+                // Only a begin in the slider track acquires it. Text taps and
+                // stationary contacts elsewhere never mutate or save preferences.
+                if (began && r.Contains(p) && p.x>=r.x+210f) sliderRow=row;
+                if(sliderRow!=row)continue;
                 float t = Mathf.Clamp01((p.x - r.x - 210f) / 275f);
                 if (row == 2) PlayerPreferences.ControlScale = Mathf.Lerp(.8f, 1.35f, t);
                 if (row == 3) PlayerPreferences.ControlInset = t * 90f;
                 if (row == 4) PlayerPreferences.ControlHeight = t * 100f;
                 if (row == 5) PlayerPreferences.TouchSensitivity = Mathf.Lerp(.3f, 2.5f, t);
                 if (row == 6) { PlayerPreferences.Volume = t; AudioListener.volume = t; }
-                if (row == 7 && began) PlayerPreferences.CameraAssist = !PlayerPreferences.CameraAssist;
             }
             if (began && MenuRect(8).Contains(p)) PlayerPreferences.InvertY = !PlayerPreferences.InvertY;
             if (began && MenuRect(9).Contains(p)) { PlayerPreferences.LowPower = !PlayerPreferences.LowPower; GameFlow.Instance.ApplyFrameTier(); }
@@ -121,9 +142,9 @@ namespace Shiftbound
                 if (telemetry == null) telemetry = new GameObject("QA telemetry").AddComponent<GameplayTelemetry>();
                 if (telemetry.Collecting) telemetry.End(); else telemetry.Begin();
             }
-            PlayerPreferences.Save();
+            if(began && (MenuRect(8).Contains(p)||MenuRect(9).Contains(p)))PlayerPreferences.Save();
         }
-        private bool ShowDiagnostics => diagnosticTaps >= 5 || Debug.isDebugBuild || Array.IndexOf(Environment.GetCommandLineArgs(), "-shiftboundQA") >= 0;
+        public bool ShowDiagnostics => diagnosticTaps >= 5 || Debug.isDebugBuild || Array.IndexOf(Environment.GetCommandLineArgs(), "-shiftboundQA") >= 0;
         private void DrawMenu()
         {
             GUI.Box(new Rect(Width * .5f - 270f, 78f, 540f, ShowDiagnostics ? 615f : 565f), GUIContent.none);

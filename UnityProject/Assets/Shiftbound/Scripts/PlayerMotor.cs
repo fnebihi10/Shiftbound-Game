@@ -121,9 +121,11 @@ namespace Shiftbound
             if (IsGrounded && flatTravel.sqrMagnitude > 0.0001f)
             {
                 stepTravel += flatTravel.magnitude;
-                if (stepTravel >= 1.6f)
+                // The courier's calibrated sprint cycle covers 3.2 m (two contacts).
+                float footDistance = Mathf.Lerp(.62f, 1.6f, Mathf.Clamp01(horizontalVelocity.magnitude / maxSpeed));
+                if (stepTravel >= footDistance)
                 {
-                    stepTravel = 0f;
+                    stepTravel %= footDistance;
                     GameFlow.Instance?.feedback?.Footstep();
                 }
             }
@@ -145,8 +147,7 @@ namespace Shiftbound
             {
                 LastLandingSpeed = Mathf.Max(0f, -verticalVelocity);
                 LandingSequence++;
-                if (visual != null) visual.localScale = new Vector3(
-                    visualBaseScale.x * 1.025f, visualBaseScale.y * 0.96f, visualBaseScale.z * 1.025f);
+                // Impact is a pose/contact response; never squash human anatomy.
                 Landed?.Invoke(LastLandingSpeed);
                 if (LastLandingSpeed > 4f)
                     GameFlow.Instance?.feedback?.Landing(LastLandingSpeed > 11f);

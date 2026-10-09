@@ -1,7 +1,8 @@
 param(
     [switch]$Build,
     [switch]$ExistingBinary,
-    [string]$Editor = 'C:/Program Files/Unity/Hub/Editor/6000.3.25f1/Editor/Unity.exe'
+    [string]$Editor = 'C:/Program Files/Unity/Hub/Editor/6000.3.25f1/Editor/Unity.exe',
+    [string]$Player = ''
 )
 $ErrorActionPreference = 'Stop'
 $milestoneRoot = Split-Path -Parent $PSScriptRoot
@@ -29,7 +30,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Production jump-intent checks failed.' }
 dotnet run --no-restore --project (Join-Path $PSScriptRoot 'TouchInputChecks/TouchInputChecks.csproj')
 if ($LASTEXITCODE -ne 0) { throw 'Production touch-router checks failed. Restore the project first if necessary.' }
 if (-not $ExistingBinary -or $Build) { & (Join-Path $PSScriptRoot 'BuildCandidate.ps1') -Target Windows -Editor $Editor }
-$milestonePlayer = Join-Path $milestoneRoot 'UnityProject/Builds/WindowsPolished/Shiftbound.exe'
+$milestonePlayer = if ($Player) { [IO.Path]::GetFullPath($Player) } else { Join-Path $milestoneRoot 'UnityProject/Builds/WindowsPolished/Shiftbound.exe' }
 $milestoneManifest = $milestonePlayer + '.manifest.json'
 if (-not (Test-Path -LiteralPath $milestoneManifest)) { throw 'No source/binary manifest. A fresh build is required.' }
 $milestoneIdentity = Get-Content -LiteralPath $milestoneManifest -Raw | ConvertFrom-Json

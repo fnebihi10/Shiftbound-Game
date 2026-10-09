@@ -10,7 +10,7 @@ namespace Shiftbound
         [Min(0f)] public float jogThreshold = 0.25f;
         [Min(0f)] public float sprintThreshold = 4.2f;
         [Min(0f)] public float landingDuration = 0.18f;
-        [Min(0f)] public float transitionDuration = 0.12f;
+        [Min(0f)] public float transitionDuration = 0.085f;
 
         private Animator animator;
         private int currentState;
@@ -69,7 +69,7 @@ namespace Shiftbound
             }
             animator.speed = wanted == Walk ? Mathf.Clamp(speed / 1.5f, .3f, 1.4f) :
                 wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :
-                wanted == Sprint ? Mathf.Clamp(speed / 7f, 0.75f, 1.2f) : 1f;
+                wanted == Sprint ? Mathf.Clamp(speed / 4.8f, 0.7f, 1.9f) : 1f;
         }
     }
 }

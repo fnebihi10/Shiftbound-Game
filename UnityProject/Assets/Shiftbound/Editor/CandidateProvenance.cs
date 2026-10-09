@@ -14,6 +14,7 @@ public static class CandidateProvenance
     [Serializable] public sealed class Manifest
     {
         public string revision, sourceFingerprint, unity, scene, target, createdUtc, signing;
+        public string sourceHashPolicy = "utf8-lf-v1; binary files retain exact SHA256";
         public Entry[] sources, binaries;
     }
     private static string Root => Path.GetFullPath(Path.Combine(Application.dataPath, "../.."));
@@ -32,8 +33,20 @@ public static class CandidateProvenance
             !p.EndsWith("CandidateIdentity.json.meta", StringComparison.Ordinal) &&
             !p.EndsWith("PerformanceTestRunInfo.json", StringComparison.Ordinal) && !p.EndsWith("PerformanceTestRunInfo.json.meta", StringComparison.Ordinal) &&
             !p.EndsWith("PerformanceTestRunSettings.json", StringComparison.Ordinal) && !p.EndsWith("PerformanceTestRunSettings.json.meta", StringComparison.Ordinal))
-            .Select(p => new Entry { path = p.Substring(Root.Length + 1).Replace('\\', '/'), sha256 = Hash(File.ReadAllBytes(p)) })
+            .Select(p => new Entry { path = p.Substring(Root.Length + 1).Replace('\\', '/'), sha256 = SourceHash(p) })
             .OrderBy(e => e.path, StringComparer.Ordinal).ToArray();
+    }
+    private static string SourceHash(string path)
+    {
+        byte[] bytes = File.ReadAllBytes(path);
+        string extension = Path.GetExtension(path).ToLowerInvariant();
+        // Explicit text formats only. .asset can be binary: Unity YAML is recognized
+        // by its header, so mesh/texture payloads never lose byte-integrity checks.
+        bool text = new[] { ".cs", ".shader", ".hlsl", ".cginc", ".json", ".meta", ".txt", ".md", ".xml", ".asmdef", ".asmref" }.Contains(extension) ||
+            ((extension == ".asset" || extension == ".mat" || extension == ".prefab" || extension == ".unity" || extension == ".controller") &&
+             bytes.Length >= 5 && Encoding.ASCII.GetString(bytes, 0, 5) == "%YAML");
+        if (text) bytes = new UTF8Encoding(false, true).GetBytes(new UTF8Encoding(false, true).GetString(bytes).TrimStart('\uFEFF').Replace("\r\n", "\n").Replace("\r", "\n"));
+        return Hash(bytes);
     }
     private static string Fingerprint(Entry[] entries) => Hash(Encoding.UTF8.GetBytes(string.Concat(entries.Select(e => e.path + ":" + e.sha256 + "\n"))));
     private static void SaveAuthoringSettings()
