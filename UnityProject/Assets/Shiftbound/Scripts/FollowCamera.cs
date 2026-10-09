@@ -25,6 +25,9 @@ namespace Shiftbound
         private float pitch = 18f;
         private readonly Collider[] overlaps = new Collider[16];
         private SphereCollider collisionProbe;
+        private float lastManualOrbit;
+        public float OrbitYaw => yaw;
+        public float OrbitPitch => pitch;
 
         private void Awake()
         {
@@ -55,14 +58,30 @@ namespace Shiftbound
             if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) return;
             Vector2 mouse = input.MouseLook;
             Vector2 stick = input.StickLook;
+            Vector2 touch = input.TouchLook;
+            float invert = PlayerPreferences.InvertY ? -1f : 1f;
             if (UnityEngine.InputSystem.Mouse.current != null &&
                 UnityEngine.InputSystem.Mouse.current.rightButton.isPressed)
-                yaw += mouse.x * mouseSensitivity;
+                yaw += mouse.x * mouseSensitivity * PlayerPreferences.MouseSensitivity;
             if (UnityEngine.InputSystem.Mouse.current != null &&
                 UnityEngine.InputSystem.Mouse.current.rightButton.isPressed)
-                pitch -= mouse.y * mouseSensitivity;
-            yaw += stick.x * stickSensitivity * Time.deltaTime;
-            pitch -= stick.y * stickSensitivity * Time.deltaTime;
+                pitch -= mouse.y * mouseSensitivity * PlayerPreferences.MouseSensitivity * invert;
+            yaw += stick.x * stickSensitivity * PlayerPreferences.StickSensitivity * Time.deltaTime;
+            pitch -= stick.y * stickSensitivity * PlayerPreferences.StickSensitivity * Time.deltaTime * invert;
+            yaw += touch.x * .16f * PlayerPreferences.TouchSensitivity;
+            pitch += touch.y * .16f * PlayerPreferences.TouchSensitivity * invert;
+            bool manual = touch.sqrMagnitude > .01f || stick.sqrMagnitude > .01f ||
+                (UnityEngine.InputSystem.Mouse.current != null && UnityEngine.InputSystem.Mouse.current.rightButton.isPressed);
+            if (manual) lastManualOrbit = Time.time;
+            // Gentle grounded heading follow only. No airborne target switching or
+            // reversal snap; release the camera for a full second after manual orbit.
+            if (input.Phone.Visible && PlayerPreferences.CameraAssist && !manual && Time.time - lastManualOrbit > 1f &&
+                motor != null && motor.IsGrounded && motor.HorizontalVelocity.sqrMagnitude > 4f && input.Move.y > .35f)
+            {
+                float heading = Mathf.Atan2(motor.HorizontalVelocity.x, motor.HorizontalVelocity.z) * Mathf.Rad2Deg;
+                if (Mathf.Abs(Mathf.DeltaAngle(yaw, heading)) < 100f)
+                    yaw = Mathf.MoveTowardsAngle(yaw, heading, 35f * Time.deltaTime);
+            }
             pitch = Mathf.Clamp(pitch, -15f, 58f);
 
             Vector3 focus = Focus();
@@ -81,7 +100,12 @@ namespace Shiftbound
         {
             Vector3 focus = target.position + Vector3.up * lookHeight +
                 Quaternion.Euler(0f, yaw, 0f) * Vector3.forward * lookAhead;
-            if (motor != null) focus += motor.ActualVelocity * 0.05f;
+            if (motor != null)
+            {
+                Vector3 velocity = motor.ActualVelocity;
+                velocity.y = 0f;
+                focus += Vector3.ClampMagnitude(velocity, motor.maxSpeed) * .05f;
+            }
             return focus;
         }
 
@@ -97,9 +121,16 @@ namespace Shiftbound
             collisionProbe.radius = collisionRadius;
             int count = Physics.OverlapSphereNonAlloc(result, collisionRadius, overlaps,
                 obstacleMask, QueryTriggerInteraction.Ignore);
+            Collider[] candidates = overlaps;
+            // Rare crowded corner fallback: saturation must not silently omit walls.
+            if (count == overlaps.Length)
+            {
+                candidates = Physics.OverlapSphere(result, collisionRadius, obstacleMask, QueryTriggerInteraction.Ignore);
+                count = candidates.Length;
+            }
             for (int i = 0; i < count; i++)
             {
-                Collider obstacle = overlaps[i];
+                Collider obstacle = candidates[i];
                 if (obstacle == null) continue;
                 if (Physics.ComputePenetration(collisionProbe, result, Quaternion.identity,
                     obstacle, obstacle.transform.position, obstacle.transform.rotation,

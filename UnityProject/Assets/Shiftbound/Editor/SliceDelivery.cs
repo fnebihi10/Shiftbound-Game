@@ -44,6 +44,7 @@ public static class SliceDelivery
         if (string.IsNullOrEmpty(outputRoot))
             outputRoot = Path.GetFullPath(Path.Combine(Application.dataPath, "../Builds/WindowsPolished"));
         Directory.CreateDirectory(outputRoot);
+        CandidateProvenance.Manifest identity = CandidateProvenance.Begin("Windows");
         BuildReport report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
         {
             scenes = new[] { ScenePath },
@@ -53,6 +54,7 @@ public static class SliceDelivery
         });
         if (report.summary.result != BuildResult.Succeeded)
             throw new Exception("SHIFTBOUND BUILD FAILED: " + report.summary.result);
+        CandidateProvenance.Finish(identity, report.summary.outputPath);
         Debug.Log("SHIFTBOUND BUILD PASSED: " + report.summary.outputPath);
     }
 
@@ -84,8 +86,15 @@ public static class SliceDelivery
         if (motion == null || motion.layers.Length == 0)
             throw new Exception("Courier animation controller is missing.");
         bool uprightIdle = false;
+        var requiredStates = new System.Collections.Generic.HashSet<string> { "Idle", "Walk", "Jog", "Sprint", "Takeoff", "Jump", "Fall", "Land" };
         foreach (ChildAnimatorState entry in motion.layers[0].stateMachine.states)
         {
+            if (requiredStates.Contains(entry.state.name))
+            {
+                if (!(entry.state.motion is AnimationClip requiredClip) || requiredClip.length <= 0f || !requiredClip.isHumanMotion)
+                    throw new Exception("Courier " + entry.state.name + " requires a valid runtime Humanoid clip.");
+                requiredStates.Remove(entry.state.name);
+            }
             if (entry.state.motion is AnimationClip runtimeClip &&
                 runtimeClip.name.StartsWith("__preview__", StringComparison.Ordinal))
                 throw new Exception("Courier state " + entry.state.name + " uses an Editor-only preview clip.");
@@ -95,8 +104,15 @@ public static class SliceDelivery
                 clip.EndsWith("|Idle_Loop", StringComparison.Ordinal) ||
                 clip.EndsWith("/Idle_Loop", StringComparison.Ordinal);
         }
+        if (requiredStates.Count != 0)
+            throw new Exception("Missing runtime courier states: " + string.Join(", ", requiredStates));
         if (!uprightIdle)
             throw new Exception("Courier Idle state must use upright Idle_Loop, not Crouch_Idle_Loop.");
+        FeedbackAudio audio = flow.feedback;
+        if (audio == null || audio.shiftClip == null || audio.blockedClip == null || audio.checkpointClip == null ||
+            audio.goalClip == null || audio.jumpClip == null || audio.footstepClip == null || audio.landingClip == null ||
+            audio.hardLandingClip == null || audio.presentAmbience == null || audio.overgrownAmbience == null)
+            throw new Exception("Production audio cues and both world loops must be authored and assigned.");
         int checkpoints = 0;
         int goals = 0;
         foreach (StageTrigger trigger in UnityEngine.Object.FindObjectsByType<StageTrigger>(FindObjectsSortMode.None))

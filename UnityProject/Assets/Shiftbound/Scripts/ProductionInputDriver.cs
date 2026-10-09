@@ -12,6 +12,7 @@ namespace Shiftbound
         private Vector2 worldAxes;
         private bool jumpHeld;
         private bool shiftRequested;
+        private Vector2 orbitAxes;
         public int editorFrameRate = 60;
         private int frames;
         private float totalDt;
@@ -39,6 +40,7 @@ namespace Shiftbound
 
         public void Set(Vector2 axes, bool jump, bool shift = false)
         { worldAxes = axes; jumpHeld = jump; shiftRequested |= shift; }
+        public void SetLook(Vector2 axes) { orbitAxes = axes; }
 
         private void Update()
         {
@@ -56,7 +58,7 @@ namespace Shiftbound
             Vector3 right = view.right; right.y = 0f; right.Normalize();
             Vector3 direction = new Vector3(worldAxes.x, 0f, worldAxes.y);
             var state = new GamepadState { leftStick = new Vector2(
-                Vector3.Dot(direction, right), Vector3.Dot(direction, forward)) };
+                Vector3.Dot(direction, right), Vector3.Dot(direction, forward)), rightStick = orbitAxes };
             if (jumpHeld) state = state.WithButton(GamepadButton.South);
             if (shiftRequested) state = state.WithButton(GamepadButton.West);
             InputSystem.QueueStateEvent(pad, state);

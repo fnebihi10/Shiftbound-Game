@@ -47,19 +47,62 @@ namespace Shiftbound
         public float Elapsed => elapsed;
         public string ActiveNotice => Time.unscaledTime < noticeUntil ? notice : "";
         public bool showLegacyHud = true;
+        private bool DiagnosticSession => System.Array.Exists(System.Environment.GetCommandLineArgs(),
+            arg => arg.StartsWith("-shiftbound", System.StringComparison.Ordinal) && arg != "-shiftboundTouchUI");
 
         private void Awake()
         {
             Instance = this;
+            if (DiagnosticSession) Application.runInBackground = true;
             Time.timeScale = 1f;
+            AudioListener.pause = false;
             checkpoint = player.transform.position;
             checkpointYaw = player.transform.eulerAngles.y;
+        }
+
+        private void Start()
+        {
+            // Store authored checkpoint identity, never arbitrary air positions.
+            string saved = DiagnosticSession ? "" : PlayerPrefs.GetString("sb.checkpoint", "");
+            foreach (StageTrigger trigger in FindObjectsByType<StageTrigger>(FindObjectsSortMode.None))
+            {
+                if (trigger.name != saved || trigger.kind != StageTrigger.TriggerKind.Checkpoint || !trigger.hasCheckpointPosition) continue;
+                checkpoint = trigger.checkpointPosition;
+                checkpointYaw = trigger.checkpointFacingYaw;
+                CheckpointHint = trigger.checkpointHint;
+                shiftBridgeLessonExit = trigger.shiftBridgeLessonExit;
+                if (shiftBridgeLessonExit != null)
+                {
+                    Collider landing = shiftBridgeLessonExit.GetComponent<Collider>();
+                    shiftBridgeLessonEnd = landing != null ? landing.ClosestPoint(checkpoint) : shiftBridgeLessonExit.position;
+                }
+                Respawn();
+                break;
+            }
+            AudioListener.volume = PlayerPreferences.Volume;
+            ApplyFrameTier();
+        }
+
+        public void ApplyFrameTier()
+        {
+            if (Application.isMobilePlatform) Application.targetFrameRate = PlayerPreferences.LowPower ? 30 : 60;
+        }
+
+        private void OnApplicationPause(bool interrupted) { if (interrupted && !DiagnosticSession) Suspend(); }
+        private void OnApplicationFocus(bool focused) { if (!focused && !DiagnosticSession) Suspend(); }
+        public void Suspend()
+        {
+            if (!completed && !paused) TogglePause();
+            input?.CancelGameplayInput();
+            player?.ClearJumpIntent();
+            PlayerPreferences.Save();
         }
 
         private void OnDestroy()
         {
             if (Instance == this) Instance = null;
             Time.timeScale = 1f;
+            AudioListener.pause = false;
         }
 
         private void Update()
@@ -88,12 +131,17 @@ namespace Shiftbound
                 shiftBridgeLessonEnd = landing != null ? landing.ClosestPoint(position) : bridgeLessonExit.position;
             }
             CheckpointSequence++;
+            if (!DiagnosticSession) foreach (StageTrigger trigger in FindObjectsByType<StageTrigger>(FindObjectsSortMode.None))
+                if (trigger.kind == StageTrigger.TriggerKind.Checkpoint && trigger.hasCheckpointPosition &&
+                    Vector3.Distance(trigger.checkpointPosition, position) < .01f)
+                { PlayerPrefs.SetString("sb.checkpoint", trigger.name); PlayerPrefs.Save(); break; }
             feedback?.Checkpoint();
             Notify("CHECKPOINT");
         }
 
         public void Respawn()
         {
+            input?.CancelGameplayInput();
             player.Teleport(checkpoint);
             player.transform.rotation = Quaternion.Euler(0f, checkpointYaw, 0f);
             if (player.visual != null) player.visual.rotation = player.transform.rotation;
@@ -105,6 +153,8 @@ namespace Shiftbound
         {
             if (completed) return;
             completed = true;
+            if (!DiagnosticSession) { PlayerPrefs.DeleteKey("sb.checkpoint"); PlayerPrefs.Save(); }
+            input?.CancelGameplayInput();
             player.StopMotion();
             // Finish may arrive directly from a jump. Reframe from the stopped
             // focus before freezing follow, rather than keeping an airborne offset.
@@ -121,6 +171,9 @@ namespace Shiftbound
 
         public void Restart()
         {
+            PlayerPrefs.DeleteKey("sb.checkpoint"); PlayerPrefs.Save();
+            input?.CancelGameplayInput();
+            AudioListener.pause = false;
             Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -129,6 +182,9 @@ namespace Shiftbound
         {
             if (completed) return;
             paused = !paused;
+            input?.CancelGameplayInput();
+            player?.ClearJumpIntent();
+            AudioListener.pause = paused;
             Time.timeScale = paused ? 0f : 1f;
         }
 

@@ -16,6 +16,11 @@ namespace Shiftbound
         private int currentState;
         private int landingSequence;
         private float landingUntil;
+        private bool wasGrounded;
+        private float takeoffUntil;
+        private static readonly int Walk = Animator.StringToHash("Base Layer.Walk");
+        private static readonly int Takeoff = Animator.StringToHash("Base Layer.Takeoff");
+        private static readonly int Fall = Animator.StringToHash("Base Layer.Fall");
         private static readonly int Idle = Animator.StringToHash("Base Layer.Idle");
         private static readonly int Jog = Animator.StringToHash("Base Layer.Jog");
         private static readonly int Sprint = Animator.StringToHash("Base Layer.Sprint");
@@ -34,6 +39,9 @@ namespace Shiftbound
         {
             if (motor == null || animator.runtimeAnimatorController == null) return;
             bool grounded = motor.IsGrounded;
+            if (grounded && !wasGrounded) takeoffUntil = 0f;
+            if (!grounded && wasGrounded && motor.VerticalVelocity > 0f) takeoffUntil = Time.time + .09f;
+            wasGrounded = grounded;
             if (motor.LandingSequence != landingSequence)
             {
                 if (motor.LastLandingSpeed > 4f) landingUntil = Time.time + landingDuration;
@@ -42,21 +50,25 @@ namespace Shiftbound
 
             float speed = new Vector2(motor.ActualVelocity.x, motor.ActualVelocity.z).magnitude;
             bool complete = GameFlow.Instance != null && GameFlow.Instance.IsComplete;
-            int wanted = complete ? Idle : !grounded ? Jump : Time.time < landingUntil ? Land :
-                speed >= sprintThreshold ? Sprint : speed >= jogThreshold ? Jog : Idle;
+            int wanted = complete ? Idle : !grounded ?
+                (Time.time < takeoffUntil ? Takeoff : motor.VerticalVelocity > .6f ? Jump : Fall) :
+                Time.time < landingUntil && speed < .5f ? Land :
+                speed >= sprintThreshold ? Sprint : speed >= 1.8f ? Jog : speed >= jogThreshold ? Walk : Idle;
             if (wanted != currentState)
             {
-                bool gaitChange = (currentState == Jog || currentState == Sprint) &&
-                    (wanted == Jog || wanted == Sprint);
+                bool gaitChange = (currentState == Walk || currentState == Jog || currentState == Sprint) &&
+                    (wanted == Walk || wanted == Jog || wanted == Sprint);
                 if (gaitChange)
                 {
                     float phase = Mathf.Repeat(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f);
                     animator.CrossFade(wanted, transitionDuration, 0, phase);
                 }
-                else animator.CrossFadeInFixedTime(wanted, transitionDuration);
+                else animator.CrossFadeInFixedTime(wanted, transitionDuration, 0,
+                    wanted == Takeoff ? .65f : wanted == Fall ? .8f : 0f);
                 currentState = wanted;
             }
-            animator.speed = wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :
+            animator.speed = wanted == Walk ? Mathf.Clamp(speed / 1.5f, .3f, 1.4f) :
+                wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :
                 wanted == Sprint ? Mathf.Clamp(speed / 7f, 0.75f, 1.2f) : 1f;
         }
     }
