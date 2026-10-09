@@ -42,6 +42,8 @@ namespace Shiftbound
         public float VerticalVelocity => verticalVelocity;
         public CharacterController Controller => controller;
         public bool IsGrounded { get; private set; }
+        public double LastInputToMotorMs { get; private set; } = -1;
+        public int InputSampleFrame { get; private set; } = -1;
 
         private void Awake()
         {
@@ -53,6 +55,12 @@ namespace Shiftbound
         private void Update()
         {
             if (input == null || (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying)) return;
+            if (input.Phone.EventFrame == Time.frameCount)
+            {
+                // EnhancedTouch.time explicitly shares realtimeSinceStartup's clock.
+                LastInputToMotorMs = (Time.realtimeSinceStartupAsDouble - input.Phone.LastEventTime) * 1000;
+                InputSampleFrame = Time.frameCount;
+            }
             jumpIntent.SynchronizeHeld(input.JumpHeld);
             Step(Time.deltaTime, input.Move, input.JumpPressed, input.JumpReleased);
         }
@@ -125,8 +133,8 @@ namespace Shiftbound
             {
                 if (horizontalVelocity.sqrMagnitude > 0.05f)
                     visual.rotation = Quaternion.Slerp(visual.rotation,
-                        Quaternion.LookRotation(horizontalVelocity), turnSpeed * dt);
-                visual.localScale = Vector3.Lerp(visual.localScale, visualBaseScale, 12f * dt);
+                        Quaternion.LookRotation(horizontalVelocity), 1f - Mathf.Exp(-turnSpeed * dt));
+                visual.localScale = Vector3.Lerp(visual.localScale, visualBaseScale, 1f - Mathf.Exp(-12f * dt));
             }
         }
 
@@ -183,5 +191,7 @@ namespace Shiftbound
             jumpIntent.Reset();
             stepTravel = 0f;
         }
+
+        public void ClearJumpIntent() => jumpIntent.Reset();
     }
 }
