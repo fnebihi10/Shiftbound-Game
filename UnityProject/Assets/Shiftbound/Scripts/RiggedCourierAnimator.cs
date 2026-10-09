@@ -46,7 +46,14 @@ namespace Shiftbound
                 speed >= sprintThreshold ? Sprint : speed >= jogThreshold ? Jog : Idle;
             if (wanted != currentState)
             {
-                animator.CrossFadeInFixedTime(wanted, transitionDuration);
+                bool gaitChange = (currentState == Jog || currentState == Sprint) &&
+                    (wanted == Jog || wanted == Sprint);
+                if (gaitChange)
+                {
+                    float phase = Mathf.Repeat(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f);
+                    animator.CrossFade(wanted, transitionDuration, 0, phase);
+                }
+                else animator.CrossFadeInFixedTime(wanted, transitionDuration);
                 currentState = wanted;
             }
             animator.speed = wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :

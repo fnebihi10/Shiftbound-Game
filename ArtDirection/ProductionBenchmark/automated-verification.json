@@ -1,0 +1,99 @@
+[
+    {
+        "log":  "production-final-input-120.log",
+        "sha256":  "A616F218F1CAF5E25C35053C4148A87BFBDF017AD21FA2CD3FDED5DC6A91B4CD",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.11, 0.08, 59.81) camera=(-0.11, 3.88, 54.48) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=120 frames=1409 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.",
+                        "SHIFTBOUND PRODUCTION TIMING: requestedRate=120 samples=1473 meanDt=0.00835 minDt=0.00833 maxDt=0.02000"
+                    ]
+    },
+    {
+        "log":  "production-final-input-144.log",
+        "sha256":  "21A3C3CC0752C1FB207401BE10C57769C20718FF8215F4BC736D3F8AAF1244D8",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.11, 0.08, 59.82) camera=(-0.11, 3.88, 54.49) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=144 frames=1686 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.",
+                        "SHIFTBOUND PRODUCTION TIMING: requestedRate=144 samples=1758 meanDt=0.00696 minDt=0.00694 maxDt=0.02000"
+                    ]
+    },
+    {
+        "log":  "production-final-input-30.log",
+        "sha256":  "206F7DE05E56B9984373734F0B148CB7EE9FA5CF8A42B9DA7D8B93EE4355771F",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.13, 0.08, 59.85) camera=(-0.13, 3.88, 54.52) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=30 frames=339 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.",
+                        "SHIFTBOUND PRODUCTION TIMING: requestedRate=30 samples=376 meanDt=0.03326 minDt=0.02000 maxDt=0.03341"
+                    ]
+    },
+    {
+        "log":  "production-final-input-60.log",
+        "sha256":  "A2BCA36114B56CFF137556A3CD6E91834A26FA2E138F39FBAA94AD2ABDED60B7",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.10, 0.08, 59.79) camera=(-0.10, 3.88, 54.46) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=696 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.",
+                        "SHIFTBOUND PRODUCTION TIMING: requestedRate=60 samples=742 meanDt=0.01668 minDt=0.01667 maxDt=0.02000"
+                    ]
+    },
+    {
+        "log":  "production-final-reachaudit.log",
+        "sha256":  "2D6A87AAB928FE512E4236E1E13D5A4CB339EC754777B99DBB7FF34427F96517",
+        "markers":  [
+                        "SHIFTBOUND REACH AUDIT COMPLETE: samples are mechanical evidence, not exhaustive proof or human testing."
+                    ]
+    },
+    {
+        "log":  "production-final-regression.log",
+        "sha256":  "BB9366C294663B45E9DE145DD6385D7A7FC639C9B64691FE04593605EACC5DBC",
+        "markers":  [
+                        "SHIFTBOUND REGRESSION PASSED: motor cases at 30/60/120/144 Hz and variable dt; Shift timing; checkpoint trigger and recovery. Run route regression for goal traversal."
+                    ]
+    },
+    {
+        "log":  "production-final-route-0.log",
+        "sha256":  "E23A4D223A790C47B89E93A67E4CBF952DDBDB9EACF747C65EA4553949F0AB33",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.05, 0.08, 59.63) camera=(-0.05, 3.88, 54.31) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=0 frames=720 input=direct Step actual checkpoints=3; actual goal; stopped completion motion."
+                    ]
+    },
+    {
+        "log":  "production-final-route-120.log",
+        "sha256":  "9FEFE4027C17FB73553539482C259EF393391867C14DD7DC219E6E061A3AB7B5",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.09, 0.08, 59.75) camera=(-0.09, 3.88, 54.42) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=120 frames=1424 input=direct Step actual checkpoints=3; actual goal; stopped completion motion."
+                    ]
+    },
+    {
+        "log":  "production-final-route-144.log",
+        "sha256":  "98F9DE4592CA202A6F355BB21D77D6774834803B72C9018DDAB15DB76C5E3D2B",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.08, 0.08, 59.71) camera=(-0.08, 3.88, 54.39) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=144 frames=1702 input=direct Step actual checkpoints=3; actual goal; stopped completion motion."
+                    ]
+    },
+    {
+        "log":  "production-final-route-30.log",
+        "sha256":  "DBA8D1839631531BA446F93BF43A6C51F782B7A0BBF7C5BF1799609981B88BA5",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.10, 0.08, 59.78) camera=(-0.10, 3.88, 54.45) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=30 frames=344 input=direct Step actual checkpoints=3; actual goal; stopped completion motion."
+                    ]
+    },
+    {
+        "log":  "production-final-route-60.log",
+        "sha256":  "96473C1CA82D8499CADF21A0AA2D632E5410D9D558A385C46C3E77F17467A0B1",
+        "markers":  [
+                        "SHIFTBOUND COMPLETION FRAME: player=(-0.08, 0.08, 59.73) camera=(-0.08, 3.88, 54.41) viewport=(0.50, 0.35, 5.93)",
+                        "SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=705 input=direct Step actual checkpoints=3; actual goal; stopped completion motion."
+                    ]
+    },
+    {
+        "log":  "production-final-smoke.log",
+        "sha256":  "04DBDDB07BF5BA16CA41AE81D2516D5147D08C23D6EA511FC3004EA195EF94DB",
+        "markers":  [
+                        "SHIFTBOUND SMOKE PASSED: blocked shift, safe ground shift, midair shift, material slots, jumps at 30/60/120/144 steps, checkpoint respawn, goal."
+                    ]
+    }
+]

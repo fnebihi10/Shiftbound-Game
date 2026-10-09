@@ -1,0 +1,122 @@
+{
+    "hardware":  [
+                     "Unity=6000.3.25f1",
+                     "CPU=AMD Ryzen 5 5600X 6-Core Processor ",
+                     "RAM_MB=32657",
+                     "GPU=AMD Radeon RX 7600",
+                     "GPU_API=Direct3D11",
+                     "Driver=Direct3D 11.0 [level 11.1]",
+                     "OS=Windows 11  (10.0.26300)",
+                     "Resolution=1920x1080",
+                     "Quality=PC",
+                     "VSync=0",
+                     "FrameCap=unlimited",
+                     "Development=False",
+                     "BatchesRecorder=True",
+                     "DrawsRecorder=True",
+                     "TrianglesRecorder=True",
+                     "AllocationRecorder=False",
+                     "Samples=22295",
+                     "Protocol=stationary start roof; four orbits per world; 1.5s settle then 3s sample; no readbacks"
+                 ],
+    "samples":  22295,
+    "raw_sha256":  "DA966C9939D42807A1B43A11F396CC7A8D22A72AB6E6020411767309139972ED",
+    "phases":  [
+                   {
+                       "phase":  "present-yaw-0",
+                       "samples":  2269,
+                       "cpu_frame_p50_ms":  1.295,
+                       "cpu_frame_p95_ms":  1.46,
+                       "cpu_main_p95_ms":  0.722,
+                       "gpu_p50_ms":  1.238,
+                       "gpu_p95_ms":  1.263,
+                       "batches_p50":  848,
+                       "draws_p50":  848,
+                       "triangles_p50":  490171
+                   },
+                   {
+                       "phase":  "present-yaw-90",
+                       "samples":  2974,
+                       "cpu_frame_p50_ms":  1,
+                       "cpu_frame_p95_ms":  1.127,
+                       "cpu_main_p95_ms":  0.698,
+                       "gpu_p50_ms":  0.931,
+                       "gpu_p95_ms":  0.943,
+                       "batches_p50":  312,
+                       "draws_p50":  312,
+                       "triangles_p50":  241085
+                   },
+                   {
+                       "phase":  "present-yaw-180",
+                       "samples":  3250,
+                       "cpu_frame_p50_ms":  0.898,
+                       "cpu_frame_p95_ms":  1.153,
+                       "cpu_main_p95_ms":  0.945,
+                       "gpu_p50_ms":  0.759,
+                       "gpu_p95_ms":  0.771,
+                       "batches_p50":  242,
+                       "draws_p50":  242,
+                       "triangles_p50":  112047
+                   },
+                   {
+                       "phase":  "present-yaw-270",
+                       "samples":  2893,
+                       "cpu_frame_p50_ms":  1.027,
+                       "cpu_frame_p95_ms":  1.18,
+                       "cpu_main_p95_ms":  0.772,
+                       "gpu_p50_ms":  0.93,
+                       "gpu_p95_ms":  0.942,
+                       "batches_p50":  479,
+                       "draws_p50":  479,
+                       "triangles_p50":  276763
+                   },
+                   {
+                       "phase":  "overgrown-yaw-0",
+                       "samples":  2083,
+                       "cpu_frame_p50_ms":  1.429,
+                       "cpu_frame_p95_ms":  1.609,
+                       "cpu_main_p95_ms":  0.885,
+                       "gpu_p50_ms":  1.402,
+                       "gpu_p95_ms":  1.549,
+                       "batches_p50":  1956,
+                       "draws_p50":  1956,
+                       "triangles_p50":  716949
+                   },
+                   {
+                       "phase":  "overgrown-yaw-90",
+                       "samples":  2861,
+                       "cpu_frame_p50_ms":  1.038,
+                       "cpu_frame_p95_ms":  1.177,
+                       "cpu_main_p95_ms":  0.742,
+                       "gpu_p50_ms":  0.929,
+                       "gpu_p95_ms":  0.939,
+                       "batches_p50":  326,
+                       "draws_p50":  326,
+                       "triangles_p50":  241147
+                   },
+                   {
+                       "phase":  "overgrown-yaw-180",
+                       "samples":  3110,
+                       "cpu_frame_p50_ms":  0.953,
+                       "cpu_frame_p95_ms":  1.128,
+                       "cpu_main_p95_ms":  0.763,
+                       "gpu_p50_ms":  0.733,
+                       "gpu_p95_ms":  0.745,
+                       "batches_p50":  250,
+                       "draws_p50":  250,
+                       "triangles_p50":  112087
+                   },
+                   {
+                       "phase":  "overgrown-yaw-270",
+                       "samples":  2855,
+                       "cpu_frame_p50_ms":  1.044,
+                       "cpu_frame_p95_ms":  1.19,
+                       "cpu_main_p95_ms":  0.751,
+                       "gpu_p50_ms":  0.934,
+                       "gpu_p95_ms":  0.949,
+                       "batches_p50":  523,
+                       "draws_p50":  523,
+                       "triangles_p50":  277045
+                   }
+               ]
+}

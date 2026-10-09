@@ -50,6 +50,7 @@ namespace Shiftbound
             controls = Label(13, FontStyle.Bold, Color.white);
             center = Label(23, FontStyle.Bold, Color.white);
             center.alignment = TextAnchor.MiddleCenter;
+            center.wordWrap = false;
             lessonTitle = Label(20, FontStyle.Bold, new Color(0.67f, 0.90f, 0.86f));
             lessonTitle.alignment = TextAnchor.MiddleCenter;
             lessonDetail = Label(16, FontStyle.Bold, Color.white);
@@ -104,10 +105,10 @@ namespace Shiftbound
             GUI.Label(new Rect(w - pad - 130f, pad + 12f, 120f, 34f),
                 FormatTime(flow.Elapsed), timer);
 
-            GUI.Box(new Rect(pad, h - pad - 42f, 430f, 42f), GUIContent.none, pill);
-            GUI.Label(new Rect(pad + 14f, h - pad - 39f, 410f, 34f),
-                gamepadPrompts ? "LEFT STICK  MOVE     A  JUMP     X  SWITCH" :
-                "WASD  MOVE     SPACE  JUMP     SHIFT  SWITCH", controls);
+            GUI.Box(new Rect(pad, h - pad - 60f, 530f, 60f), GUIContent.none, pill);
+            GUI.Label(new Rect(pad + 14f, h - pad - 57f, 505f, 52f),
+                gamepadPrompts ? "LEFT STICK  MOVE     A  JUMP     X  SWITCH\nRIGHT STICK  LOOK     START  PAUSE" :
+                "WASD  MOVE     SPACE  JUMP     SHIFT  SWITCH\nHOLD RIGHT MOUSE  LOOK     ESC  PAUSE     R  RETRY", controls);
             if (flow.HasShiftBridgeGuidance)
             {
                 float width = Mathf.Min(580f, w - pad * 2f);
@@ -125,15 +126,15 @@ namespace Shiftbound
             }
             else if (flow.IsPlaying && !string.IsNullOrEmpty(flow.CheckpointHint))
             {
-                GUI.Box(new Rect(pad, h - pad - 112f, 530f, 60f), GUIContent.none, pill);
-                GUI.Label(new Rect(pad + 14f, h - pad - 108f, 505f, 52f), flow.CheckpointHint, controls);
+                GUI.Box(new Rect(pad, h - pad - 130f, 530f, 60f), GUIContent.none, pill);
+                GUI.Label(new Rect(pad + 14f, h - pad - 126f, 505f, 52f), flow.CheckpointHint, controls);
             }
 
             if (!string.IsNullOrEmpty(flow.ActiveNotice))
             {
-                GUI.Box(new Rect(w / 2f - 130f, pad, 260f, 48f),
+                GUI.Box(new Rect(w / 2f - 210f, 202f, 420f, 48f),
                     GUIContent.none, pill);
-                GUI.Label(new Rect(w / 2f - 120f, pad + 5f, 240f, 38f),
+                GUI.Label(new Rect(w / 2f - 200f, 207f, 400f, 38f),
                     flow.ActiveNotice, center);
             }
             if (flow.IsPaused || flow.IsComplete)

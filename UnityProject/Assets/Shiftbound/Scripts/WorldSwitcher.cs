@@ -27,6 +27,9 @@ namespace Shiftbound
         private float rejectionFlash;
         private CharacterController controller;
         public bool showLegacyBlockedFlash = true;
+        public bool previewCollisionSurfacesOnly;
+        private bool[][] previewEligible;
+        private bool[][] originalVisibility;
 
         public bool IsAltered => activeWorld == 1;
         public bool IsReady => Time.unscaledTime >= nextSwitch;
@@ -53,13 +56,19 @@ namespace Shiftbound
             };
             materialSets = new Material[2][][];
             ghostSets = new Material[2][][];
+            previewEligible = new bool[2][];
+            originalVisibility = new bool[2][];
             for (int world = 0; world < 2; world++)
             {
                 materialSets[world] = new Material[renderSets[world].Length][];
                 ghostSets[world] = new Material[renderSets[world].Length][];
+                previewEligible[world] = new bool[renderSets[world].Length];
+                originalVisibility[world] = new bool[renderSets[world].Length];
                 for (int i = 0; i < renderSets[world].Length; i++)
                 {
                     materialSets[world][i] = renderSets[world][i].sharedMaterials;
+                    previewEligible[world][i] = renderSets[world][i].GetComponent<Collider>() != null;
+                    originalVisibility[world][i] = renderSets[world][i].enabled;
                     ghostSets[world][i] = new Material[materialSets[world][i].Length];
                     for (int slot = 0; slot < ghostSets[world][i].Length; slot++)
                         ghostSets[world][i][slot] = ghostMaterial;
@@ -159,6 +168,8 @@ namespace Shiftbound
                 for (int i = 0; i < renderSets[world].Length; i++)
                 {
                     Material[] originals = materialSets[world][i];
+                    if (previewCollisionSurfacesOnly)
+                        renderSets[world][i].enabled = originalVisibility[world][i] && (active || previewEligible[world][i]);
                     if (active) renderSets[world][i].sharedMaterials = originals;
                     else renderSets[world][i].sharedMaterials = ghostSets[world][i];
                 }

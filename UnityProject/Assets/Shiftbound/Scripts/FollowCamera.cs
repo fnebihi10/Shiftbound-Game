@@ -123,6 +123,14 @@ namespace Shiftbound
             pitch = 18f;
             Snap();
         }
+
+        // Exact inspection pose for paired-world captures; never used by normal input.
+        public void SetInspectionOrbit(float inspectionYaw, float inspectionPitch)
+        {
+            yaw = inspectionYaw;
+            pitch = Mathf.Clamp(inspectionPitch, -15f, 58f);
+            Snap();
+        }
     }
 }
 
