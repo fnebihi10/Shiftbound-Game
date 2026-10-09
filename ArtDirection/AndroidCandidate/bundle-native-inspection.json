@@ -1,0 +1,105 @@
+{
+    "apk_sha256":  "a8b6bc2276580ba66173ae15c61f74fc3d24fa511e443d28da699b47a23e2fd1",
+    "native":  [
+                   {
+                       "library":  "lib_burst_generated.so",
+                       "sha256":  "9a00b27f74b0a7f20a36d93b149a9d4dae4719074cce22873b5d23a502de8b40",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   },
+                   {
+                       "library":  "libc++_shared.so",
+                       "sha256":  "4397241b4bd20a8e579bfb41d21107857e12985f6a01ca0c2a5f83380d1270b4",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   },
+                   {
+                       "library":  "libgame.so",
+                       "sha256":  "1aff0fe45f35c2b60513e78c2ef077a9aa5b6660487f39b6d92508f768ce64c5",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   },
+                   {
+                       "library":  "libil2cpp.so",
+                       "sha256":  "cb41c0ed620d9d8a5d815b8fee8b69e13af0cd640022c0b993d0d4ed6cc2028e",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   },
+                   {
+                       "library":  "libmain.so",
+                       "sha256":  "8c63eeda160250bc1e8a882a2f9298514a2d8a3a718e5cd0fa4f8150fae7a68b",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   },
+                   {
+                       "library":  "libswappywrapper.so",
+                       "sha256":  "1d684402dff8f31b77a88db46980a2bc390f3335a6f7b2bf7813b2b6643bbe8d",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   },
+                   {
+                       "library":  "libunity.so",
+                       "sha256":  "a1c97156a446de60c498843347e8d805a33273c07a2a98678cae4482b3eaa254",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   }
+               ],
+    "zipalign_pass":  true,
+    "signature_pass":  true,
+    "runtime_16kb":  "NOT VERIFIED: physical 16KB device required",
+    "install_update":  "NOT VERIFIED: no connected phone"
+}
