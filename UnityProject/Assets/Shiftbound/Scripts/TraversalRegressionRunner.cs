@@ -253,6 +253,25 @@ namespace Shiftbound
             Reset(Vector3.up * 0.8f);
             Require(!motor.ProbeGround(out _), "steep slope not ground", rate);
             slope.SetActive(false); floor.SetActive(true);
+            Reset(Vector3.up * .06f);
+            float moveTime = 0f;
+            for (int i = 0; moveTime < .45f; i++) { float step = Dt(rate, i); motor.Step(step, Vector2.right, false, false); moveTime += step; }
+            float reverseTime = 0f;
+            for (int i = 0; reverseTime < .4f; i++) { float step = Dt(rate, i); motor.Step(step, Vector2.left, false, false); reverseTime += step; }
+            Require(motor.HorizontalVelocity.x < -motor.maxSpeed * .8f && motor.ActualVelocity.x < -1f,
+                "reversal responds without animation lockout", rate);
+            Reset(Vector3.up * .06f); motor.Step(dt, Vector2.zero, false, false);
+            motor.Step(dt, Vector2.up, true, false);
+            for (int i = 0; i < 500 && !motor.IsGrounded; i++) motor.Step(Dt(rate,i), Vector2.up, false, false);
+            Vector3 landingPosition = motor.transform.position;
+            motor.Step(dt, Vector2.up, true, false);
+            Require(motor.VerticalVelocity > 0f && motor.transform.position.z > landingPosition.z,
+                "landing accepts immediate movement and Jump", rate);
+            Reset(Vector3.up * .16f); motor.Step(dt, Vector2.zero, true, false);
+            motor.ClearJumpIntent();
+            bool resumedJump = false;
+            for (int i = 0; i < 200; i++) { motor.Step(Dt(rate,i), Vector2.zero, false, false); resumedJump |= motor.VerticalVelocity > 0f; }
+            Require(!resumedJump && motor.IsGrounded, "interruption clears pre-landing jump intent", rate);
             Debug.Log("SHIFTBOUND MOTOR CASES PASS: " + (rate == 0 ? "variable dt" : rate + " Hz") + " heldPeak=" + held + " tapPeak=" + tapped);
         }
 
