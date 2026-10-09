@@ -1,6 +1,7 @@
 ﻿[Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
+[Bb]in/
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
@@ -14,6 +15,8 @@
 *.sln
 *.slnx
 *.user
+*.keystore
+*.jks
 *.pidb
 *.booproj
 *.svd
@@ -22,3 +25,8 @@
 .DS_Store
 Thumbs.db
 /.validation/
+UnityProject/Assets/Shiftbound/Resources/CandidateIdentity.json
+UnityProject/Assets/Shiftbound/Resources/CandidateIdentity.json.meta
+UnityProject/.utmp/
+UnityProject/Assets/Resources/PerformanceTestRun*.json
+UnityProject/Assets/Resources/PerformanceTestRun*.json.meta
