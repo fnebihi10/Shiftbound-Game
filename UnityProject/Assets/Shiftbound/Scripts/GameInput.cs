@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Shiftbound
 {
+    [DefaultExecutionOrder(-350)]
     public sealed class GameInput : MonoBehaviour
     {
         private InputAction move;
@@ -13,18 +14,22 @@ namespace Shiftbound
         private InputAction pause;
         private InputAction restart;
 
-        public Vector2 Move => move.ReadValue<Vector2>();
-        public Vector2 MouseLook => mouseLook.ReadValue<Vector2>();
-        public Vector2 StickLook => stickLook.ReadValue<Vector2>();
-        public bool JumpPressed => jump.WasPressedThisFrame();
-        public bool JumpReleased => jump.WasReleasedThisFrame();
-        public bool JumpHeld => jump.IsPressed();
-        public bool ShiftPressed => shift.WasPressedThisFrame();
-        public bool PausePressed => pause.WasPressedThisFrame();
-        public bool RestartPressed => restart.WasPressedThisFrame();
+        public PhoneControls Phone { get; private set; }
+        private bool waitingForRelease;
+        public Vector2 Move => waitingForRelease ? Vector2.zero : Vector2.ClampMagnitude(move.ReadValue<Vector2>() + Phone.Router.Move, 1f);
+        public Vector2 MouseLook => waitingForRelease ? Vector2.zero : mouseLook.ReadValue<Vector2>();
+        public Vector2 TouchLook => waitingForRelease ? Vector2.zero : Phone.Router.Look;
+        public Vector2 StickLook => waitingForRelease ? Vector2.zero : stickLook.ReadValue<Vector2>();
+        public bool JumpPressed => !waitingForRelease && (jump.WasPressedThisFrame() || Phone.Router.JumpPressed);
+        public bool JumpReleased => !waitingForRelease && (jump.WasReleasedThisFrame() || Phone.Router.JumpReleased) && !JumpHeld;
+        public bool JumpHeld => !waitingForRelease && (jump.IsPressed() || Phone.Router.JumpHeld);
+        public bool ShiftPressed => !waitingForRelease && (shift.WasPressedThisFrame() || Phone.Router.ShiftPressed);
+        public bool PausePressed => !waitingForRelease && pause.WasPressedThisFrame();
+        public bool RestartPressed => !waitingForRelease && restart.WasPressedThisFrame();
 
         private void Awake()
         {
+            Phone = gameObject.AddComponent<PhoneControls>();
             move = new InputAction("Move", InputActionType.Value);
             move.AddCompositeBinding("2DVector")
                 .With("Up", "<Keyboard>/w").With("Down", "<Keyboard>/s")
@@ -40,6 +45,20 @@ namespace Shiftbound
             shift = Button("Shift", "<Keyboard>/leftShift", "<Keyboard>/rightShift", "<Gamepad>/buttonWest");
             pause = Button("Pause", "<Keyboard>/escape", "<Gamepad>/start");
             restart = Button("Restart", "<Keyboard>/r", "<Gamepad>/select");
+        }
+
+        public void CancelGameplayInput()
+        {
+            Phone.Cancel();
+            waitingForRelease = true;
+        }
+
+        private void Update()
+        {
+            // Rearm on a neutral frame; old held controls cannot act on resume.
+            if (waitingForRelease && !jump.IsPressed() && !shift.IsPressed() && !pause.IsPressed() && !restart.IsPressed() &&
+                move.ReadValue<Vector2>().sqrMagnitude < .01f && !Phone.Router.JumpHeld && Phone.Router.ContactCount == 0)
+                waitingForRelease = false;
         }
 
         private static InputAction Button(string name, params string[] paths)
