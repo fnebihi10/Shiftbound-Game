@@ -90,11 +90,14 @@ namespace Shiftbound
         {
             if (flow == null || worlds == null) return;
             EnsureStyles();
-            float scale = Mathf.Clamp(Screen.height / 720f, 0.72f, 1.45f);
+            bool phone = flow.input != null && flow.input.Phone.Visible;
+            if (phone) return; // Phone HUD renders in camera space, including offscreen QA.
+            float scale = Screen.safeArea.height / 720f;
             Matrix4x4 previous = GUI.matrix;
-            GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1f));
-            float w = Screen.width / scale;
-            float h = Screen.height / scale;
+            GUI.matrix = Matrix4x4.TRS(new Vector3(Screen.safeArea.x, Screen.height - Screen.safeArea.yMax, 0f),
+                Quaternion.identity, new Vector3(scale, scale, 1f));
+            float w = Screen.safeArea.width / scale;
+            float h = 720f;
             const float pad = 20f;
 
             GUI.Box(new Rect(pad, pad, 250f, 68f), GUIContent.none, pill);
@@ -105,10 +108,17 @@ namespace Shiftbound
             GUI.Label(new Rect(w - pad - 130f, pad + 12f, 120f, 34f),
                 FormatTime(flow.Elapsed), timer);
 
+            if (!phone) {
             GUI.Box(new Rect(pad, h - pad - 60f, 530f, 60f), GUIContent.none, pill);
             GUI.Label(new Rect(pad + 14f, h - pad - 57f, 505f, 52f),
                 gamepadPrompts ? "LEFT STICK  MOVE     A  JUMP     X  SWITCH\nRIGHT STICK  LOOK     START  PAUSE" :
                 "WASD  MOVE     SPACE  JUMP     SHIFT  SWITCH\nHOLD RIGHT MOUSE  LOOK     ESC  PAUSE     R  RETRY", controls);
+            }
+            if (phone && flow.IsPlaying && flow.Elapsed < 7f)
+            {
+                GUI.Box(new Rect(w / 2f - 245f, 104f, 490f, 42f), GUIContent.none, pill);
+                GUI.Label(new Rect(w / 2f - 235f, 109f, 470f, 32f), "Hold JUMP; slide onto SHIFT for midair change", lessonDetail);
+            }
             if (flow.HasShiftBridgeGuidance)
             {
                 float width = Mathf.Min(580f, w - pad * 2f);
@@ -116,18 +126,21 @@ namespace Shiftbound
                 GUI.Box(new Rect(left, 106f, width, 86f), GUIContent.none, pill);
                 GUI.Label(new Rect(left + 10f, 112f, width - 20f, 30f),
                     worlds.IsAltered ? "BRIDGE SOLID — CROSS IN OVERGROWN" :
-                    gamepadPrompts ? "PRESS X TO MAKE THE BRIDGE SOLID" :
+                    phone ? "TAP SHIFT TO MAKE THE BRIDGE SOLID" : gamepadPrompts ? "PRESS X TO MAKE THE BRIDGE SOLID" :
                     "PRESS SHIFT TO MAKE THE BRIDGE SOLID", lessonTitle);
                 GUI.Label(new Rect(left + 10f, 145f, width - 20f, 37f),
                     worlds.IsAltered
-                        ? (gamepadPrompts ? "Move forward and hold A to jump across." :
+                        ? (phone ? "Move forward and hold JUMP to jump across." : gamepadPrompts ? "Move forward and hold A to jump across." :
                             "Move forward and hold SPACE to jump across.")
                         : "Blue previews cannot support you. Switch before jumping.", lessonDetail);
             }
             else if (flow.IsPlaying && !string.IsNullOrEmpty(flow.CheckpointHint))
             {
-                GUI.Box(new Rect(pad, h - pad - 130f, 530f, 60f), GUIContent.none, pill);
-                GUI.Label(new Rect(pad + 14f, h - pad - 126f, 505f, 52f), flow.CheckpointHint, controls);
+                float hintY = phone ? 104f : h - pad - 130f;
+                GUI.Box(new Rect(w / 2f - 265f, hintY, 530f, 60f), GUIContent.none, pill);
+                string hint = flow.CheckpointHint;
+                if (phone) hint = hint.Replace("SPACE", "JUMP").Replace("Space", "JUMP").Replace("press Shift", "tap SHIFT");
+                GUI.Label(new Rect(w / 2f - 251f, hintY + 4f, 505f, 52f), hint, controls);
             }
 
             if (!string.IsNullOrEmpty(flow.ActiveNotice))
@@ -137,21 +150,39 @@ namespace Shiftbound
                 GUI.Label(new Rect(w / 2f - 200f, 207f, 400f, 38f),
                     flow.ActiveNotice, center);
             }
-            if (flow.IsPaused || flow.IsComplete)
+            if (!phone && (flow.IsPaused || flow.IsComplete))
             {
-                GUI.Box(new Rect(w / 2f - 210f, h / 2f - 90f, 420f, 180f),
+                GUI.Box(new Rect(w / 2f - 240f, 180f, 480f, 370f),
                     GUIContent.none, new GUIStyle(pill) { normal = { background = darkTexture } });
-                GUI.Label(new Rect(w / 2f - 185f, h / 2f - 55f, 370f, 100f),
+                GUI.Label(new Rect(w / 2f - 215f, 194f, 430f, 80f),
                     flow.IsComplete
                         ? "ROOFTOP CLEARED\n" + FormatTime(flow.Elapsed) + "\nRetry below"
                         : "PAUSED\nResume or restart below",
                     center);
-                if (flow.IsPaused && GUI.Button(new Rect(w / 2f - 178f, h / 2f + 48f, 160f, 34f), "RESUME"))
+                if (flow.IsPaused && GUI.Button(new Rect(w / 2f - 210f, 283f, 195f, 40f), "RESUME"))
                     flow.TogglePause();
-                if (GUI.Button(new Rect(w / 2f + 18f, h / 2f + 48f, 160f, 34f), "RETRY"))
+                if (GUI.Button(new Rect(w / 2f + 15f, 283f, 195f, 40f), "RETRY"))
                     flow.Restart();
+                if (Event.current.type == EventType.MouseDown) GUI.FocusControl(null);
+                Setting(w, 338f, "Mouse sensitivity", ref PlayerPreferences.MouseSensitivity, .3f, 2.5f);
+                Setting(w, 381f, "Controller sensitivity", ref PlayerPreferences.StickSensitivity, .3f, 2.5f);
+                Setting(w, 424f, "Volume", ref PlayerPreferences.Volume, 0f, 1f);
+                AudioListener.volume = PlayerPreferences.Volume;
+                bool inverted = GUI.Toggle(new Rect(w/2f - 210f, 480f, 420f, 32f), PlayerPreferences.InvertY, "Invert vertical camera");
+                if (inverted != PlayerPreferences.InvertY) { PlayerPreferences.InvertY = inverted; PlayerPreferences.Save(); }
             }
             GUI.matrix = previous;
+        }
+
+        private void Setting(float width, float y, string text, ref float value, float min, float max)
+        {
+            GUI.Label(new Rect(width/2f - 210f, y, 220f, 30f), text, controls);
+            float next = GUI.HorizontalSlider(new Rect(width/2f + 20f, y+9f, 185f, 25f), value, min, max);
+            if (!Mathf.Approximately(next, value))
+            {
+                value = next;
+                PlayerPreferences.Save();
+            }
         }
 
         private void OnDestroy()
