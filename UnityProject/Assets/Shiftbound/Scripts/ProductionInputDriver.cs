@@ -18,23 +18,24 @@ namespace Shiftbound
         private float totalDt;
         private float minDt = float.PositiveInfinity;
         private float maxDt;
-#if UNITY_EDITOR
         private InputSettings originalSettings;
         private InputSettings testSettings;
-#endif
         public string Timing => "samples=" + frames + " meanDt=" + (totalDt / Mathf.Max(1, frames)).ToString("F5") +
             " minDt=" + minDt.ToString("F5") + " maxDt=" + maxDt.ToString("F5");
 
         private void Awake()
         {
-#if UNITY_EDITOR
+            // Only this opt-in synthetic driver ignores focus. Shipping input
+            // retains normal interruption handling. Inactive window diagnostics
+            // must not silently discard queued gamepad events.
             originalSettings = InputSystem.settings;
             testSettings = Instantiate(originalSettings);
             testSettings.hideFlags = HideFlags.DontSave;
+#if UNITY_EDITOR
             testSettings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
+#endif
             testSettings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
             InputSystem.settings = testSettings;
-#endif
             pad = InputSystem.AddDevice<Gamepad>();
         }
 
@@ -70,10 +71,8 @@ namespace Shiftbound
         private void OnDestroy()
         {
             if (pad != null) InputSystem.RemoveDevice(pad);
-#if UNITY_EDITOR
             if (originalSettings != null) InputSystem.settings = originalSettings;
             if (testSettings != null) Destroy(testSettings);
-#endif
         }
     }
 }
