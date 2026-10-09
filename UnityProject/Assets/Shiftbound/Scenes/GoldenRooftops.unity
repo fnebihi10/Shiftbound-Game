@@ -20982,7 +20982,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320219782}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -23253,7 +23253,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f487b116fb81d3f40bb19e2c28ff497d, type: 2}
+  - {fileID: 2100000, guid: a261c6398b5d91044af94f18b430769d, type: 2}
+  - {fileID: 2100000, guid: df261b02def62c44eb0a5a9b73702475, type: 2}
+  - {fileID: 2100000, guid: d8def694ef2bbb346942464a6fe7a953, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23305,7 +23307,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351098375}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 318310d9185ffd24786cfcbb97dba3e1, type: 2}
 --- !u!1 &354107574
 GameObject:
   m_ObjectHideFlags: 0
@@ -30010,7 +30012,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
@@ -47060,7 +47062,7 @@ MonoBehaviour:
   hasCheckpointPosition: 0
   checkpointPosition: {x: 0, y: 0, z: 5.5}
   checkpointFacingYaw: 0
-  checkpointHint:
+  checkpointHint: 
   shiftBridgeLessonExit: {fileID: 0}
 --- !u!65 &745619707
 BoxCollider:
@@ -84388,7 +84390,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b551a67ead0f09448b1d3da4d6b70e0, type: 2}
+  - {fileID: 2100000, guid: 2d7c66edb170061409b49e8e61d9c161, type: 2}
+  - {fileID: 2100000, guid: df261b02def62c44eb0a5a9b73702475, type: 2}
+  - {fileID: 2100000, guid: d8def694ef2bbb346942464a6fe7a953, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84440,7 +84444,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328442220}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 15250316c0b582d4890ef0602f67861f, type: 2}
 --- !u!1 &1330158781
 GameObject:
   m_ObjectHideFlags: 0
@@ -90395,7 +90399,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
   m_IsGlobal: 1
   priority: 0
@@ -90412,7 +90416,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4de48b1d566fcb042bfcafc2a72c670f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shiftbound.WorldPanorama
   worlds: {fileID: 1700806235}
   present: {fileID: 2100000, guid: ad3ae94ce9b9f0949a4752f7d0c9a13b, type: 2}
@@ -107178,17 +107182,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shiftbound.FeedbackAudio
   source: {fileID: 0}
-  shiftClip: {fileID: 0}
-  blockedClip: {fileID: 0}
-  checkpointClip: {fileID: 0}
-  goalClip: {fileID: 0}
-  jumpClip: {fileID: 0}
-  footstepClip: {fileID: 0}
-  landingClip: {fileID: 0}
-  hardLandingClip: {fileID: 0}
-  presentAmbience: {fileID: 0}
-  overgrownAmbience: {fileID: 0}
-  ambienceVolume: 0.25
+  shiftClip: {fileID: 8300000, guid: bf0513261787a484e8603827c6313dc4, type: 3}
+  blockedClip: {fileID: 8300000, guid: 0cf7fad2c9f014c4c867a82e2cd35994, type: 3}
+  checkpointClip: {fileID: 8300000, guid: dd28466438e04fd43a78a37180fcaa42, type: 3}
+  goalClip: {fileID: 8300000, guid: d3df1c1f86308034da8407ac274f6e1d, type: 3}
+  jumpClip: {fileID: 8300000, guid: 83b813862ac7ef14e96b92c89951ae3a, type: 3}
+  footstepClip: {fileID: 8300000, guid: b3d83061314c97648a2f75c1ffc1b0fe, type: 3}
+  footstepVariants:
+  - {fileID: 8300000, guid: 2595c1dece53add4aa136ba91e234f29, type: 3}
+  - {fileID: 8300000, guid: 0ac15c3ae3f927041b5c4a7b5a115fc4, type: 3}
+  - {fileID: 8300000, guid: 83b813862ac7ef14e96b92c89951ae3a, type: 3}
+  landingClip: {fileID: 8300000, guid: 94c549f13efbea24cb8e97a430ab7882, type: 3}
+  hardLandingClip: {fileID: 8300000, guid: e81eb329cdf46b04c866dfa485af8658, type: 3}
+  presentAmbience: {fileID: 8300000, guid: c616cf95240e0e34788f2302c851de32, type: 3}
+  overgrownAmbience: {fileID: 8300000, guid: 64b7d496e234ac54f95d831708c661b0, type: 3}
+  ambienceVolume: 0.32
   worlds: {fileID: 0}
 --- !u!114 &1700806237
 MonoBehaviour:
@@ -118571,7 +118579,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1890199600}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
