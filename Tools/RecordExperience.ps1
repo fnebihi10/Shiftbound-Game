@@ -9,7 +9,15 @@ $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
 if(-not $Player){$Player=Join-Path $root 'UnityProject/Builds/WindowsPolished/Shiftbound.exe'}
 if(-not $FFmpeg){$FFmpeg=Join-Path $root '.validation/AndroidTooling/ffmpeg.exe'}
+. (Join-Path $PSScriptRoot 'CandidateSource.ps1')
+$identity=Get-Content ($Player+'.manifest.json') -Raw | ConvertFrom-Json
+if($identity.sourceFingerprint -ne (Get-CandidateSource $root)){throw 'Capture source differs from build; rebuild first.'}
+foreach($binary in $identity.binaries){
+ $path=Join-Path (Split-Path -Parent $Player) $binary.path
+ if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne $binary.sha256){throw "Capture binary changed: $path"}
+}
 [void][IO.Directory]::CreateDirectory($Output)
+[IO.File]::WriteAllText((Join-Path $Output 'identity.json'),($identity | ConvertTo-Json -Depth 8))
 $scenarioArgs=if($Scenario -eq 'Orbit'){'-shiftboundOrbitScenario'}elseif($Scenario -eq 'Route'){'-shiftboundCompareRun - -shiftboundProductionInput -shiftboundStepRate 60'}else{''}
 $launch="-batchmode -force-d3d11 -screen-width $Width -screen-height $Height -screen-fullscreen 0 -shiftboundTouchUI -shiftboundExperienceRecord `"$Output`" -shiftboundExperienceSeconds $Seconds $scenarioArgs -logFile `"$Output/player.log`""
 [IO.File]::WriteAllText((Join-Path $Output 'launch.txt'),$launch)

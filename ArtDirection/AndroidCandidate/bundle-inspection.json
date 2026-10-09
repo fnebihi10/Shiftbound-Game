@@ -1,0 +1,11 @@
+{
+    "aab_sha256":  "613db6be128c22fbf39273cad0b4a560332cf97784dbb4a1e43aefbb310b4b18",
+    "bundletool_sha256":  "a099cfa1543f55593bc2ed16a70a7c67fe54b1747bb7301f37fdfd6d91028e29",
+    "bundle_validation_pass":  true,
+    "jar_signature_verified":  true,
+    "page_alignment_16k":  true,
+    "apk_set_sha256":  "0c5bf2d3f69a9b2160610a4ab6e0ed870bce5d64413eabd61558e62fd415eb58",
+    "native_split":  "base-arm64_v8a_3.apk",
+    "device_install":  "NOT VERIFIED",
+    "play_distribution":  "NOT VERIFIED: local debug-signed APK set only"
+}

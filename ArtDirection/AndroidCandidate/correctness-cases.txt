@@ -1,0 +1,185 @@
+SHIFTBOUND MOTOR CASES PASS: 30 Hz heldPeak=1.909861 tapPeak=0.4344917
+SHIFTBOUND MOTOR CASES PASS: 60 Hz heldPeak=1.909862 tapPeak=0.4344917
+SHIFTBOUND MOTOR CASES PASS: 120 Hz heldPeak=1.909624 tapPeak=0.4342394
+SHIFTBOUND MOTOR CASES PASS: 144 Hz heldPeak=1.909918 tapPeak=0.4344165
+SHIFTBOUND MOTOR CASES PASS: variable dt heldPeak=1.909919 tapPeak=0.4345847
+SHIFTBOUND INPUT CASES PASS: virtual keyboard through production InputActions and buffered motor input.
+SHIFTBOUND KEYBOARD SHIFT PASSED: left/right Shift with W+Space; real checkpoint support; normal WorldSwitcher.Update; one toggle per press.
+SHIFTBOUND REGRESSION PASSED: motor cases at 30/60/120/144 Hz and variable dt; Shift timing; checkpoint trigger and recovery. Run route regression for goal traversal.
+SHIFTBOUND PHONE CASE PASS: real simultaneous move/held Jump reached motor
+SHIFTBOUND PHONE CASE PASS: touch Shift during held movement/jump preserved motion
+SHIFTBOUND PHONE CASE PASS: button drag cannot rotate camera
+SHIFTBOUND PHONE CASE PASS: cancelled Jump releases independently
+SHIFTBOUND PHONE CASE PASS: manual touch orbit while moving
+SHIFTBOUND PHONE CASE PASS: interruption pauses and clears contacts
+SHIFTBOUND PHONE CASE PASS: old held contacts cannot act after resume
+SHIFTBOUND PHONE CASE PASS: retry resets motor/touch without buffered jump
+SHIFTBOUND PHONE CASE PASS: new contact works after neutral resume/retry
+SHIFTBOUND PHONE CASE PASS: two-thumb slide Shift preserves held Jump and movement
+SHIFTBOUND PHONE REGRESSION PASSED: synthetic Touchscreen events through production touch/input/motor/camera; simultaneous actions, UI ownership, cancellation, suspend/resume/retry. Physical Android gate remains open.
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=30 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: First landing -> Shift landing rate=30 bypasses=0/10 farthestZ=19.08
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=30 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Midair takeoff -> Midair landing rate=30 bypasses=0/10 farthestZ=33.58
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=-0.08 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=-0.08 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=30 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Left lookout -> Return route rate=30 bypasses=4/10 farthestZ=44.28718
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=60 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: First landing -> Shift landing rate=60 bypasses=0/10 farthestZ=19.08
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=60 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Midair takeoff -> Midair landing rate=60 bypasses=0/10 farthestZ=33.58
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=-0.08 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=-0.08 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0.04 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0.04 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=60 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Left lookout -> Return route rate=60 bypasses=6/10 farthestZ=44.1981
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=120 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: First landing -> Shift landing rate=120 bypasses=0/10 farthestZ=19.08908
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=120 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Midair takeoff -> Midair landing rate=120 bypasses=0/10 farthestZ=33.58908
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=-0.08 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=-0.08 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0.04 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0.04 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=120 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Left lookout -> Return route rate=120 bypasses=6/10 farthestZ=44.20701
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=144 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: First landing -> Shift landing rate=144 bypasses=0/10 farthestZ=19.08996
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=144 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Midair takeoff -> Midair landing rate=144 bypasses=0/10 farthestZ=33.58996
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=-0.08 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=-0.08 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0.04 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0.04 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=144 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Left lookout -> Return route rate=144 bypasses=6/10 farthestZ=44.20513
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: First landing -> Shift landing rate=0 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: First landing -> Shift landing rate=0 bypasses=0/10 farthestZ=19.08178
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=-0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=-0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Midair takeoff -> Midair landing rate=0 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Midair takeoff -> Midair landing rate=0 bypasses=0/10 farthestZ=33.58178
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=-0.08 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=-0.08 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0 tap=False landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0 tap=True landed=True
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0.04 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0.04 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0.08 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0.08 tap=True landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0.12 tap=False landed=False
+SHIFTBOUND BYPASS SAMPLE: Left lookout -> Return route rate=0 delay=0.12 tap=True landed=False
+SHIFTBOUND REACH AUDIT: Left lookout -> Return route rate=0 bypasses=4/10 farthestZ=44.2233
+SHIFTBOUND REACH AUDIT COMPLETE: samples are mechanical evidence, not exhaustive proof or human testing.

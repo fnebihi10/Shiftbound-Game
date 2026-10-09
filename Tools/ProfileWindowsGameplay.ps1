@@ -25,3 +25,12 @@ $launch='-force-d3d11 -screen-width 1280 -screen-height 720 -screen-fullscreen 0
 [IO.File]::WriteAllText((Join-Path $Output 'identity.json'),($identity | ConvertTo-Json -Depth 8))
 Invoke-CandidateChecked $player $launch (Join-Path $Output 'player.log') 'SHIFTBOUND FULL ROUTE PASSED' 3
 & (Join-Path $PSScriptRoot 'SummarizeGameplayProfile.ps1') -Directory $Output -Log (Join-Path $Output 'player.log') -Output (Join-Path $Output 'summary.json')
+if($Record){
+ Add-Type -AssemblyName System.Drawing
+ $frame=[Drawing.Bitmap]::new((Join-Path $Output 'frame-00000.jpg'))
+ try{
+  $colors=[Collections.Generic.HashSet[int]]::new()
+  for($x=0;$x -lt $frame.Width;$x+=100){for($y=0;$y -lt $frame.Height;$y+=100){[void]$colors.Add($frame.GetPixel($x,$y).ToArgb())}}
+  if($colors.Count -lt 5){throw 'Rejected recording: hidden window has no rendered backbuffer. Callback data cannot establish presentation pacing. Use RecordExperience for offscreen visual evidence.'}
+ }finally{$frame.Dispose()}
+}

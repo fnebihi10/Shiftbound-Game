@@ -1,0 +1,1873 @@
+{
+    "revision": "f23a3a78833bb907add9eee44be821a4e126f420",
+    "sourceFingerprint": "2bb476b1bfeab5a5e232f16847b8b948bf2114829b7b975ffe6dc129622e92bb",
+    "unity": "6000.3.25f1",
+    "scene": "Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+    "target": "Android",
+    "createdUtc": "2026-10-09T20:29:00.4869526Z",
+    "signing": "debug-QA",
+    "sources": [
+        {
+            "path": "UnityProject/Assets/InputSystem_Actions.inputactions",
+            "sha256": "1c6cbb519d65ecfe19a29231735b7f54741a20ac1a8ad4f46a18e1bfb28a3c39"
+        },
+        {
+            "path": "UnityProject/Assets/InputSystem_Actions.inputactions.meta",
+            "sha256": "3b4e424a80f5b4fa76b6abd774884a24285eaa61f22ff9bb20e5ad505fd8b569"
+        },
+        {
+            "path": "UnityProject/Assets/Readme.asset",
+            "sha256": "6d098604e909b6a0e64fe5910c2719704864d49678bcf5413bd47b67e5490107"
+        },
+        {
+            "path": "UnityProject/Assets/Readme.asset.meta",
+            "sha256": "46c6b89ac1d47bd0c0d1a8b141ae3e32cd95d3e74c49381f0d9f942488c254ce"
+        },
+        {
+            "path": "UnityProject/Assets/Resources.meta",
+            "sha256": "890fec6f36824e37d0607e26deb113fd0381573e3302d7b09644b2232c2a9812"
+        },
+        {
+            "path": "UnityProject/Assets/Resources/.gitkeep",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+            "path": "UnityProject/Assets/Settings.meta",
+            "sha256": "73c8e19843240273facb0af6bdbf430d719e397aded705629594060ce25ce7ad"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/DefaultVolumeProfile.asset",
+            "sha256": "463776c51ae49d4fef980e8fd268081b2f505610d79315003faae1acff8f4115"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/DefaultVolumeProfile.asset.meta",
+            "sha256": "efbcb026cee6b8e32fdf27018c06b0515296a6ccbb43969e792fea270310700a"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/Mobile_RPAsset.asset",
+            "sha256": "5f7b6a49849873c32bac28040afecca532ae71a8932f459bcca593ec98b9dcb8"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/Mobile_RPAsset.asset.meta",
+            "sha256": "53ea46647712c615fd1a3f2e0dddfa8559eeedc649e9a1dbf93ff913de28544c"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/Mobile_Renderer.asset",
+            "sha256": "aa93274c9521fa941170becec9e87c5fa36b8587eefd5eeb5c0eed0d1d4b1dbe"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/Mobile_Renderer.asset.meta",
+            "sha256": "a148ee2b4987b05b8ff7ae5f9bf84916184f77aefddc821dceb551f5a69f8179"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/PC_RPAsset.asset",
+            "sha256": "38b665df3d63dfe75e7096b006c1cc0615147e84bfa4f1b294bb210c9ed6966d"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/PC_RPAsset.asset.meta",
+            "sha256": "bb469b9b6f318e9e9bed29c3b2e73e79371c04743c6f95dd6603941f1cd3e53e"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/PC_Renderer.asset",
+            "sha256": "3d0b01d8ded3327263b6690be128a3de58d17c514943ae42fe743a3e084a9c79"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/PC_Renderer.asset.meta",
+            "sha256": "b5df8ddb2708c6ed4c133a5ff9ee95a75cc20e4ee3ed6181366a61aedbaf31ec"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/SampleSceneProfile.asset",
+            "sha256": "a8677d4bac051d24caa11cd622e39f968155ee277bfce132274f1de225692fe9"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/SampleSceneProfile.asset.meta",
+            "sha256": "2e23abc214069f0adbf2b2207f1db54be7876629ec2a3681d0f4aa5b61622ef0"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset",
+            "sha256": "8090aff51ab2b5724b0534ec1440ffcb82681792f43418866d204a417f72bc80"
+        },
+        {
+            "path": "UnityProject/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset.meta",
+            "sha256": "f61661d8bc8dbe531daf09f6211ef978c7ba145c9207c8e76524396ae0722d7c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound.meta",
+            "sha256": "0ae1205575408565e01e7feac5a05e1fcab6acc3dcb356b8bae4793e49a74aa4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate.meta",
+            "sha256": "a9daa651173009306b9c3037162cf1d1eab73bd3b4bcce1419155df51a4687a1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Kenney-Digital-LICENSE.txt",
+            "sha256": "654d24e000d1c3b2a1d2264151f49e273e8a26d24e26e9bffc2aeb48cea93815"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Kenney-Digital-LICENSE.txt.meta",
+            "sha256": "d284ffe13a9be43b9cd729c25b86bf1292eb893e9f95213e19294e1dfb1b440e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Kenney-Impact-LICENSE.txt",
+            "sha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Kenney-Impact-LICENSE.txt.meta",
+            "sha256": "660e13957c0480b17a0748041ee5537c00f75545558a80a7f6093ab5648a4bd1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Overgrown-Rustle.wav",
+            "sha256": "988c0ff304e5fb66d436be67f47a2fcd874abf17631915095478810a423d0dc0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Overgrown-Rustle.wav.meta",
+            "sha256": "52c883610c466bfdfed2417cd740d55ae07c279c127df3e36da084feb0308525"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Present-Air.wav",
+            "sha256": "136718ef5be1d4141ec01f2e46e93eb28e2548fde19f95e679bf2046400000ae"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/Present-Air.wav.meta",
+            "sha256": "1b4c5d6ecb1a859dcb8058ec5c2f02880328bdf393ef9630602b1312b1a4c634"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_000.ogg",
+            "sha256": "d7267e183067757c92c169de2a379abea592cfca6b39bb2e8feea15221ad79fe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_000.ogg.meta",
+            "sha256": "72ce4ee2e9fea2192d6828e623486313ae691e7740d833dca41e9fdb585331d9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_001.ogg",
+            "sha256": "507a75eb19b897087855a3be3cf11a12d7fa37d143ad535eeebe0b8031c7325d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_001.ogg.meta",
+            "sha256": "b9dba9932e056d87167e74804a6ad69123ed25cf3e05b6c7ba0b41c2d5065f03"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_002.ogg",
+            "sha256": "b21fa546d74941196b25da8a20b7010abd8c05c4fcf93545d1f344e66a664e13"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_002.ogg.meta",
+            "sha256": "e03964a58838f0dfb2602fdbb1168c92ce690d10ec71b79373b889db948bee73"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_003.ogg",
+            "sha256": "8b513c2f0316324060b9174b8f28df6c2147418c506e6a53b77f18e149a5547b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/footstep_concrete_003.ogg.meta",
+            "sha256": "3b6252f3f28c4e3cedabb98510f3dc1a5bf60e977afd4dd0ae09601f60bf22b9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/highDown.ogg",
+            "sha256": "cdbea353b2e435b4f869c7b045af81079c5d5eb81cfbbc805013ccc3a7a0f36a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/highDown.ogg.meta",
+            "sha256": "25e69d81888881f7b5d9fb44ca943ebe626c22932d957c52bfd51886478e1400"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/highUp.ogg",
+            "sha256": "cbc1c3c7ccf5d7903818144a4c3f5b2ed2385095792f29d8d7c76360ba4fa559"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/highUp.ogg.meta",
+            "sha256": "09917e13952531fa0e5d230229dfcfccb30c6aebda1178e4a606f83d8ad691ee"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/impactSoft_heavy_000.ogg",
+            "sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/impactSoft_heavy_000.ogg.meta",
+            "sha256": "630ce071a71d0710979877838d294ff6015b811e095de718d2668ace313f36f9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/impactSoft_medium_000.ogg",
+            "sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/impactSoft_medium_000.ogg.meta",
+            "sha256": "110a1294bfbfb6d653259c3caa2d95845f41bfca7192551aefe0d754aa21a6a0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/threeTone1.ogg",
+            "sha256": "bdf21eb12e65507f091d074886fdac820e1ccae51d060caa168e5567acadb84b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/threeTone1.ogg.meta",
+            "sha256": "d29e0391bb8026ebd8d4307e1a8a3110ae75687514b728a8749ffd059320e579"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/twoTone1.ogg",
+            "sha256": "8732f14d6398407a8f1df77b986c2099cfd88f6583e1272cb60497cb2fe8da1d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/AudioCandidate/twoTone1.ogg.meta",
+            "sha256": "5a05855f6f985febc2695747f012e1f7332f2f94d419694c0ed19b4fe3810c81"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor.meta",
+            "sha256": "075c9798bc3feb9e011ae5561b6a54b11ea38e2f0476cc00b110681c7c824261"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/AndroidDelivery.cs",
+            "sha256": "00bf4baf89190bd1b25c46bf598356d9658eb7b05d04958fae2ab55d214828ef"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/AndroidDelivery.cs.meta",
+            "sha256": "913dc9daa899a08f45cd38eebd05ebba726da52f1c703ccd3f894242a53ad3ad"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildArtPassV2.cs",
+            "sha256": "b451788ad548b7b9252197abfef3b455bdc7b85c9f81e0931eb028d949c068ef"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildArtPassV2.cs.meta",
+            "sha256": "53b093385a1a0d2e7d7f21ce335b988813cc7f8754f7bf1b7e4eaad4cefa0722"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildArtPassV3.cs",
+            "sha256": "93f82322f227cb055be13ce4ee2b8266cc106d58fa31f625133fb006055e1a49"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildArtPassV3.cs.meta",
+            "sha256": "c3cdd8fd80db8025cf623414c6b6b480f68e28b491357c85aff3ae6fb53301d8"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildArtPassV4.cs",
+            "sha256": "e03dc3edef3c215cc7b42ef8dac34c7e887be5845d9587871ce5554300ec9f2e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildArtPassV4.cs.meta",
+            "sha256": "46cbad5f90c6f0e2ef16b3e9ee91ebfdddef4932c3f83d1c61679809b2557ac4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildFirstSlice.cs",
+            "sha256": "885d1b37dcddfe36c0c723bcd5796b488662afe08924e2daf689b67467c10688"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildFirstSlice.cs.meta",
+            "sha256": "11fe172734cb77e5e14ed806a501aeed1872d8141c58db2957cf959cceb7fdc3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildVisualBenchmarkV5.cs",
+            "sha256": "cdfd8cee8e691a3c6e1271714e2eb49c3abdca6449dce2d197c6d6bba90562e7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/BuildVisualBenchmarkV5.cs.meta",
+            "sha256": "dd5275c8f38610b0e7b89c20a0328176d3314f01a10ea3f9ad36a3288a991bdc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CandidateProvenance.cs",
+            "sha256": "0b0cbe14bc4653d0e851f91596934b6fe504f4a719ba436631df2a899df9118e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CandidateProvenance.cs.meta",
+            "sha256": "5d998337bbf1479d6819cda146c182edd2f0e4d6d5fb1692652895c0e3404aff"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CaptureSceneRender.cs",
+            "sha256": "1a4ff1ebafb882b919d0b14c4ace439ee029bbdd593cbff95a2cd380bac90311"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CaptureSceneRender.cs.meta",
+            "sha256": "028c19816c239d7dbe00fdd139f4a149adf68de79cad3775461077d75a01cafe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CompareSceneBuilds.cs",
+            "sha256": "1ca825f835dfeee859a37e5324955da629b6ff2660987029cd03ebfc654d7254"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CompareSceneBuilds.cs.meta",
+            "sha256": "ea4cedbc39339fcdb7db219d8ea47e37eda1d8b5edb0d5c6cb78a7aff90a368d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CourierParityAudit.cs",
+            "sha256": "8a88af07d9bad021612d2335f754fe5931873fea4f0a0155576d204c19379ae0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/CourierParityAudit.cs.meta",
+            "sha256": "8676e331876579a5d2fcc4b2c29f46bcdaf7ea0ac4ed7f7536287b2750a58d11"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/InspectRiggedAssets.cs",
+            "sha256": "45ffc2c7c9a056d7dcb1151f20598063e6adc0272bb45cf8fa1a280d8b8592d3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/InspectRiggedAssets.cs.meta",
+            "sha256": "54318a6ff0c04faa1890260c833cf80ec294536cd79b91c18854067a9448da6c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/MilestoneDelivery.cs",
+            "sha256": "655b1cc18d512553e3aa2f2dc661d4577ca920b6dc0cc5104ffb4bb65e78979c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/MilestoneDelivery.cs.meta",
+            "sha256": "1b75fccfd5e8b171631ac349f0d70d0467284967ab6a159e7d0aed481ec479f8"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/OfflineAndroidManifest.cs",
+            "sha256": "271f134b9394ab0d7df838cd8e79c5753151b33a6cfe54509a00e134c2f4bc61"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/OfflineAndroidManifest.cs.meta",
+            "sha256": "107548f1c25d5e3cca7697dc09ed3f95fed869339cc12bcca3f2e678f9e1b02f"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/OpeningEquipmentRefinement.cs",
+            "sha256": "9b4b7300f09c9f36046f586438a49e49fb57dbf2ecf6c82680b3933e53db9bae"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/OpeningEquipmentRefinement.cs.meta",
+            "sha256": "33fa51c8c8c23d4fe7f48d5d812b2841218b7e92a0986616b0f1b00de9333409"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/PhoneCandidateAuthoring.cs",
+            "sha256": "2c5d0d4e535d9b1afd196de8837c9cfd707a4635765851573b2e536e6dd8746d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/PhoneCandidateAuthoring.cs.meta",
+            "sha256": "8b5823f6f976e762deba85abcd709848eadc24be41c35533880a761704b8f2fc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/ProductionBenchmarkAuthoring.cs",
+            "sha256": "6f719cecd13d83429f2cf60dd450c92ee525d6819276a7a6634cba008105a088"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/ProductionBenchmarkAuthoring.cs.meta",
+            "sha256": "76670029d8f24d5318007e4767429e95959e31a38d5966e0682303773386615d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/ProductionBenchmarkDelivery.cs",
+            "sha256": "d5dac720c06ab4ecd7fa8031a3d913ba0c1c306a9ddf630c0c702fd8070adf69"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/ProductionBenchmarkDelivery.cs.meta",
+            "sha256": "2f2890170e43292edb21a61f4a21d4f639ab009109f22412b9e50be459fa233d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/SliceDelivery.cs",
+            "sha256": "defdf63d3a61982f3350c099aa83ff0adc23dc0b09eee9fa7138deba9ad27a2b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/SliceDelivery.cs.meta",
+            "sha256": "189f89f97e8f121c25ca60a4e95301b2848bc6e7b19287cdf325503655fbf512"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/TraversalGeometryRepair.cs",
+            "sha256": "d07b8f612ce48d2bd6491bc340e2cb774c8afc567d4e5fd81d78509d88d7bdd6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Editor/TraversalGeometryRepair.cs.meta",
+            "sha256": "5bb58d7ec7c108e15ee1636ca1bcaa86eff65221b07b155fe906aeadcbf5d0c7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials.meta",
+            "sha256": "030563075e2c704e1d04a2108798f0d4fef311981a9b9d945cd4f5cc49646db0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Concrete.mat",
+            "sha256": "945a6a24ad22b7e9f50548a3b031e71f27d576718e6764081eafd90ea7dc3b5b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Concrete.mat.meta",
+            "sha256": "00fe1625ed6ff60bb974554fc2894113fe2ee7587215066a96d8a7c01f1fcee0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Edge.mat",
+            "sha256": "73b1e02d7c8409319bb7199f3532f59763d2ce3fb8fa0037663a1d81600426ce"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Edge.mat.meta",
+            "sha256": "239b4356e796435678651331aff1cc35e428af958663341931dd49fdf563d2c9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Foliage.mat",
+            "sha256": "7ad72759b4e4405e87ed915a35d72cdf3554c426745a154662c033f3a0979e60"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Foliage.mat.meta",
+            "sha256": "53c954c54c16e949b10af07e10aedd549acac9c53b2dd700635a1cfa334d6ff0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/GhostPreview.mat",
+            "sha256": "e0e752d2c48def5a7cf3cc7403556fcc9f02bd0a25a789aa7ad874ba602a9a6c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/GhostPreview.mat.meta",
+            "sha256": "98bc2d0742d874502d8f836a393aa7ace9fddbc3f4a67ef889791279cd95ce70"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Goal.mat",
+            "sha256": "d7af731ae497915109572777a8e6bf67646de08b3c6e285fae02d39fec352ec2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Goal.mat.meta",
+            "sha256": "5950426f9759d887ea0074e7d2e3b8a301c39d89252ea02e5d008e657ceec25a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/OvergrownPlatform.mat",
+            "sha256": "23e58364b39b40152cdae1fcbbe48934113876924906b0e7b65be0d8194e918a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/OvergrownPlatform.mat.meta",
+            "sha256": "0e3b5cc88ec782a612569b1c0b9c98d8b244a4ae6fcbf89824a6c2bafdc0dd07"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/PresentPlatform.mat",
+            "sha256": "e510d719787a9aab7ef19aa40a7c41a21cb5cd46498f2d4feaacfe25e79fe6f5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/PresentPlatform.mat.meta",
+            "sha256": "7a20dac1bda18698ae826ec14f3cc4e26157669ca1be50017ab47d35d4b8de49"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Runner.mat",
+            "sha256": "d1507e640c5d20e8de00c13466768ee71a148f764382a1aa8d30e794d317e7fe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Materials/Runner.mat.meta",
+            "sha256": "1155b63ceda34721b51704b0551635ceea865e2fbf2a14e56f512a1f6e425f45"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2.meta",
+            "sha256": "1b5f5769fd62d9ce6fd1cd4e8ceb8a1690d1cdf9433549545d8c085e61b2e2bc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Amberroutelight.mat",
+            "sha256": "5e9084c63e04136ba04d00b809c515511a9a7cb16eda6d20bf1807001b2de74b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Amberroutelight.mat.meta",
+            "sha256": "02a120a96404483e2fe5c89c2282a6a8a6b8626207f5a49f7023a530c70436f1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Bark.mat",
+            "sha256": "089c857d08a94ae0565039c09a017912c944a70d4cc7c8c29592ac1db033f80b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Bark.mat.meta",
+            "sha256": "2323ba618384ebd6ea684c0fd71c4d3978ad4dcb4adf5c517b63baaaf48e4fb4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/CityVolume.asset",
+            "sha256": "e83cf574be53a3714cac48903a220c7d375be0963e8c207460870b188120e26e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/CityVolume.asset.meta",
+            "sha256": "e6f74c4a7748900804b6f46be4462e5995e2fb3a9f37560a7e20b033146fc574"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Cityfacades.mat",
+            "sha256": "bbea6485e49dc05fc76f111ff2bd5d010961f873faecf0a8a397b5ff59b75f35"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Cityfacades.mat.meta",
+            "sha256": "65c727e651f53465e68a2497d218df463693872dfd1de0dcd33b9085eebb107d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Cityglass.mat",
+            "sha256": "540e02f8435edc8d524b5598eb3e5a8dc19d73035880903003fc06b201dc76c3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Cityglass.mat.meta",
+            "sha256": "009754c966df2918faf65b28a763809d770a40020b29ff8ca7d5270feb430b98"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/CourierMotion.controller",
+            "sha256": "7a51e811e0fd4a84ca7cfa26924d7307d9965cb01ceb7a5a06e16df0e23b206c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/CourierMotion.controller.meta",
+            "sha256": "22bcbad5194dc4863b064dc4960bf9230802d76d626246a5239083aebd3b47a6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Couriereyes.mat",
+            "sha256": "f924b5d4a087677eec902de623a9d75af950f3361403d13f48155f1bb56afee2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Couriereyes.mat.meta",
+            "sha256": "7755092bd38fee922b5dda4d498a2e31aef8a9f826fb75547604083c381a87b5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierhair.mat",
+            "sha256": "00c7b74621dec754b5dacc07311c6b2ee378b84dff7ade4bffc572aeca612a4b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierhair.mat.meta",
+            "sha256": "6eb164875956633302054cc7bef83cc005f9b76b29b34ed508584536d40e5874"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierjacket.mat",
+            "sha256": "cea5a838532c8c30e90a61f5423d8135112acf80a127be3e3ba95bb8d0004a96"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierjacket.mat.meta",
+            "sha256": "5a5be7d7c0b9b2e12ea1b9918ae1a93752c600f119d297601329e019678bef67"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierscarf.mat",
+            "sha256": "5b5e1d71ef7ff0b1a4b8ac5d56d7f9d49c49b103680c75c1cf8267922958a438"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierscarf.mat.meta",
+            "sha256": "9b12da8c9445d1c27ec32bda689217f8e1a1e6b2c6e80936be5445251d3ff117"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Couriershoes.mat",
+            "sha256": "759addea6d43297c502b48222b4e9952c5dbe5b5f7712d032e86ef0543b72964"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Couriershoes.mat.meta",
+            "sha256": "2ba387e3b378ee902f9a05764839a6810c92188f2545a34dbdf7e3625d877120"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierskin.mat",
+            "sha256": "6b65eb43673b7bdee93d5be54b952b7b19c7884b93acaf508852853bea45b9f4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Courierskin.mat.meta",
+            "sha256": "ea4c3b0fc7b3dce91e4b87a6074dcfbe90379af6235bfad7cac71481c2d56342"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Couriertrousers.mat",
+            "sha256": "28749496e331ab6970d7eb3476376b8e5538487a62300b79d9a7a99fcfb52f18"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Couriertrousers.mat.meta",
+            "sha256": "af5f4b3abc10fca12d81e439af1602ea341ec558ba88290f8cb652d267e178c1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Cyanroutelight.mat",
+            "sha256": "3ae7b2cba380a986d1be29f582c4c557f10e5cd35ed35fe916d9ffcd4a067415"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Cyanroutelight.mat.meta",
+            "sha256": "c7bc1465e2dd558689b8c99f70f437a2dc9267b770654911ca04466fcdca7b69"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Deepslate.mat",
+            "sha256": "2bf32ed31aaff814c654865421017801337ee3effe6794308da7e364442fa255"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Deepslate.mat.meta",
+            "sha256": "e1b1dd64abc1c937cd9f7811cc8917995c5b79be8f7680f1ab62f45a8ffb4607"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Freshleaf.mat",
+            "sha256": "f3746c1a2721ca413e89bf6b010a909f6933538244d479de292047160a821edf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Freshleaf.mat.meta",
+            "sha256": "2d005f067a0de038f15219fd02c4cc602b9c82e5f83883100eb34563b324c203"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Leafgreen.mat",
+            "sha256": "79df5257e51b1c8b061a08da135af1a3e2f9616d69e4dbaff962cadc2b09d002"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Leafgreen.mat.meta",
+            "sha256": "d909ddf7f09b3dd16e157cf2673bda63481141d55d646a566b3fe5c2a2908c07"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Paletrim.mat",
+            "sha256": "e6cc882bd7394849b29549cfee436c6d7c54fa8cb4e7e807ca435c9c00b5b2dc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Paletrim.mat.meta",
+            "sha256": "893c0854149e124ba96c56a1d32fddb7808c0c1d4262cab15be941044465f186"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/RooftopSky.mat",
+            "sha256": "7c5bc53f911fb4bca52c221185d47df95363b335f04e519af4584b738fea9413"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/RooftopSky.mat.meta",
+            "sha256": "45b36f86c38f8b1990635fc993a92b40aa4ce8548b14d8b500de438a65351114"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/RooftopStoneTexture.asset",
+            "sha256": "4521fa3d35a08d5de15fd3827cfde4d2f5b0650324acc8106123fa1fba1bcd7a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/RooftopStoneTexture.asset.meta",
+            "sha256": "ad65417046df27224092fc2ce6bfe17f7f70a597990212eccb9311c9c1124a27"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Routepreview.mat",
+            "sha256": "dbd0e210c139cc0bf662c1806e9a646ada9fb8447d614ef2a2e8c73e54e924d9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Routepreview.mat.meta",
+            "sha256": "d5ce71ae24f5e2a24c7f343cc9810d7177d249f3e224aa293f063b14458963dc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Vents.mat",
+            "sha256": "8135ef5a63ffa0546c5baadd8d4adaf69cdd20c4548c366b739e3990ead35bc7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Vents.mat.meta",
+            "sha256": "2805355f7455dc57c28b940f8380309806d4497ae126b755a2ab32224e1c7b0d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Warmrooftopstone.mat",
+            "sha256": "bbe42e9d3aad6257d9cacc066464be559b9e7287a561c6c979800314dad3598a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV2/Warmrooftopstone.mat.meta",
+            "sha256": "963c64480485f7bc2acb838748e2b6ccaeb65b02d3f69fa02ad0f9296c725773"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4.meta",
+            "sha256": "9f671031d20fe31fe13039b745972b12acc32e024c575fe94bb9578edba1a837"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Courierbackpack.mat",
+            "sha256": "365178e54d5dddcf365704163281f747b1414dab62f940b3eab08e4cb3f2cb53"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Courierbackpack.mat.meta",
+            "sha256": "d543a78ca621846041a78c8a70169d235384737d870f73d9f34f22e7ab53317e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Courierbluescarf.mat",
+            "sha256": "5503ea2d64e4dee2d08d54d0ecd2f097e24b116a843ceadacd6f6db6ed37cac0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Courierbluescarf.mat.meta",
+            "sha256": "156590c5f84559294e2e186e17c7e055d43801a5fb808347e64bdb88de03b495"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Darkbluesteel.mat",
+            "sha256": "f4d8e39467ddd59bf252ddc0ba0e8459354d000ad88185cd6e50f86a7bc2f0e5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Darkbluesteel.mat.meta",
+            "sha256": "70a2da3fea3a8c035a9f3ca762d727361d61e5debd6f78acfe835eddaebc3a92"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Distantcityovergrown.mat",
+            "sha256": "28d99e3fae99a8fb96a27505588394baae03f328859e2af18d757cd606f41a5a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Distantcityovergrown.mat.meta",
+            "sha256": "a0979d6cded9d56dd9a93c9462689df84dfc05bebf2a67872ba05bdba5bccf52"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Distantcitypresent.mat",
+            "sha256": "fc0dacf93883ccd1eeaf07a49d0746d41697796a0f63d94885a37c524740d16e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Distantcitypresent.mat.meta",
+            "sha256": "77375aa894b13c2ec18a3db3082cc934e6d9c1d4f91f2fc1fa20ced119520db9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Foliagegreen.mat",
+            "sha256": "39e92189b477818ee5652f32b6d4250b0498b48dd892e96ee85b96c89a3d87bc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Foliagegreen.mat.meta",
+            "sha256": "14d7c6e9720bbea106cc92da0ad98fc2d900113e3f39794d48ce445c908fb14c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Hangingivycutout.mat",
+            "sha256": "37edf50a24b93d4f1ce468f586edfd9b45e8df59429e4a783ed0f10309781443"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Hangingivycutout.mat.meta",
+            "sha256": "88a25abfa3076f34630a3f0ae56d5637913c2f0a1076d1e9dda39fe73642660d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Overgrownrooftopconcrete.mat",
+            "sha256": "3ad5bf0a667a1d0aadf70ff614a26c4354f70ad8490179a217de65d408ab7165"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Overgrownrooftopconcrete.mat.meta",
+            "sha256": "53a89d441eca82baa6279b1ccc16f0f54c6a6c3f6115e9b918410f2e058ef62a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Presentrooftopconcrete.mat",
+            "sha256": "8a0ffb1c52c444459c9d7ca1c2b3eef59cc45b8f45a88197feb0c8e34fc44dd2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Presentrooftopconcrete.mat.meta",
+            "sha256": "f0355d91f886280b95f21fa4e69f0155a8b7f661bb2de2e5d1fed42478a068fb"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Sunlitmetaltrim.mat",
+            "sha256": "df32b0316671f87da48a0ca4d0cf94e8e27ccb08eba826884112d75218dedb57"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Sunlitmetaltrim.mat.meta",
+            "sha256": "a58e6eef92f4aa5f4af28be13e966a93e0a50b27dc30c9a0e8eb1352a540c8a3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Warmbrasshandrail.mat",
+            "sha256": "40fa750da6c090ae7f372bfb300d869a7b3136cb6a49957856e8a9d6f1af8eb5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Warmbrasshandrail.mat.meta",
+            "sha256": "596edff66ed26e8af8ea0f832be6ed84f6a84bc84c5002c4501fd6ffff02f314"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Weatheredfacade.mat",
+            "sha256": "72c1bbb4a6b482e662f76f601ad5e21d714b500631dcaa276532b271ee17d43d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Weatheredfacade.mat.meta",
+            "sha256": "6b253e7daacb710b1480db83b5c2a8501ef372439e7bdcc167c19b4dfdb95c55"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Weatheredochreequipment.mat",
+            "sha256": "9961c6ed1d381fdaec6cc1876af33a6be485b977f0a8c727e6856652b8dd9624"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Weatheredochreequipment.mat.meta",
+            "sha256": "301128202349749ddab3758a3c4ed3043f2e5158ac8de38d577b7d05124d8ec6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Wornstonejoints.mat",
+            "sha256": "9ed40fd32cc66cae222234ed2f3ca93501c49ca49a02271c30798e10e4849435"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/MaterialsV4/Wornstonejoints.mat.meta",
+            "sha256": "c5594268d5b55f1dfe3e0d8de195a00cb1b0a704ecdc870c87d0ebe536c784b3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Prefabs.meta",
+            "sha256": "6f55f6ce77e6a0b65d19db5fec4aa1988c770acc4f1e2ac7a06f0aea757e9c8a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Prefabs/Runner.prefab",
+            "sha256": "927767a6fd0675cbdd0568b3daeaf5227a6e662d1aa05e010155074446aea6ca"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Prefabs/Runner.prefab.meta",
+            "sha256": "b3a3107df8da7f760742c0c774cfdb1d3449e783b28b154b8b0968dc19d00a53"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark.meta",
+            "sha256": "ad734d9f4827f5addbdc01f4be889d95de3e727162600e41c1abf056b33b2008"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials.meta",
+            "sha256": "a69732b3ec1d87aefd788a984d45702a31f09462181b76f2eb36ade2c46a6e01"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Aged zinc flashing.mat",
+            "sha256": "790692057d638c87417199d4345417d4d88301a2816339d961a53054b9a41ccf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Aged zinc flashing.mat.meta",
+            "sha256": "b38e44bcc0d2997a27555b5079943f991367a9e3f521a74e51bd485324d3e8e7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/City panorama overgrown.mat",
+            "sha256": "1fc11d17bc95447e33f949550e2a0ee3580c842f9561eaee8db029adddd5d040"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/City panorama overgrown.mat.meta",
+            "sha256": "b0f3699236884e9dd309518f19542e166b5abbcf3861d297c28c4f53688640b8"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/City panorama present.mat",
+            "sha256": "c0341e20c0253e1ca866467b424916a43911697637ea669a0520a0bbfe0ca2cf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/City panorama present.mat.meta",
+            "sha256": "be91587aaaed6cbf3fb7cb96b1ea8fd6ee388c46611a2d6ed71d2eb8d9567aca"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Equipment graphite.mat",
+            "sha256": "28061df4979ce82e66694695e20bba5b8a97d2648508d75919af8897f0ce9f96"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Equipment graphite.mat.meta",
+            "sha256": "d585a8501df72be9bc9b0372f3270ce8209cc75cea3a5fc3b89a38ad87d1ab1a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Equipment ochre.mat",
+            "sha256": "6017c8198aa435c9a6adcf4cb99162186cc5bf6ef9af53e8db731e3ace49a135"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Equipment ochre.mat.meta",
+            "sha256": "d3b92b2f88ed2e690d8d33f132e24c3e71e67577e07a04e5f29778aa20be0b12"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Facade limestone.mat",
+            "sha256": "15074fe6414cf6d96bab9f17a80d255fcb4f49fd81fdeeb8b11a9bd88c26a210"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Facade limestone.mat.meta",
+            "sha256": "e585379e0d05f9cae1ba2d5d6223a414cd680aec9d19da9eea262ba0df12052e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Lit ivy cutout.mat",
+            "sha256": "6a0212c9a64a12e5401a2245c1f0b5531d9d1694f0b8cfb25cbc9774697f6905"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Lit ivy cutout.mat.meta",
+            "sha256": "e4a9b0be22ad8360290c0576419e3421aefc0cce2ead52444fc271113ad86490"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Opening grade.asset",
+            "sha256": "30eb868674a0af8f04a289c2926dadb5fbbf722c56cbccdb2c14651b0c602dce"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Opening grade.asset.meta",
+            "sha256": "04b0ad4327f8c73683b8256c78956d90c6622621ec9d890ff9a6ecb9b2daf0be"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Painted window frame.mat",
+            "sha256": "03b5027cbe3d3dc749b0c17ed12b542a7e27e456aeeb5f82f363f8fe2cbb3f2e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Painted window frame.mat.meta",
+            "sha256": "827f1ff92b0ff5518b2efe777b99313e425f073aaadaa29c6531279c93821de6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Recessed cool glass.mat",
+            "sha256": "2de2360ca2614f42ca2d691595557c2d67b078e71027eb4ea781ac92b91570ba"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Recessed cool glass.mat.meta",
+            "sha256": "4d6e1f328ec38ea76215f11da2af6df64fcc557d741501f9ef6994a5a19cd14c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Roof concrete.mat",
+            "sha256": "0920a813c4de1c7ccadacb5f68e59d81f0f5a2b90aabbc87ee2b829012795f81"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Roof concrete.mat.meta",
+            "sha256": "96ba89f41ebde2c923267051c75bdccc591897570dabe286cbe18c13f3fd42bb"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Roof restrained moss.mat",
+            "sha256": "542cf8f4d4760d1c079368d75451d1a762a4df073ad3e2394b3963dfd94c23a6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Roof restrained moss.mat.meta",
+            "sha256": "4e2bac36edbb37a941fd1301784cd11b6ceb74b47deec3eb4f51caa23ee0155a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Route preview.mat",
+            "sha256": "7fa5fab34a614aac5b0b1a9baa6f54b5cd4f54fd09c35d2c3d47ca7e9230ddf2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Materials/Route preview.mat.meta",
+            "sha256": "706cfc4310bd5889fb686da75b81e98c3423609a39b5442b206ba558ad05d895"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes.meta",
+            "sha256": "c46b4d25ae3df4ce693e31d5c2072d0965aa78f192108f0a380282ba245adcfb"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Alternate-wall-test-enclosure.asset",
+            "sha256": "76d5e949382ac2e20739206f31075e638ee0c9661e99944073d9a2c8fd518743"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Alternate-wall-test-enclosure.asset.meta",
+            "sha256": "b8b66e15c95a50de38087f51d6eca0dd361b25f92e37751d805b846b0a8acf1d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-0.asset",
+            "sha256": "371656523c98287541d0a26c0e9d999862d36d97b0fa81cd973d5d0910968c05"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-0.asset.meta",
+            "sha256": "daa47e244dbb7e5ef9eec62bab2dbfab8fb46f479705e22187e521ac7ed474fc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-1.asset",
+            "sha256": "4a76b8f770d028f0f00df2da1ad80db579084e1160f22defdccd4e994aa17dbe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-1.asset.meta",
+            "sha256": "c3033a039d1aaa926b6fa92176c785fdba4cfe6f3c437e5e0f6b8d39021266fd"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-10.asset",
+            "sha256": "b35707718b4a13f88482deb86e85fb180eb7e5f548653274e05c2cb638d31ae2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-10.asset.meta",
+            "sha256": "da41496faee4cc47ab906cde5d1b49b05b8c84cc0ab59c4a0055d9bdc94cdcbe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-11.asset",
+            "sha256": "233587ffbe2b75630c02fba866d0b4bc83c74493385e74a7d8f5c5055ec5e4aa"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-11.asset.meta",
+            "sha256": "7d76e4c5c0b6088944c120c74d30a1a3dabc38ca8983a90e358bc8451bd5e993"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-12.asset",
+            "sha256": "1e54d650d76d7f165a65fc7576c082d4d3904d36423c40d7dd7e1fefe2e67480"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-12.asset.meta",
+            "sha256": "a1c7ffcad51c4fc0049d7487eaca010fe9dcd9b2a11292711049417ca339ebe6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-13.asset",
+            "sha256": "9037d63447d1b03d20dba7df9a552a834ea1e33a546a43ff57140a67f60ea1fc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-13.asset.meta",
+            "sha256": "b25b3f9b9469cae37a05f0337cb8c7cff70fd16baceedfecf08a3bfe20794507"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-14.asset",
+            "sha256": "329af5ac633b6a7e95e92bd8ea5149df5a4bce2253782a68d1c70a87b9581678"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-14.asset.meta",
+            "sha256": "48e0dffca4dfe29f126545b326be735ae2b77262c7f43474f08026ecd3ca1ab7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-15.asset",
+            "sha256": "8ebf94fac4f415b3e4529f6ecae552e6f410f6cf25c15f351a081c6e7f82ecfa"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-15.asset.meta",
+            "sha256": "66cc45aea81ba5b3a441d40bf96023ad41a0aa5fae0040384ddc89dd5158cdc5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-16.asset",
+            "sha256": "7a846bffe4af93a9d4a1bbf9b5d48b747777956940e50bddba672f7893b7f653"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-16.asset.meta",
+            "sha256": "4f62c46a3ce337e836f0478584682fce034505e3bfd1e584c13ced66397d2675"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-17.asset",
+            "sha256": "bd6b0eff9ea96b5568a2d1c78cae55ae535f733575375d58504175e448489bf1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-17.asset.meta",
+            "sha256": "2e729b5aa2b79787cca3a9e9c9bda8655ead943c75017372c93bb85a89acaf1f"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-18.asset",
+            "sha256": "71bd9483b1359248b346e8e1ee71ab0d32ae8c453fff05cef00c98b56132c3ca"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-18.asset.meta",
+            "sha256": "2031ab2de1b429e91d6ce6355418fdd7392b00986b3fffa5fad9fb2a9c1f1f36"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-2.asset",
+            "sha256": "a02e68f2dd5d8c5307681698b2545c3b7374793709c1ef88f1b74ec8be475789"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-2.asset.meta",
+            "sha256": "221b1d5a57c94f188387d3103c4f9af9d715b2dafd07065041a6eefb97755295"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-3.asset",
+            "sha256": "db5fd2b19a8e2a021827ef1f5bc6f1df587b424f544479249218d83129c38719"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-3.asset.meta",
+            "sha256": "0b7b7c2469c4dc2224d7652039959ba527ee3ecb6cffcf7a940737a14a6fb3cc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-4.asset",
+            "sha256": "727cc212cdc7f072fbfd484dfcd1eaf5ac34846ce61787a235608f3da6dfccd4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-4.asset.meta",
+            "sha256": "1438012f9f4d476378c2eb8eac97f607937e47c2e40ea801b30db9978fda88ed"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-5.asset",
+            "sha256": "3d25756dc81436bd8f41b8a1663f0bb9e5026566a69e954637029f15d1b59d6c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-5.asset.meta",
+            "sha256": "02b84743c34de0780c5f43b3f43618c1167c7f76f18908181dc8db7c1f0299bf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-6.asset",
+            "sha256": "c2ea8b66f3be31a5c6beb3b11e198c1f09194be3028855cac0bed843b25dff89"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-6.asset.meta",
+            "sha256": "10e1962d6b2dacd13c8d63f84937f53962a3996da2c69569e0c621bbd8689d7d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-7.asset",
+            "sha256": "eda5c121e2057ba67d2d8bfb8ada05ab9e486f05931663b89bfba4fbcfb894b7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-7.asset.meta",
+            "sha256": "5330679c47dd491f5fd4377992ccb893f7249b4c2009bd621e61866628d6d2a0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-8.asset",
+            "sha256": "483f64035079bcd7daebcc605ffb00a72cb2e56a94be2288d10967412ff0fe91"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-8.asset.meta",
+            "sha256": "ecbb91bb80d7bcb7d93b8427bba6f5be4145cc656fd139d88cc7f351460f2ee3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-9.asset",
+            "sha256": "fa98745516d0dd3a8dcbb003ee972c42b1e70a24bb846dd267af4f7ca4109e0e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Building-9.asset.meta",
+            "sha256": "3eaeffe5415454e082be29d74e353b40107b7e3e57780ec803a648b1b8f439be"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-alternate-bridge-deck.asset",
+            "sha256": "965c50b05b5f0711091bb3af5c51dc1addc618ae4d44ba462c938ea9997a8f58"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-alternate-bridge-deck.asset.meta",
+            "sha256": "dde86756083b11e7ddb3a19920cebf148ad2e1d61800a7f4a60880dda1603a32"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-alternate-bridge-edge-deck.asset",
+            "sha256": "2c1315087018c82f97ef895fa26bd9f30d710327f5cb4626a6ba9c12f1308856"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-alternate-bridge-edge-deck.asset.meta",
+            "sha256": "45036da5b9e905f8851e617e277771fc2676d9ce17258d6f05858cdf9184b958"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-landing-deck.asset",
+            "sha256": "9f165eeeec49e7bf8602d12ff263045f6b387c108a6432b4ed4211bb44f2fa34"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-landing-deck.asset.meta",
+            "sha256": "1021312d44f21128d199dc25ebbc01537426ce0b5f1c6771f67765817ad0b4bc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-landing-edge-deck.asset",
+            "sha256": "d601d3880434609975caae9237816ee1e599a76cb69af87be3c19af1d4556e14"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/First-landing-edge-deck.asset.meta",
+            "sha256": "28899b98658ec5779eba84c7dc2981d51064f4531e4dc933c8d28d84cc2d0094"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/IvyCurtain.asset",
+            "sha256": "782b231f1ce71ff31613a99a7d019b6519365e6f6a124c15bbecad9f52587dd2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/IvyCurtain.asset.meta",
+            "sha256": "688ffb750246d331623ceeefd10685c48f9b65fe1d8576692c10a03f3a0ec2a5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Rooftop-utility-enclosure.asset",
+            "sha256": "0a63d32c7a433f6387977ee582316a5a975da509bd91cdfb330872173ab3eaa5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Rooftop-utility-enclosure.asset.meta",
+            "sha256": "e63561d4ae13b22fa43b0ff0805b89432aa3efc7ec4d1d565518f1a18baec0ca"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/ServiceUnit-1.3m.asset",
+            "sha256": "6579f0d517879eb295bbc19ffdbcabbaf2595a91412b4b09f23b850d608b5423"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/ServiceUnit-1.3m.asset.meta",
+            "sha256": "ea13c97a52022d84f0d3cd98350c46ddbfec3f0348f65bee083ba36546e4c5fe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Shift-landing-deck.asset",
+            "sha256": "5516eff6725d29040f12e17b20264a517728ebd601c0bdc7c724dc40724273d3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Shift-landing-deck.asset.meta",
+            "sha256": "b210dbfa9dd0a70da08730a2c50ebda18941202ae8813a4493ed2229da3c120a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Shift-landing-edge-deck.asset",
+            "sha256": "fb03de38c092d470d7b6d2e381a8ede0d36af0d5f996bedfbad68d50fa43c8cb"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Shift-landing-edge-deck.asset.meta",
+            "sha256": "8cb07fb1b57302dcd4df0ca2937b596654b337d15bd1c7471ccf4faff720671a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Start-rooftop-deck.asset",
+            "sha256": "075900ebb3a5a587fc73c86f45c5b426872d2d146918c97895556d721b38ca30"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Start-rooftop-deck.asset.meta",
+            "sha256": "36163157059212f0fc76779365e597d2f611eba4e1f8d65db3dd80cee565315d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Start-rooftop-edge-deck.asset",
+            "sha256": "00baa71fec590a8bde533567e45ae6527a342be16522f60767b8276a4ed288ca"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/Start-rooftop-edge-deck.asset.meta",
+            "sha256": "61e8fc6b14d6140966f78ad831b551733b81618b7c72f92f93708486fde5d84a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/WindowBay-3x3.1m.asset",
+            "sha256": "674caa4e9b96e51270b55f4ba30b15a928631f73d74e3587133ef16dd8449426"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Meshes/WindowBay-3x3.1m.asset.meta",
+            "sha256": "84f5f57ae936e452430ba41ccbf00fb359566e585a6f0ff6fbf359555d265405"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Prefabs.meta",
+            "sha256": "18cbfea1d731728fc81d8e6e113c41c650a258bd06fcb3d2f241ceffac2e2137"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Prefabs/ServiceUnit.prefab",
+            "sha256": "fce517a55a5a9171e032fc176d706cb4f30778f775a630bea350fe41b6d60d85"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Prefabs/ServiceUnit.prefab.meta",
+            "sha256": "00e4807d6cb7ae4d88d93522b277c50b7a79e5b3e685061ac1d26c486690d1d5"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Prefabs/WindowBay.prefab",
+            "sha256": "cb096d8daca9eb9d70cd846b2d6d86466f3b8f4f53b145112c914d5d906f1119"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Prefabs/WindowBay.prefab.meta",
+            "sha256": "63d9b7abc19c83c0db377f91f63f45880b20ae532635fd882a298416039eed40"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/RoutePreview.shader",
+            "sha256": "06d2f1288310286e52ab8531fcbbe91d39160eca908fec5348cfa861325b7623"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/RoutePreview.shader.meta",
+            "sha256": "40471ccf3a334ddbd3af49dfc5f35faed2ab26941dbbb1e701171391b7650ede"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures.meta",
+            "sha256": "33d151e381459b34a661f8182b6f7f70e39c1c6fecaecac8bd0e669e09f7182b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures/CityOvergrown.png",
+            "sha256": "a9262d68c494bc598288e2d997d0e9e52155442ded5140a6cc0434557277209e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures/CityOvergrown.png.meta",
+            "sha256": "82d6f73e72dbab501dce94db0c2efc78b7c5b488acb1beb40a82f06bcc024c84"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures/CityPresent.png",
+            "sha256": "6c6d8a4c242ab3ea63be63dee3c5d62442546e71cb0b703cf305bcf5610ffdcd"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures/CityPresent.png.meta",
+            "sha256": "2fff204ee857e31c185d10f5b711df60158cf9efdc2848f20736e5e708678ff2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures/IvyCutout.png",
+            "sha256": "a60f02887ebd6e171d0717a0c8b4a1f65ee83994192d83fbd7876c3285bccf97"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ProductionBenchmark/Textures/IvyCutout.png.meta",
+            "sha256": "0c57499509b0d9227cdae2ae697b1f01c9fc1401648b2679788890a1239ba375"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Resources.meta",
+            "sha256": "80c5a6b91de817ee81a0b68a276a52087cb96bd36b06cb0eb6fb1394da2f3ef1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Resources/.gitkeep",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scenes.meta",
+            "sha256": "d69c4ad7585bbb8b4eead07dd210b469627f928883f2201013cdcd0d6166801b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+            "sha256": "dd1ab55cf1a6edc4dfae3566d5e10b2327661dd81b3c09538c1758eb668cf1a3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scenes/GoldenRooftops.unity.meta",
+            "sha256": "af7d3fba8d798a8cec8176cef32996c7c0d5194ca5cea7ac71708efb65305139"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scenes/SkylineRooftops.unity",
+            "sha256": "2fe659ad84d713d093f26d903d6ec995b77482b5fcd3e24768375b644853470c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scenes/SkylineRooftops.unity.meta",
+            "sha256": "b92d6f5ac426b95ed68bc20f81634755113dadaa9f25872729f809d4ce909e01"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts.meta",
+            "sha256": "4e8fb37617ad1c94bf670b949c97a71a83cf1ef268686d61f351bc26961439a1"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/AtmosphereController.cs",
+            "sha256": "2aa03d4dd0eb07c5908170132383649ae85b6b03523553f801a706d437543b77"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/AtmosphereController.cs.meta",
+            "sha256": "c287e946ee4dc9f4fc93313324e464077afd4c34c28102b4324bd6864948431c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/CaptureRunner.cs",
+            "sha256": "8e091eb48abaad8cd018d2bb9bd628f57da8322b783ff608066e9151ea9e85cf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/CaptureRunner.cs.meta",
+            "sha256": "11123796e98716bd0fd198eee866f30c2ca09b246594204d8b1862591b072afe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/CourierVisual.cs",
+            "sha256": "9a7838cab1cbacd264219401428a4625cc19a855c095c6b3e5bb5323ada81cef"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/CourierVisual.cs.meta",
+            "sha256": "bf8a3ca6f1b4194ad6588aea11dc9d393fca3c6c514eb2972e9b032f74b23af0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ExperienceCapture.cs",
+            "sha256": "6e86d8762ab66ad8873d3a6f0ca8e2163f3c67b2b203818e4e12681369964167"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ExperienceCapture.cs.meta",
+            "sha256": "44714fa064eb23b633ae49e17fc6bba2e39bb11bd34d4af133667abff7825597"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/FeedbackAudio.cs",
+            "sha256": "92336b2aec1864d029828906b020e95943e751487f9ec9ea78b8702a4578d6ba"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/FeedbackAudio.cs.meta",
+            "sha256": "739ef4d05b4c6398dcb226ee400983acd0b2f1f416fe7dd649c034c6bdd521b2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/FollowCamera.cs",
+            "sha256": "b6bcb42c1cef6b946cd9432e2450ac8992912800d87197adef4895728e476f3b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/FollowCamera.cs.meta",
+            "sha256": "d5d481c288d347ace1296dca53c4ee5230633879362afd6035820e8ca2d65f9b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameFlow.cs",
+            "sha256": "0ef063ba0f45ab668aafe73a49368bb191837785b59943cb71889e2884229bd3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameFlow.cs.meta",
+            "sha256": "be22ae733250d53b3757267995b706a1ee512fd12e6054801c086fbdc9b39cd9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameInput.cs",
+            "sha256": "3ea0bf3ba1e16249fbbf32398c29378766acf446266764fb3a27ac92e0497845"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameInput.cs.meta",
+            "sha256": "ab4a040c430ee348c5973b77ebf9375b43621473c6a75cf43738af86d1a014c9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameplayCompareRunner.cs",
+            "sha256": "94825703d76016794fb118bbd03b201ac8b6dfb53b6903a3701ce168920196e8"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameplayCompareRunner.cs.meta",
+            "sha256": "5775f6a093abc1d5bf5884be93f738eccf4289464e145990bd7b70985922f4cb"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameplayTelemetry.cs",
+            "sha256": "34a797c504c08fdf0590d6a73282637dbba70c20da2254827ce88edeacd48baf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/GameplayTelemetry.cs.meta",
+            "sha256": "bdffee71009e8ea5a69c215f33722189bd3a65efa04a18842eb51acb97a74007"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/JumpIntent.cs",
+            "sha256": "76d6cc52a480041f4d956637e259246a0044f2e2c4a0ca525f7b53da828cfff9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/JumpIntent.cs.meta",
+            "sha256": "685b97a74d363cced64127e3fb2fc67fe8f8a351442ee3a7bac5d00687558a29"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/MixCapture.cs",
+            "sha256": "5e0409a07821942fd014a059b329a30a1254a1a1201c047e6a10c6913b688ce4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/MixCapture.cs.meta",
+            "sha256": "fcd0f3bb00e9f4f7a4ec1fd1f4f6faece7f547acd0565c7c0b8b97a010249ae7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/MotionInspectionRunner.cs",
+            "sha256": "e15892a5082a2ee8f2e5a654b5303b0f3b53c46bc018efea0f747492ac235fa9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/MotionInspectionRunner.cs.meta",
+            "sha256": "2d1aa640f4f88ee061bf7ca2f7258f069bc75c940f3087c2ec8dda9196a17297"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/OpeningBenchmarkRuntimeV5.cs",
+            "sha256": "5838a0511d4dca4f25a39650cec524a2712c9c456695349a5bb64499ef36dc63"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/OpeningBenchmarkRuntimeV5.cs.meta",
+            "sha256": "2a30f6b01ced99d3450f35a200253b65c5bac362d399f1a7a494ca332fc31d8a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/OrbitExperienceScenario.cs",
+            "sha256": "a2e5fe4d0509658a35b42c587f3ea4af2da2ab59c337e60f9a4a9a1c818e6036"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/OrbitExperienceScenario.cs.meta",
+            "sha256": "31ae1757f86699ec3be0e3fbf36d43f1772eb24874092fa61a6ec1be38f219dd"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PhoneControls.cs",
+            "sha256": "b931ed0b5a48745ddd62f0595435ea59424cafe68ae664718345014127eff05a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PhoneControls.cs.meta",
+            "sha256": "72e63f6b603a344bfd2dc3c5d99e2e66ca6475996e8d1c9cd9b8bd260a6bbf8b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PhoneHUDCanvas.cs",
+            "sha256": "c32128f4ede63e7d58b1db25720bf78a5e8281fccfb48be7f060d7f70ca1fe73"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PhoneHUDCanvas.cs.meta",
+            "sha256": "3cb2f876a78585eec8dc9a71da439f6c0ad4319c53aa62faf39535552a2d1aac"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PhoneRegressionRunner.cs",
+            "sha256": "1eea3563be6da49a9e7ad38e1e2b983be22d53325fcd06b583e7ed7e71e52d16"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PhoneRegressionRunner.cs.meta",
+            "sha256": "aa81674b9105b850eae66df92bba7eaf249f9a73ff9a418c47bedc2ddb2fffd4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PlayerMotor.cs",
+            "sha256": "0a05eaa02a1b19313c34e082bff8edced472ea5119c54313d5f6b73a8f56e049"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PlayerMotor.cs.meta",
+            "sha256": "4a3ba2f9e7c513e0d811e894001ec4edeb1d850bd47a8183ee8c7ccdab509cce"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PlayerPreferences.cs",
+            "sha256": "907ad810ba6c772262e2f60082f2e04f08cc91bb2d3a37d36ff479cc13a4dd9c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PlayerPreferences.cs.meta",
+            "sha256": "f3dc4b3912e26e74a3f3be285ba026f7e551eb2f78ef48a3acb2b9173f40f40b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PremiumHUD.cs",
+            "sha256": "6fafa6ba84fd4b2993430ee299d91c3f1199d0ad85fc6d492c16d8f4f524c7e0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/PremiumHUD.cs.meta",
+            "sha256": "2252861b4154370bd5bf8af2baaf59938556a47dfc2e9f743b0b090effc9e2e2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ProductionBenchmarkProbe.cs",
+            "sha256": "8f7fb9244d8d444b23985cee28b01995224ba48950a6286ea762558363d9bbcd"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ProductionBenchmarkProbe.cs.meta",
+            "sha256": "87506e8a83ab6f9acd308c93892e6cd10b1d43207392f06a0c382793a02ef5c7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ProductionInputDriver.cs",
+            "sha256": "caa2cb9bb97163c963c6ab1bc38e79d6b4ec1dfc1d4ab06a0fd959ec585765b4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ProductionInputDriver.cs.meta",
+            "sha256": "0e4053a1d3963ad9ebe7701fe9c97431072c6af3f9f06484e4d475b0be1ba28c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ReachAuditRunner.cs",
+            "sha256": "46ec80e756bcda3810d95c2ea1164d382409ada22976419b6a435a85f2d7d237"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/ReachAuditRunner.cs.meta",
+            "sha256": "68a3937378c0ca56252ca50381a8c08efa3325c2fe8b8b43eccec7782486a2a4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/RiggedCourierAnimator.cs",
+            "sha256": "869a2f92e4522f109618e49aa0c266a4154e2893f2c4281a0690ebf164f9da4c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/RiggedCourierAnimator.cs.meta",
+            "sha256": "c3db739e09fc55e172432c4bfd70c67ba81b340c122c9c76aa707c887874a387"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/RooftopWorldArt.cs",
+            "sha256": "3dec80bbe268b764cc3bba25af4b974d002465fc48a8320b44c5d52158275709"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/RooftopWorldArt.cs.meta",
+            "sha256": "9b375eb3dcc22096111a386ab65351182a0178477b62d8a93c42ff003f88510d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/SkylineBackdrop.cs",
+            "sha256": "fc3bd0c9f50d927fb4aef926c4545991621660ccc8926629955b6fd612f5449c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/SkylineBackdrop.cs.meta",
+            "sha256": "58477cf148fa0e9da8ee1741978253e6c6dfef06b21528cf32d1f7090ef7d03b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/SmokeRunner.cs",
+            "sha256": "7f551870d366d3a744d1d15fce2f1bf5b0835a4dab9c237f53254c8c7bc2b383"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/SmokeRunner.cs.meta",
+            "sha256": "bd7f544c82e234bb05df22c28450da7f9d10bae3f624265ec84f5e99dc901d3c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/StageTrigger.cs",
+            "sha256": "a56ed28591d5b6d5a3e806d858a44bce89e9b2e7acd3aa18667161876d62e55d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/StageTrigger.cs.meta",
+            "sha256": "6865f3dc11df2644973b9e06abb2969ce30ea768dc8bd77d456106827e9cdfbb"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/TouchInputRouter.cs",
+            "sha256": "d853f529f00e42c187551adfe54ef402bbd4f6054ef022c40fade8c0829031df"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/TouchInputRouter.cs.meta",
+            "sha256": "9652926b9834e173a2c93e500d0d6d83bc86d6082ea63990ea4dbc795a4ca311"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/TraversalRegressionRunner.cs",
+            "sha256": "f4be26ad73ba64306dfeaccd1b8669f9bd45e7ec251d089f1231a7b31a4e5652"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/TraversalRegressionRunner.cs.meta",
+            "sha256": "099cc4458e0e131446710d1c0ee90542df7ac3b7018a657c2e6cdce2b6aa3676"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/WorldPanorama.cs",
+            "sha256": "b005400a6f5d16d96f6f404cefd3b7a56fd218d5230c144f112220a375fbe576"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/WorldPanorama.cs.meta",
+            "sha256": "19f5cf0126817fc4a74f797dbcd15e1f04e851bf452017f4c8a4bda0a2dccc1f"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/WorldSwitcher.cs",
+            "sha256": "72577ab97aedd4a5df12518296fbfba47c589046f61d6e00bd25f1713c0e7bcf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/Scripts/WorldSwitcher.cs.meta",
+            "sha256": "f8773fec51266962310a63e4c2f354320b56e833fcb70d1d4a15ec10d1c5feb4"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4.meta",
+            "sha256": "3f59336f0a28f2386cbc9f77b4d20356b79323f63dbcd18f81a82713e220e5b9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/Ivy_Hanging.png",
+            "sha256": "887143255ea29698ce6cf6475828436aa93325a7b02e25c949ff21262513af14"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/Ivy_Hanging.png.meta",
+            "sha256": "a2ba445962d299612a1976fb93ec4177cf9279aee1a214649c234266f1cac6f0"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/Skyline_Overgrown.png",
+            "sha256": "e2ef127a655b0dbb747b56392385fdc4e2bc8ae40dfeac46a8bdef751d2b72c2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/Skyline_Overgrown.png.meta",
+            "sha256": "c9c650327748fdd0b650a5430e9d12d4038a85fbaea4e8f415c3666896adb99b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/Skyline_Present.png",
+            "sha256": "ed0d6c6eff7f6e809a888719da0401fc6a6abe0895b163614a6197bef3b70a10"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/Skyline_Present.png.meta",
+            "sha256": "ad82c45d74419f9950ec043fe4078912f8f6e567da09443f5e20936919533e12"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_brick_wall_001_Diffuse.jpg",
+            "sha256": "088c6d45b9a485f850639578299b15e2e0060f21cfa19c18161f2931f220157b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_brick_wall_001_Diffuse.jpg.meta",
+            "sha256": "2124a4479f138687b29197f5dcd8912daeeb0390ab83308218c1140bcf0c2d85"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_brick_wall_001_nor_dx.jpg",
+            "sha256": "fb459287a70a6f01958e0443a43050b07c609c247f840476c20c950de1a998df"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_brick_wall_001_nor_dx.jpg.meta",
+            "sha256": "b8e2f47b37c6bc53dafd39e1637ebde5ed93b4da2dc507cc0da71a274b03fd26"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_floor_01_Diffuse.jpg",
+            "sha256": "ca24c52dabae67ef49093f91d8f9b9e5328a3b9fcb1327742ff6181ee542e017"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_floor_01_Diffuse.jpg.meta",
+            "sha256": "a58ee56c5caf39ca5c5df9d795acee65ef747d127a3b2e8e2285fa3867c7f4fd"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_floor_01_nor_dx.jpg",
+            "sha256": "8b507fd18302d2cfdfeca2a30249c222a9f2491017dd0b6ed81e499a90093b0a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_floor_01_nor_dx.jpg.meta",
+            "sha256": "1c80e0996ff743a834c2e1d65a5766995b7f1339dff2b1ae3f880317c9e74b01"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_moss_Diffuse.jpg",
+            "sha256": "764e43763490672a2067d3bd644ab0602a9d477533e598bcc0e3b3b01d8b937a"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_moss_Diffuse.jpg.meta",
+            "sha256": "2f76c028c07ad2fcce6717a7caff333c3178a09874f3aac4081542c54f8b33b9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_moss_nor_dx.jpg",
+            "sha256": "1cee0e890d6ab51cf21487c9719276d225b91e9397e62a1ff86b4438fe4d5113"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/TexturesV4/concrete_moss_nor_dx.jpg.meta",
+            "sha256": "e9237ebe849fe63905f48ce4b5b49b951a738a653ae8a653e854de2320f8b6dc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty.meta",
+            "sha256": "2b4f01a899cc8920c8562bc94e0cc27ce97a0c902d89ce3d2d7bf9485df936de"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius.meta",
+            "sha256": "65861f95e03dcab6f163b91ab72ba4e8f03d16a53ec13912b787ef35f7d8769c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation.meta",
+            "sha256": "6915d688bf34650fe7e6731929ceddedbbdaada053a1827b8caab0939aab5976"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation/License.txt",
+            "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation/License.txt.meta",
+            "sha256": "fea425b38581b6d07de470b85ab6ee32b73855de14eb102a5435a7a28a4ee575"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation/README.txt",
+            "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation/README.txt.meta",
+            "sha256": "520e9cde185c28936093c01e6a3de49ac4dbda50011326a49a6a27562c59f3fe"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation/UAL1_Standard.fbx",
+            "sha256": "21b32d912da3cb93426d974fb945e86f5b2e86970acd2ce89905e0fbf9f1dcc2"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation/UAL1_Standard.fbx.meta",
+            "sha256": "79bd7a7d567bd58f7881c30ecfda9a365982bee90190c95b30d5fd040ffb3a43"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2.meta",
+            "sha256": "9fdbb6ca194d5a970cfee175943b10f775727bdf3f4f46826a5514d1aa712be6"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2/License.txt",
+            "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2/License.txt.meta",
+            "sha256": "ea30cdc011bb5b53b3f71d526ffbd42c9e979b061b2d73343b6eb073883a3822"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2/README.txt",
+            "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2/README.txt.meta",
+            "sha256": "d88ccb41cdc91a057fc1d174e1fe5867e12bdef84e4035f34497414ff833cccc"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2/UAL2_Standard.fbx",
+            "sha256": "d26d0e9f4a202d473194c056045143095a605a53ba1d823ef24055be4b86851d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Animation2/UAL2_Standard.fbx.meta",
+            "sha256": "27400d5a373397fb39a1cfb9eb648a8273b0f48022e2c0feee31d75e5da9288c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character.meta",
+            "sha256": "ea06dc822de1183ac59443b558512e9a6377c21ba9f5abc3d95800478b3d637c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Casual_Hoodie.fbx",
+            "sha256": "55fd019ef45766267e4decf101899b8c4f6019d077cef9047a6de1b7a2120b41"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Casual_Hoodie.fbx.meta",
+            "sha256": "0d829ddb5493f61ea7f807e0cdd5c0e396cec8f539dc45fc5b2471876ba5aa46"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Casual_Humanoid.fbx",
+            "sha256": "a4f84c2b788d2761a711cebd628c1770b7ae5a5a40e7a8faf09dd5c37a8eca7b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Casual_Humanoid.fbx.meta",
+            "sha256": "53ff78018db2dc648f754e787f57734107af93c965509c535dbcf8c5fae8c7cf"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/License_Standard.txt",
+            "sha256": "0f4beaf0fe360a7732e58bbe3dbf60a2422367fbea60cb9ea4add968f383268e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/License_Standard.txt.meta",
+            "sha256": "e50bb741632076e0a359536de2f716b1fcf362b86d0a4e5491dd2f913479c33e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Superhero_Male_FullBody.fbx",
+            "sha256": "79344418d754a59730b79d1874752e9592143db34abe8adf138fa9a92a4768e9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Superhero_Male_FullBody.fbx.meta",
+            "sha256": "9e0b2cf8125f9cee3fdcd921b89a54f81c2621e11e9956efe4c480968e5584ce"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Eye_Brown.png",
+            "sha256": "d08e3356a83211bc6ca21fe3a8e39f4b5c1a3b8f85457fc2c0fb57be09935025"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Eye_Brown.png.meta",
+            "sha256": "859e57478dce499807e2356f58397b59ac5d01995612871a78a7aa4fbb3f2aa7"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Hair_1_BaseColor.png",
+            "sha256": "bc7aa863bd22ab0a995cd838cceb4d3a5186ee54ee2fb0108fad85d20c057e6e"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Hair_1_BaseColor.png.meta",
+            "sha256": "98b71083b4b3c6077726d7c0302671f6c836a5f4dd7510afc836b68c78d8b6ab"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Hair_2_BaseColor.png",
+            "sha256": "f9f4f2fb3eeeefb0b6f0fdef38b0770fd6607640c1c680b8139dd76697e9f9b3"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Hair_2_BaseColor.png.meta",
+            "sha256": "c162227aabb3431ca65ae2a30f5a48674c9978812001821a0e6940e80a1fb43d"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Dark.png",
+            "sha256": "df680cbc1967a61e85998bfafb8f7bc0a36dd604bb3266486c4b06b1a184bb45"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Dark.png.meta",
+            "sha256": "5f6a75e7889fcba5f563b6f7876dc03126c30e05d95d84bcd6d2cf52d5ac60dd"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Ligh.png",
+            "sha256": "419f96dbb8811511e2d515bcdabc085ff2f219ec7b8b4e91050a84cba6888fe9"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Ligh.png.meta",
+            "sha256": "b7d5b604e357ec36c9c9e3de5f77e77273828f8561798acccdcd5e5f5efb400b"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Normal.png",
+            "sha256": "3645858289beb51643155a924e5148735dd5fe226230532936375c06ba829dec"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Normal.png.meta",
+            "sha256": "00636a815161cd0971249a9b5a9995f353b4f9e8852cab0590b077b3235efb45"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Roughness.png",
+            "sha256": "5079fd95603bdd34700abd42ca6bcf43b615929f29134822aeb63a3a8bb3400c"
+        },
+        {
+            "path": "UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/T_Superhero_Male_Roughness.png.meta",
+            "sha256": "e6b015c381fa5d1faf1684c62f5ba6f3a3975a7161c6a79d1ec2b2082f99e311"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo.meta",
+            "sha256": "07f022e5932c833d026e020b27d73452ebd781993b616d76003494af1e140946"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Icons.meta",
+            "sha256": "546e7d7af6b4d5e17d284c8f1188d05472e681911b8359905ee9b9e20769a106"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Icons/URP.png",
+            "sha256": "1d17a9ff3537859abe2c008603d29d90cf43191ae77aa386167cc65e53ba03d9"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Icons/URP.png.meta",
+            "sha256": "b330f1fcfc4e6ceccc95fc34a38434141603469b135633e1c4e8a03c19f9fdbc"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Layout.wlt",
+            "sha256": "0a18bf035aa7ce914f19f7ce6b60a5a2d33e2371af6f492a8ea7a1bc78755b8b"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Layout.wlt.meta",
+            "sha256": "b8745a251df078ffa75dbaac0c4c6debecb61ab306b5b119a490ce6c635a11d8"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Scripts.meta",
+            "sha256": "930d0c8276cea1559a3e315f8500ea6ca8b58d980eee3b44aaa1d461742c47e0"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Scripts/Editor.meta",
+            "sha256": "7036bdbc8af05799b5fd508484343b35c28a68b390198da4673d34357d7d667f"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs",
+            "sha256": "d2023934bc2be23af69cd930ade85eff41c5db0a6f6666b05324b975befdb5b5"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs.meta",
+            "sha256": "f59080b424c16fa13edd105bf006fdbad98c11fce0c921043e63c8877f144cd9"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Scripts/Readme.cs",
+            "sha256": "c09c93844f93eb252a6fb39c222d169c63a63e96008fd040b9e7628c3e7ccc2e"
+        },
+        {
+            "path": "UnityProject/Assets/TutorialInfo/Scripts/Readme.cs.meta",
+            "sha256": "80a3df9969fab6e656583ee9bbca884d0507e2b7de3417f6ea3118fba901cd60"
+        },
+        {
+            "path": "UnityProject/Packages/manifest.json",
+            "sha256": "6a403f94c78dc6ef3004c5979fa26e7da2b837a92ff354787a89ccbca27a7d1c"
+        },
+        {
+            "path": "UnityProject/Packages/packages-lock.json",
+            "sha256": "83e482578d253de4de4f5b8e18eaaaa47cdadb4a5ab1646deadeeef1399487d1"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/AudioManager.asset",
+            "sha256": "aeedeb3243f07b61dbbe854aa08b5ef6f0b5274dd9852ad9f6129dde3e105a31"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/ClusterInputManager.asset",
+            "sha256": "40e65dd214bf254955d2c8829ca8ce2130fd3510485560ce012e9a1ddd93e623"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/DynamicsManager.asset",
+            "sha256": "b7c9a9dc08b98990109d4346f68745e15e238de400f96c583e53e1c83c743a78"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/EditorBuildSettings.asset",
+            "sha256": "26450642f5d05b1905f1371d2aeb70935ffc253e58c263d5a7d1437f37b215c3"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/EditorSettings.asset",
+            "sha256": "32d6a9be4c9aa9795a96bd951820a2d9be1bfefab82ed05a5db111af0863938f"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/GraphicsSettings.asset",
+            "sha256": "6736f33dc62c35b0e7a88e275242080bc7a1d94c91154d18fceb332b661a6bce"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/InputManager.asset",
+            "sha256": "7a1bb836a1008d26d0860d143e9d9df7ca41731d30a72901b518063819c62df2"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/MemorySettings.asset",
+            "sha256": "1e8379a461b10ae09f3f696911088c16875d63e87ed5f2d95df9e1892703f9fd"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/MultiplayerManager.asset",
+            "sha256": "aba89fd1a1ddad182727ad82727e536d27372e90328a8196da2a4560398983dd"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/NavMeshAreas.asset",
+            "sha256": "80106cfa7e6181a1928b142c075f3e510d527441e3d79bc83590e4ac91e7cd66"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/PackageManagerSettings.asset",
+            "sha256": "a7dabba589abe7fc2b45bd3d3fba3fe9be97043492703f716da2d9131c13a807"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/Physics2DSettings.asset",
+            "sha256": "e3cbdbf0be15244b7b67d2f07bdb8e8981911c11a8c7fe8035f5261272fec658"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/PresetManager.asset",
+            "sha256": "29c125923fe6e29f90190d4fce1c82d660e7051546e2c9d02908d18c9cf2436c"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/ProjectSettings.asset",
+            "sha256": "714b0b2626c901d869cabc020fd9b81d1a32fb1d0d698997608cccb5e70414f2"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/ProjectVersion.txt",
+            "sha256": "4a18b4936a9f83ec28b32cf336e6f62f6b00ddf12a48c792feac779add1380f3"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/QualitySettings.asset",
+            "sha256": "8da42c39afe3ecdcec275f48a1878a123333a15b184e2f765e018fa867968d75"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/SceneTemplateSettings.json",
+            "sha256": "bb9098b3bfcde78d93e264b96f7b77b5430e64e8c57a7aad7f5a5d9c3945e16a"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/ShaderGraphSettings.asset",
+            "sha256": "cdba1e5d65bcf6e3269d76ed3e60b6c21f98322002996642c9d74f1eb89f6b91"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/TagManager.asset",
+            "sha256": "23fc56b484aa3d7edf5914cd3591f7a823ccef5e3f3496f8a51f30388ead63dc"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/TimeManager.asset",
+            "sha256": "1a83e54adbbda7c9f4851103a0c6ab7f6448a3343d4ea5b7620452fa08416ecd"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/URPProjectSettings.asset",
+            "sha256": "c317fe22b9488785c0611f0642429922e5d324430d929bffb41648130f30c218"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/UnityConnectSettings.asset",
+            "sha256": "b7dd1e8290598f5ce86919ba1c98b42b766c8c42191a30fa2c4d12195c4ecd00"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/VFXManager.asset",
+            "sha256": "f066c6483919961332415ee64204f74fe52f38c02e82892eb02b7a5b2e381f0e"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/VersionControlSettings.asset",
+            "sha256": "e7bda45bf7a394745fee1316e6c71fa676004d591ad1f3aa247fd3e4ceb86071"
+        },
+        {
+            "path": "UnityProject/ProjectSettings/XRSettings.asset",
+            "sha256": "edd2beb4a2e388312b4b7da241aa51070434005d82c59363f1237dd2e567585f"
+        }
+    ],
+    "binaries": [
+        {
+            "path": "Shiftbound-QA.aab",
+            "sha256": "613db6be128c22fbf39273cad0b4a560332cf97784dbb4a1e43aefbb310b4b18"
+        }
+    ]
+}

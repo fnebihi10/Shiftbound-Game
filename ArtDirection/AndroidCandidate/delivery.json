@@ -1,0 +1,244 @@
+{
+    "source_revision":  "f23a3a78833bb907add9eee44be821a4e126f420",
+    "sourceFingerprint":  "2bb476b1bfeab5a5e232f16847b8b948bf2114829b7b975ffe6dc129622e92bb",
+    "platform_evidence":  "Windows synthetic only; Android static build/package only; no physical device",
+    "artifacts":  [
+                      {
+                          "artifact":  "UnityProject/Builds/WindowsPolished/Shiftbound.exe",
+                          "sha256":  "3070e580e019576b9afcdeb4fec18d03cebc119f6ae84d597412905c749ad653",
+                          "bytes":  667136,
+                          "revision":  "f23a3a78833bb907add9eee44be821a4e126f420",
+                          "sourceFingerprint":  "2bb476b1bfeab5a5e232f16847b8b948bf2114829b7b975ffe6dc129622e92bb",
+                          "unity":  "6000.3.25f1",
+                          "scene":  "Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+                          "signing":  "none",
+                          "binary_manifest":  "Shiftbound.exe.manifest.json"
+                      },
+                      {
+                          "artifact":  "UnityProject/Builds/AndroidCandidate/Shiftbound-QA.apk",
+                          "sha256":  "a52bc56753e3fda71c83d078d92606e1e42e58895c99a74aa97215721cc70c55",
+                          "bytes":  56732598,
+                          "revision":  "f23a3a78833bb907add9eee44be821a4e126f420",
+                          "sourceFingerprint":  "2bb476b1bfeab5a5e232f16847b8b948bf2114829b7b975ffe6dc129622e92bb",
+                          "unity":  "6000.3.25f1",
+                          "scene":  "Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+                          "signing":  "debug-QA",
+                          "binary_manifest":  "Shiftbound-QA.apk.manifest.json"
+                      },
+                      {
+                          "artifact":  "UnityProject/Builds/AndroidCandidate/Shiftbound-QA.aab",
+                          "sha256":  "613db6be128c22fbf39273cad0b4a560332cf97784dbb4a1e43aefbb310b4b18",
+                          "bytes":  56622975,
+                          "revision":  "f23a3a78833bb907add9eee44be821a4e126f420",
+                          "sourceFingerprint":  "2bb476b1bfeab5a5e232f16847b8b948bf2114829b7b975ffe6dc129622e92bb",
+                          "unity":  "6000.3.25f1",
+                          "scene":  "Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+                          "signing":  "debug-QA",
+                          "binary_manifest":  "Shiftbound-QA.aab.manifest.json"
+                      }
+                  ],
+    "review_files":  [
+                         {
+                             "path":  "android-badging.txt",
+                             "sha256":  "d9bde23b128aee36e7070680339b6ae94fc95b1d171ce13365ce7e54ae11eb57",
+                             "bytes":  4703
+                         },
+                         {
+                             "path":  "android-inspection.json",
+                             "sha256":  "0589e6359b8b17c5cf2b8aa02cfeefb3206efe182187c161158fd8dd364bc209",
+                             "bytes":  5231
+                         },
+                         {
+                             "path":  "android-permissions.txt",
+                             "sha256":  "8e7ab4efb245a6e02ae6bbc9ef10eced57eb1601186a84f7f1154262bb245e14",
+                             "bytes":  229
+                         },
+                         {
+                             "path":  "android-signature.txt",
+                             "sha256":  "2827c66910ce1c04ddcbf2bbf8033d52da08f608dca02788ed486f863549b5be",
+                             "bytes":  972
+                         },
+                         {
+                             "path":  "bundle-config.txt",
+                             "sha256":  "90606c95c702a971eb7aea91fb610adb1ab3322f3faee5a681002a78f2219452",
+                             "bytes":  1453
+                         },
+                         {
+                             "path":  "bundle-inspection.json",
+                             "sha256":  "656799c61cf60fd1546ed10ad5f8cc797fb492448dfd63bbd7ae05821b46cb57",
+                             "bytes":  552
+                         },
+                         {
+                             "path":  "bundle-manifest.txt",
+                             "sha256":  "7a77c81549e79099e381ad6259830c7418cf885022d4ea014111b856d93ea7a9",
+                             "bytes":  4184
+                         },
+                         {
+                             "path":  "bundle-native-inspection.json",
+                             "sha256":  "9350a024d1a897d2676b6414caf58fc4bc0af3d0c8fd585fab2d25ec50b26b0d",
+                             "bytes":  5231
+                         },
+                         {
+                             "path":  "bundle-split-signature.txt",
+                             "sha256":  "167fea643bb4ea0c7a5442762f4a53a6221278e330741e085c440c998fc075fb",
+                             "bytes":  972
+                         },
+                         {
+                             "path":  "correctness-cases.txt",
+                             "sha256":  "135efbd6a1c881448e3e385e4335aa6596147abe2767e1f8132b567e4ed8a081",
+                             "bytes":  18145
+                         },
+                         {
+                             "path":  "equipment-overgrown.png",
+                             "sha256":  "c60bf333cd1f7175bb503f382c1722800433e34defab17935ff5aab00ed6001f",
+                             "bytes":  1265058
+                         },
+                         {
+                             "path":  "equipment-present.png",
+                             "sha256":  "a8fe80f07166ede9aed6c74384742e0c14c4d2ed333d2fe88b030ec32699776e",
+                             "bytes":  1251069
+                         },
+                         {
+                             "path":  "FinalDiagnostic30.json",
+                             "sha256":  "2a326e0b98788b22e03c7e97b825b40b89e47efd9fa7fda7cad5221954ab95ac",
+                             "bytes":  3039
+                         },
+                         {
+                             "path":  "FinalDiagnosticNoPost.json",
+                             "sha256":  "ec2259ecd64354e4c4073bc774b5ace3ac816a329d71230a7bf5b15b48372eb7",
+                             "bytes":  3048
+                         },
+                         {
+                             "path":  "FinalDiagnosticNoTiming.json",
+                             "sha256":  "410d839528a7eb3605c3dadd793eb86b778c3a5f5efcdd3044da0c41c1634566",
+                             "bytes":  3046
+                         },
+                         {
+                             "path":  "FinalDiagnosticRecorded.json",
+                             "sha256":  "45facd703e936846bbec47e62b60e56134dd563de5ad2b8ea70418c862c72c29",
+                             "bytes":  3039
+                         },
+                         {
+                             "path":  "FinalDiagnosticTimingOn.json",
+                             "sha256":  "1d389bfc9df8711e3acff738c6d9bc81e597b59bdb545d55c55351ad3ffe0a6e",
+                             "bytes":  3038
+                         },
+                         {
+                             "path":  "full-route.mp4",
+                             "sha256":  "523c32fb96a3a2fd05d369c78c0e210939b73c6f8ad08c072b7ec436707cc9a7",
+                             "bytes":  11371881
+                         },
+                         {
+                             "path":  "observed-panorama-seam.jpg",
+                             "sha256":  "f1a64f9012971181971608b899503a4ba41015921580f5389f2165446175cb20",
+                             "bytes":  141957
+                         },
+                         {
+                             "path":  "orbit-and-recovery.mp4",
+                             "sha256":  "b4cc2a5ceed70d1d28231dfc0dd94b4ae8cf999977e973ade2ce979191f2d2df",
+                             "bytes":  18116165
+                         },
+                         {
+                             "path":  "orbit-audio.txt",
+                             "sha256":  "d0484c1f024d564faa78c829396bfa5514e839d763ca6a3a3bf84e757621eca8",
+                             "bytes":  98
+                         },
+                         {
+                             "path":  "orbit-times.csv",
+                             "sha256":  "95bf54df379f57c23e8e3cdc66af89684ce3bed06fcc08909ba74a6110e0c5a5",
+                             "bytes":  9501
+                         },
+                         {
+                             "path":  "phone-present-16x9.jpg",
+                             "sha256":  "e2feefa790a2bbe87786fd15d2fbd9259651f4a26588f7bc9d4e1f2e8c1b79df",
+                             "bytes":  175167
+                         },
+                         {
+                             "path":  "phone-present-195x9.jpg",
+                             "sha256":  "3d566be59b7a9bfabaf17ce755171f106378ff05017fd5c19757436ad4429f02",
+                             "bytes":  200899
+                         },
+                         {
+                             "path":  "phone-present-20x9.jpg",
+                             "sha256":  "40c29eadc4fb89171de0c005194d7cf1931cc36f1da3d4046d2eecf3be52057a",
+                             "bytes":  204319
+                         },
+                         {
+                             "path":  "README.md",
+                             "sha256":  "4731bb311ec356468020f39f0fd7be0039c17a2148a201234a139191399d070c",
+                             "bytes":  7766
+                         },
+                         {
+                             "path":  "route-audio.txt",
+                             "sha256":  "6792986ccf182eef37ef4d8ff4211e0c73e89d80cd6426c4fb8c95e755fd37d9",
+                             "bytes":  98
+                         },
+                         {
+                             "path":  "route-times.csv",
+                             "sha256":  "58ede6e9820ae950129192fe3774532af873ab3f26cef8e299de229e0db886f3",
+                             "bytes":  4641
+                         },
+                         {
+                             "path":  "Shiftbound-QA.aab.manifest.json",
+                             "sha256":  "a93d56d9c1a159f0425ca88e161f59c54c30c921e6254d104b61ce86084dd53e",
+                             "bytes":  93574
+                         },
+                         {
+                             "path":  "Shiftbound-QA.apk.manifest.json",
+                             "sha256":  "b5c8c9258b44797c417005313c7876660c5c6612880417143dac00d36d56d655",
+                             "bytes":  93574
+                         },
+                         {
+                             "path":  "Shiftbound.exe.manifest.json",
+                             "sha256":  "bd12ddf88bf5dc197726635b11777242d9831b19a6041ea65595529aaa68915c",
+                             "bytes":  126148
+                         },
+                         {
+                             "path":  "software-input.json",
+                             "sha256":  "8992174ac3d4782aa58ec18229ae5b9393cd69ba8c01467d615120d7d5481933",
+                             "bytes":  417
+                         },
+                         {
+                             "path":  "verification.txt",
+                             "sha256":  "22ae7a31c6231f2837fb9c36f08fe64885d6697e94ffa1158f2239b180492107",
+                             "bytes":  5618
+                         },
+                         {
+                             "path":  "native-headers/libc++_shared.so.headers.txt",
+                             "sha256":  "824a33113579703cc0e0d01d35c57536982b841f8c860031618cb9b1e5e2b0a3",
+                             "bytes":  2022
+                         },
+                         {
+                             "path":  "native-headers/libgame.so.headers.txt",
+                             "sha256":  "113813148a33c4b9ef07109524c6d8dcb8c99838ec41f7d1b3093184588713be",
+                             "bytes":  1646
+                         },
+                         {
+                             "path":  "native-headers/libil2cpp.so.headers.txt",
+                             "sha256":  "76733843023534e886f6d34219a953589a29bfbcc8fd2c0e5327117ed7d5a178",
+                             "bytes":  1784
+                         },
+                         {
+                             "path":  "native-headers/libmain.so.headers.txt",
+                             "sha256":  "5badc68b76bf901b57abed19872517d12a43ff35a8cb8c8247b464d3903e2a37",
+                             "bytes":  1728
+                         },
+                         {
+                             "path":  "native-headers/libswappywrapper.so.headers.txt",
+                             "sha256":  "cc49fe618d09eb72a89fab6b651f8869b71ee148a4ae913d782503fed7c138d6",
+                             "bytes":  1628
+                         },
+                         {
+                             "path":  "native-headers/libunity.so.headers.txt",
+                             "sha256":  "b7574489d04556a39e7d9868dd4809885ccb51a663652806c957756f008e0db8",
+                             "bytes":  1790
+                         },
+                         {
+                             "path":  "native-headers/lib_burst_generated.so.headers.txt",
+                             "sha256":  "f4bea958b16f03b896912cce37f51f1a3ca44211a798a212bde9bb1fb06f6493",
+                             "bytes":  1711
+                         }
+                     ],
+    "raw_evidence":  "Ignored local .validation/AndroidCandidate and Logs; not hosted",
+    "release":  "NOT APPROVED: native RELRO failures, device QA, signing/Console and independent review remain open"
+}

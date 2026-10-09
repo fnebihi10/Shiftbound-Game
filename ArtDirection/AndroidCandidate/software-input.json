@@ -1,0 +1,9 @@
+{
+    "kind":  "Windows synthetic EnhancedTouch timestamp -\u003e PlayerMotor.Update; excludes physical touch scan/display",
+    "samples":  7,
+    "p50_ms":  16.6402,
+    "p95_ms":  27.6108,
+    "p99_ms":  27.6108,
+    "raw_sha256":  "08706E1939D25051B664D9642800EE3697BBAA0881AE9023F05D5FEED737533F",
+    "limits":  "Small synthetic diagnostic under competing load; not phone latency or input-to-photon"
+}
