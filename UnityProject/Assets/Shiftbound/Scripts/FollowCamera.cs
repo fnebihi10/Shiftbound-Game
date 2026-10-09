@@ -17,7 +17,7 @@ namespace Shiftbound
         [Range(0.1f, 1f)] public float collisionRadius = 0.26f;
         [Range(0.05f, 1f)] public float minimumDistance = 0.35f;
         [Min(1f)] public float positionSharpness = 13f;
-        [Min(1f)] public float mouseSensitivity = 0.16f;
+        [Min(0.01f)] public float mouseSensitivity = 0.16f;
         [Min(1f)] public float stickSensitivity = 115f;
         public LayerMask obstacleMask = 1;
 
@@ -115,6 +115,13 @@ namespace Shiftbound
             Vector3 focus = Focus();
             transform.position = Resolve(focus, Quaternion.Euler(pitch, yaw, 0f) * Vector3.back, distance);
             transform.LookAt(focus);
+        }
+
+        public void Recover(float facingYaw)
+        {
+            yaw = facingYaw;
+            pitch = 18f;
+            Snap();
         }
     }
 }

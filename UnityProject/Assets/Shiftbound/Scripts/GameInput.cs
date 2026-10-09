@@ -18,6 +18,7 @@ namespace Shiftbound
         public Vector2 StickLook => stickLook.ReadValue<Vector2>();
         public bool JumpPressed => jump.WasPressedThisFrame();
         public bool JumpReleased => jump.WasReleasedThisFrame();
+        public bool JumpHeld => jump.IsPressed();
         public bool ShiftPressed => shift.WasPressedThisFrame();
         public bool PausePressed => pause.WasPressedThisFrame();
         public bool RestartPressed => restart.WasPressedThisFrame();

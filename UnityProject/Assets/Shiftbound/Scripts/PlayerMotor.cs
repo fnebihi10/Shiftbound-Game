@@ -27,12 +27,15 @@ namespace Shiftbound
         private CharacterController controller;
         private Vector3 horizontalVelocity;
         private float verticalVelocity;
-        private float coyoteLeft;
-        private float bufferLeft;
-        private bool wasGrounded;
+        private readonly JumpIntent jumpIntent = new JumpIntent();
         private Vector3 visualBaseScale;
-        private bool jumpedSinceGrounded;
         private float stepTravel;
+        private float airTime;
+        public event System.Action<float> Landed;
+        public float LastLandingSpeed { get; private set; }
+        public int LandingSequence { get; private set; }
+        // Support may bridge the controller's contact skin, never an extra radius.
+        public float SupportTolerance => Mathf.Min(groundProbeDistance, controller.skinWidth + 0.02f);
 
         public Vector3 HorizontalVelocity => horizontalVelocity;
         public Vector3 ActualVelocity { get; private set; }
@@ -43,45 +46,39 @@ namespace Shiftbound
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+            if (view == null && Camera.main != null) view = Camera.main.transform;
             if (visual != null) visualBaseScale = visual.localScale;
         }
 
         private void Update()
         {
-            if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) return;
+            if (input == null || (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying)) return;
+            jumpIntent.SynchronizeHeld(input.JumpHeld);
             Step(Time.deltaTime, input.Move, input.JumpPressed, input.JumpReleased);
         }
 
         // Also used by the deterministic player smoke check at fixed render steps.
         public void Step(float dt, Vector2 axes, bool jumpPressed, bool jumpReleased)
         {
-            bool grounded = verticalVelocity <= 0f && ProbeGround();
+            if (dt <= 0f || float.IsNaN(dt) || float.IsInfinity(dt)) return;
+            bool previouslyGrounded = IsGrounded;
+            bool grounded = verticalVelocity <= 0f && ProbeGround(out _);
+            if (grounded && !previouslyGrounded) RegisterLanding();
             IsGrounded = grounded;
             if (grounded)
             {
-                if (!jumpedSinceGrounded || !wasGrounded) coyoteLeft = coyoteTime;
-                jumpedSinceGrounded = false;
-                if (!wasGrounded && visual != null) visual.localScale = new Vector3(
-                    visualBaseScale.x * 1.025f, visualBaseScale.y * 0.96f, visualBaseScale.z * 1.025f);
                 if (verticalVelocity < 0f) verticalVelocity = -2f;
             }
-            else coyoteLeft -= dt;
-            wasGrounded = grounded;
-
-            if (jumpPressed) bufferLeft = jumpBuffer;
-            else bufferLeft -= dt;
-
-            if (bufferLeft > 0f && coyoteLeft > 0f)
+            jumpIntent.Advance(dt, grounded, jumpPressed, jumpReleased, coyoteTime, jumpBuffer);
+            bool tookOff = jumpIntent.TryConsume(out bool held);
+            if (tookOff)
             {
-                verticalVelocity = Mathf.Sqrt(2f * gravity * jumpHeight);
-                bufferLeft = 0f;
-                coyoteLeft = 0f;
-                wasGrounded = false;
+                verticalVelocity = Mathf.Sqrt(2f * gravity * jumpHeight) *
+                    (held ? 1f : releasedJumpMultiplier);
                 IsGrounded = false;
-                jumpedSinceGrounded = true;
                 GameFlow.Instance?.feedback?.Jump();
             }
-            if (jumpReleased && verticalVelocity > 0f)
+            if (!tookOff && jumpReleased && verticalVelocity > 0f)
                 verticalVelocity *= releasedJumpMultiplier;
 
             Vector3 forward = view != null ? view.forward : Vector3.forward;
@@ -93,25 +90,24 @@ namespace Shiftbound
             horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, desired,
                 (grounded ? groundAcceleration : airAcceleration) * dt);
 
+            // Exact constant-gravity displacement avoids reducing the arc at 30 Hz.
+            float verticalTravel = verticalVelocity * dt - 0.5f * gravity * dt * dt;
             verticalVelocity -= gravity * dt;
+            if (!IsGrounded) airTime += dt;
             Vector3 before = transform.position;
             CollisionFlags flags = controller.Move(
-                (horizontalVelocity + Vector3.up * verticalVelocity) * dt);
+                horizontalVelocity * dt + Vector3.up * verticalTravel);
             ActualVelocity = dt > 0f ? (transform.position - before) / dt : Vector3.zero;
             if ((flags & CollisionFlags.Above) != 0 && verticalVelocity > 0f)
                 verticalVelocity = 0f;
-            bool landed = verticalVelocity <= 0f && ProbeGround();
+            bool landed = verticalVelocity <= 0f && ProbeGround(out _);
             if (landed)
             {
-                if (!grounded && verticalVelocity < -4f)
-                    GameFlow.Instance?.feedback?.Landing(verticalVelocity < -11f);
-                if (!grounded) coyoteLeft = coyoteTime;
+                if (!IsGrounded) RegisterLanding();
                 IsGrounded = true;
-                jumpedSinceGrounded = false;
                 if (verticalVelocity < 0f) verticalVelocity = -2f;
             }
             else IsGrounded = false;
-            wasGrounded = IsGrounded;
             Vector3 flatTravel = transform.position - before;
             flatTravel.y = 0f;
             if (IsGrounded && flatTravel.sqrMagnitude > 0.0001f)
@@ -134,13 +130,31 @@ namespace Shiftbound
             }
         }
 
-        private bool ProbeGround()
+        private void RegisterLanding()
         {
-            float radius = controller.radius * 0.82f;
+            // Initial spawn/teleport establishes support without an impact cue.
+            if (airTime > 0f)
+            {
+                LastLandingSpeed = Mathf.Max(0f, -verticalVelocity);
+                LandingSequence++;
+                if (visual != null) visual.localScale = new Vector3(
+                    visualBaseScale.x * 1.025f, visualBaseScale.y * 0.96f, visualBaseScale.z * 1.025f);
+                Landed?.Invoke(LastLandingSpeed);
+                if (LastLandingSpeed > 4f)
+                    GameFlow.Instance?.feedback?.Landing(LastLandingSpeed > 11f);
+            }
+            airTime = 0f;
+        }
+
+        public bool ProbeGround(out RaycastHit hit)
+        {
+            float inset = Mathf.Min(controller.skinWidth * 0.25f, controller.radius * 0.1f);
+            float radius = controller.radius - inset;
+            const float lift = 0.04f;
             Vector3 feet = transform.position + controller.center - Vector3.up *
                 (controller.height * 0.5f - controller.radius);
-            return Physics.SphereCast(feet + Vector3.up * 0.04f, radius, Vector3.down,
-                out RaycastHit hit, controller.radius + groundProbeDistance,
+            return Physics.SphereCast(feet + Vector3.up * lift, radius, Vector3.down,
+                out hit, inset + lift + SupportTolerance,
                 groundMask, QueryTriggerInteraction.Ignore) &&
                 hit.normal.y >= Mathf.Cos(controller.slopeLimit * Mathf.Deg2Rad);
         }
@@ -152,12 +166,21 @@ namespace Shiftbound
             controller.enabled = true;
             horizontalVelocity = Vector3.zero;
             verticalVelocity = 0f;
-            coyoteLeft = 0f;
-            bufferLeft = 0f;
-            wasGrounded = false;
+            jumpIntent.Reset();
             IsGrounded = false;
-            jumpedSinceGrounded = false;
+            airTime = 0f;
+            LastLandingSpeed = 0f;
             ActualVelocity = Vector3.zero;
+            stepTravel = 0f;
+            if (visual != null) visual.localScale = visualBaseScale;
+        }
+
+        public void StopMotion()
+        {
+            horizontalVelocity = Vector3.zero;
+            verticalVelocity = 0f;
+            ActualVelocity = Vector3.zero;
+            jumpIntent.Reset();
             stepTravel = 0f;
         }
     }

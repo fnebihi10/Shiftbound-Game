@@ -5,6 +5,8 @@ namespace Shiftbound
     [DefaultExecutionOrder(-50)]
     public sealed class WorldSwitcher : MonoBehaviour
     {
+        public enum ShiftResult { Accepted, Blocked, Debounced, NotPlaying }
+        public event System.Action<ShiftResult> ShiftAttempted;
         public Transform presentRoot;
         public Transform alteredRoot;
         public CapsuleCollider playerProbe;
@@ -23,12 +25,22 @@ namespace Shiftbound
         private int activeWorld;
         private float nextSwitch;
         private float rejectionFlash;
+        private CharacterController controller;
         public bool showLegacyBlockedFlash = true;
 
         public bool IsAltered => activeWorld == 1;
+        public bool IsReady => Time.unscaledTime >= nextSwitch;
 
         private void Awake()
         {
+            controller = playerProbe != null ? playerProbe.GetComponentInParent<CharacterController>() : null;
+            if (controller == null || presentRoot == null || alteredRoot == null || ghostMaterial == null)
+            {
+                Debug.LogError("Shift requires controller, probe, both world roots and ghost material.", this);
+                enabled = false;
+                return;
+            }
+            SynchronizeProbe();
             collisionSets = new[]
             {
                 presentRoot.GetComponentsInChildren<Collider>(true),
@@ -60,13 +72,29 @@ namespace Shiftbound
         {
             if (rejectionFlash > 0f) rejectionFlash -= Time.deltaTime;
             if (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying) return;
-            if (input != null && input.ShiftPressed && Time.unscaledTime >= nextSwitch)
+            if (input != null && input.ShiftPressed)
                 TrySwitch();
         }
 
-        public void TrySwitch()
+        public void SynchronizeProbe()
         {
-            int destination = 1 - activeWorld;
+            if (controller == null && playerProbe != null)
+                controller = playerProbe.GetComponentInParent<CharacterController>();
+            if (controller == null) return;
+            playerProbe.transform.SetPositionAndRotation(controller.transform.position, controller.transform.rotation);
+            playerProbe.center = controller.center;
+            playerProbe.height = controller.height;
+            playerProbe.radius = controller.radius;
+            playerProbe.direction = 1;
+            playerProbe.isTrigger = true;
+        }
+
+        public bool DestinationClear(Vector3 controllerPosition, bool altered, out Collider blocker)
+        {
+            SynchronizeProbe();
+            int destination = altered ? 1 : 0;
+            blocker = null;
+            if (controller == null || collisionSets == null) return false;
             foreach (Collider obstacle in collisionSets[destination])
             {
                 if (obstacle == null || obstacle.isTrigger || !obstacle.gameObject.activeInHierarchy) continue;
@@ -80,7 +108,7 @@ namespace Shiftbound
                 {
                     obstacle.enabled = true;
                     blocked = Physics.ComputePenetration(
-                        playerProbe, playerProbe.transform.position, playerProbe.transform.rotation,
+                        playerProbe, controllerPosition, controller.transform.rotation,
                         obstacle, obstacle.transform.position, obstacle.transform.rotation,
                         out _, out depth) && depth > 0.035f;
                 }
@@ -89,16 +117,37 @@ namespace Shiftbound
                     obstacle.enabled = wasEnabled;
                 }
                 if (!blocked) continue;
+                blocker = obstacle;
+                return false;
+            }
+            return true;
+        }
+
+        public ShiftResult TrySwitch()
+        {
+            if (!enabled || (GameFlow.Instance != null && !GameFlow.Instance.IsPlaying))
+                return Report(ShiftResult.NotPlaying);
+            if (!IsReady) return Report(ShiftResult.Debounced);
+            // Accepted and blocked attempts share the production timing contract.
+            nextSwitch = Time.unscaledTime + switchDebounce;
+            if (!DestinationClear(controller.transform.position, !IsAltered, out _))
+            {
                 rejectionFlash = 0.25f;
                 feedback?.Denied();
                 GameFlow.Instance?.Notify("SHIFT BLOCKED");
-                return;
+                return Report(ShiftResult.Blocked);
             }
-            activeWorld = destination;
-            nextSwitch = Time.unscaledTime + switchDebounce;
+            activeWorld = 1 - activeWorld;
             Apply();
             feedback?.Shift();
             GameFlow.Instance?.Notify(IsAltered ? "OVERGROWN WORLD" : "PRESENT WORLD");
+            return Report(ShiftResult.Accepted);
+        }
+
+        private ShiftResult Report(ShiftResult result)
+        {
+            ShiftAttempted?.Invoke(result);
+            return result;
         }
 
         private void Apply()

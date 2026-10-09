@@ -14,8 +14,7 @@ namespace Shiftbound
 
         private Animator animator;
         private int currentState;
-        private bool wasGrounded;
-        private float airTime;
+        private int landingSequence;
         private float landingUntil;
         private static readonly int Idle = Animator.StringToHash("Base Layer.Idle");
         private static readonly int Jog = Animator.StringToHash("Base Layer.Jog");
@@ -28,21 +27,22 @@ namespace Shiftbound
             animator = GetComponent<Animator>();
             animator.applyRootMotion = false;
             currentState = Idle;
-            wasGrounded = motor != null && motor.IsGrounded;
+            landingSequence = motor != null ? motor.LandingSequence : 0;
         }
 
         private void Update()
         {
             if (motor == null || animator.runtimeAnimatorController == null) return;
             bool grounded = motor.IsGrounded;
-            if (!grounded) airTime += Time.deltaTime;
-            if (grounded && !wasGrounded && airTime > 0.18f)
-                landingUntil = Time.time + landingDuration;
-            if (grounded) airTime = 0f;
-            wasGrounded = grounded;
+            if (motor.LandingSequence != landingSequence)
+            {
+                if (motor.LastLandingSpeed > 4f) landingUntil = Time.time + landingDuration;
+                landingSequence = motor.LandingSequence;
+            }
 
             float speed = new Vector2(motor.ActualVelocity.x, motor.ActualVelocity.z).magnitude;
-            int wanted = !grounded ? Jump : Time.time < landingUntil ? Land :
+            bool complete = GameFlow.Instance != null && GameFlow.Instance.IsComplete;
+            int wanted = complete ? Idle : !grounded ? Jump : Time.time < landingUntil ? Land :
                 speed >= sprintThreshold ? Sprint : speed >= jogThreshold ? Jog : Idle;
             if (wanted != currentState)
             {

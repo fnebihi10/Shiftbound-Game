@@ -18,6 +18,8 @@ public static class BuildArtPassV2
     [MenuItem("Shiftbound/Build City Rooftops V2")]
     public static void Build()
     {
+        if (AssetDatabase.LoadAssetAtPath<SceneAsset>(SourceScene) == null)
+            throw new InvalidOperationException("Historical V2 source is absent. Edit GoldenRooftops; do not regenerate authored work.");
         random = new System.Random(2046);
         if (!AssetDatabase.IsValidFolder(Materials))
             AssetDatabase.CreateFolder(Root, "MaterialsV2");

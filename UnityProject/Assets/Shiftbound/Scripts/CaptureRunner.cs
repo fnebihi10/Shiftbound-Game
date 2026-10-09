@@ -36,6 +36,12 @@ namespace Shiftbound
             var courier = GameObject.Find("Courier - rigged hoodie");
             if (courier != null)
             {
+                Animator motion = courier.GetComponent<Animator>();
+                Debug.Log("SHIFTBOUND POSE: root=" + courier.transform.position + " local=" + courier.transform.localPosition +
+                    " state=" + motion.GetCurrentAnimatorStateInfo(0).shortNameHash +
+                    " clips=" + string.Join(",", System.Array.ConvertAll(motion.GetCurrentAnimatorClipInfo(0), x => x.clip.name)) +
+                    " leftFoot=" + motion.GetBoneTransform(HumanBodyBones.LeftFoot).position +
+                    " rightFoot=" + motion.GetBoneTransform(HumanBodyBones.RightFoot).position);
                 var skins = courier.GetComponentsInChildren<SkinnedMeshRenderer>();
                 if (skins.Length > 0)
                 {

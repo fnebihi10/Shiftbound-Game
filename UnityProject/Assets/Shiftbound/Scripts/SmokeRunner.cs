@@ -40,6 +40,7 @@ namespace Shiftbound
             }
 
             player.Teleport(new Vector3(0f, 0.08f, 3f));
+            yield return new WaitForSecondsRealtime(world.switchDebounce + 0.02f);
             world.TrySwitch();
             if (!world.IsAltered)
             {
@@ -53,6 +54,7 @@ namespace Shiftbound
             }
 
             player.Teleport(new Vector3(0f, 3f, 18f));
+            yield return new WaitForSecondsRealtime(world.switchDebounce + 0.02f);
             world.TrySwitch();
             if (world.IsAltered)
             {

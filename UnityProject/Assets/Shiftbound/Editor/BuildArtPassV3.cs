@@ -20,6 +20,8 @@ public static class BuildArtPassV3
     [MenuItem("Shiftbound/Build Skyline Rooftops V3")]
     public static void Build()
     {
+        if (AssetDatabase.LoadAssetAtPath<SceneAsset>(SourceScene) == null)
+            throw new InvalidOperationException("Historical V3 source is absent. Edit GoldenRooftops; do not regenerate authored work.");
         random = new System.Random(2046);
         if (!AssetDatabase.IsValidFolder(Materials))
             AssetDatabase.CreateFolder(Root, "MaterialsV2");
@@ -557,6 +559,7 @@ public static class BuildArtPassV3
         // Select the named clip exactly so rebuilding cannot reintroduce the crouch.
         AnimationClip clip = AssetDatabase.LoadAllAssetsAtPath(animationPath)
             .OfType<AnimationClip>()
+            .Where(x => !x.name.StartsWith("__preview__", StringComparison.Ordinal))
             .FirstOrDefault(x => x.name == clipSuffix ||
                 x.name.EndsWith("|" + clipSuffix, StringComparison.Ordinal) ||
                 x.name.EndsWith("/" + clipSuffix, StringComparison.Ordinal));

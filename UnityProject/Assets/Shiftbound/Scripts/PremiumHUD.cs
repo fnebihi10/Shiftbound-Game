@@ -12,6 +12,8 @@ namespace Shiftbound
         private GUIStyle timer;
         private GUIStyle controls;
         private GUIStyle center;
+        private GUIStyle lessonTitle;
+        private GUIStyle lessonDetail;
         private Texture2D pillTexture;
         private Texture2D darkTexture;
         private bool gamepadPrompts;
@@ -48,6 +50,10 @@ namespace Shiftbound
             controls = Label(13, FontStyle.Bold, Color.white);
             center = Label(23, FontStyle.Bold, Color.white);
             center.alignment = TextAnchor.MiddleCenter;
+            lessonTitle = Label(20, FontStyle.Bold, new Color(0.67f, 0.90f, 0.86f));
+            lessonTitle.alignment = TextAnchor.MiddleCenter;
+            lessonDetail = Label(16, FontStyle.Bold, Color.white);
+            lessonDetail.alignment = TextAnchor.MiddleCenter;
         }
 
         private static GUIStyle Label(int fontSize, FontStyle fontStyle, Color color)
@@ -102,6 +108,26 @@ namespace Shiftbound
             GUI.Label(new Rect(pad + 14f, h - pad - 39f, 410f, 34f),
                 gamepadPrompts ? "LEFT STICK  MOVE     A  JUMP     X  SWITCH" :
                 "WASD  MOVE     SPACE  JUMP     SHIFT  SWITCH", controls);
+            if (flow.HasShiftBridgeGuidance)
+            {
+                float width = Mathf.Min(580f, w - pad * 2f);
+                float left = (w - width) / 2f;
+                GUI.Box(new Rect(left, 106f, width, 86f), GUIContent.none, pill);
+                GUI.Label(new Rect(left + 10f, 112f, width - 20f, 30f),
+                    worlds.IsAltered ? "BRIDGE SOLID — CROSS IN OVERGROWN" :
+                    gamepadPrompts ? "PRESS X TO MAKE THE BRIDGE SOLID" :
+                    "PRESS SHIFT TO MAKE THE BRIDGE SOLID", lessonTitle);
+                GUI.Label(new Rect(left + 10f, 145f, width - 20f, 37f),
+                    worlds.IsAltered
+                        ? (gamepadPrompts ? "Move forward and hold A to jump across." :
+                            "Move forward and hold SPACE to jump across.")
+                        : "Blue previews cannot support you. Switch before jumping.", lessonDetail);
+            }
+            else if (flow.IsPlaying && !string.IsNullOrEmpty(flow.CheckpointHint))
+            {
+                GUI.Box(new Rect(pad, h - pad - 112f, 530f, 60f), GUIContent.none, pill);
+                GUI.Label(new Rect(pad + 14f, h - pad - 108f, 505f, 52f), flow.CheckpointHint, controls);
+            }
 
             if (!string.IsNullOrEmpty(flow.ActiveNotice))
             {
