@@ -11,7 +11,7 @@
     "version":  "0.3.0",
     "versionCode":  3,
     "compilation":  "PASS: motion authoring, Android and matching Windows builds; final source correspondence",
-    "installUpdate":  "NOT INSTALLED: Samsung disconnected after build; same-key update ready",
+    "installUpdate":  "PASS: same-key install-r preserves app data; installed APK SHA256 matches; ordinary MAIN/LAUNCHER launch, no gameplay automation",
     "deviceVisualAndGameplay":  "NOT VERIFIED: owner stopped tests",
     "artifactCompatibility":  "NOT VERIFIED on24; known22 vendor RELRO failures remain unresolved"
 }
