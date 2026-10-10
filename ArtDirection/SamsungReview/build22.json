@@ -1,0 +1,13 @@
+﻿{
+    "build":  "AndroidIteration22",
+    "baseRevision":  "324f3c3bd8e9a251a7d8939845513cc6e7f61d9a",
+    "sourceFingerprint":  "7570ed4de927989ec13df9e5fa0dddaa7b56642400ab603eb692ce0e3389821e",
+    "unity":  "6000.3.25f1",
+    "scene":  "Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+    "createdUtc":  "2026-10-10T19:36:32.3429848Z",
+    "signing":  "debug-QA",
+    "apkSha256":  "413968df149f7ee4b2a337e5d11c30ffdc77ff345a48e6d32898073ea95f0e1c",
+    "package":  "com.shiftboundproject.shiftbound",
+    "version":  "0.3.0",
+    "versionCode":  3
+}

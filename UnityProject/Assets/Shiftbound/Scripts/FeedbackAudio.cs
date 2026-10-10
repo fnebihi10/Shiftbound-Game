@@ -24,6 +24,7 @@ namespace Shiftbound
         private int stepIndex;
         private AudioSource presentLoop;
         private AudioSource overgrownLoop;
+        public void ResetForRun(){source?.Stop();steps?.Stop();}
 
         private void Awake()
         {

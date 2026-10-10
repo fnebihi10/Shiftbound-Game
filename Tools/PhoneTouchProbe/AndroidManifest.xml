@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.shiftboundproject.shiftbound.qa">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="36" />
+  <application android:label="Shiftbound USB touch probe" android:debuggable="true" />
+  <instrumentation android:name="com.shiftboundproject.shiftbound.qa.PhoneTouchProbe" android:targetPackage="com.shiftboundproject.shiftbound.qa" android:functionalTest="true" />
+</manifest>

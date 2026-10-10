@@ -10,8 +10,10 @@ $artifactRoot=[IO.Path]::GetFullPath($Output)
 $archive=[IO.Compression.ZipFile]::OpenRead((Resolve-Path -LiteralPath $Apk).Path)
 $nativeResults=@()
 try {
- foreach($entry in $archive.Entries | Where-Object {$_.FullName -match '^lib/arm64-v8a/[^/]+\.so$'}) {
-  $nativePath=Join-Path $artifactRoot $entry.Name
+ foreach($entry in $archive.Entries | Where-Object {$_.FullName -match '^lib/[^/]+/[^/]+\.so$'}) {
+  $abi=($entry.FullName -split '/')[1]
+  $abiRoot=Join-Path $artifactRoot $abi;[void][IO.Directory]::CreateDirectory($abiRoot)
+  $nativePath=Join-Path $abiRoot $entry.Name
   [IO.Compression.ZipFileExtensions]::ExtractToFile($entry,$nativePath,$true)
   $headers=@(& "$AndroidTools/NDK/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-readelf.exe" -lW $nativePath)
   if($LASTEXITCODE -ne 0){throw "Cannot inspect $($entry.Name)"}
@@ -24,7 +26,7 @@ try {
    ($start+$size)%16384 -eq 0
   })
   $pass=$loadAlign.Count -gt 0 -and @($loadAlign | Where-Object {$_ -lt 16384}).Count -eq 0 -and @($relro | Where-Object {-not $_}).Count -eq 0
-  $nativeResults+=[ordered]@{library=$entry.Name;sha256=(Get-FileHash $nativePath -Algorithm SHA256).Hash.ToLowerInvariant();load_alignments=$loadAlign;relro_end_aligned=$relro;static_16kb_pass=$pass}
+  $nativeResults+=[ordered]@{abi=$abi;library=$entry.Name;sha256=(Get-FileHash $nativePath -Algorithm SHA256).Hash.ToLowerInvariant();load_alignments=$loadAlign;relro_end_aligned=$relro;static_16kb_pass=$pass}
  }
 } finally {$archive.Dispose()}
 $alignment=@(& "$AndroidTools/SDK/build-tools/36.0.0/zipalign.exe" -c -P 16 -v 4 $Apk)
@@ -38,6 +40,6 @@ $manifest=@(& "$AndroidTools/SDK/build-tools/36.0.0/aapt.exe" dump badging $Apk)
 $permissions=@(& "$AndroidTools/SDK/build-tools/36.0.0/aapt.exe" dump permissions $Apk)
 $manifest | Set-Content -LiteralPath (Join-Path $artifactRoot 'badging.txt')
 $permissions | Set-Content -LiteralPath (Join-Path $artifactRoot 'permissions.txt')
-[ordered]@{apk_sha256=(Get-FileHash $Apk -Algorithm SHA256).Hash.ToLowerInvariant();native=$nativeResults;zipalign_pass=$alignmentPass;signature_pass=$signaturePass;runtime_16kb='NOT VERIFIED: physical 16KB device required';install_update='NOT VERIFIED: no connected phone'} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $artifactRoot 'inspection.json')
+[ordered]@{apk_sha256=(Get-FileHash $Apk -Algorithm SHA256).Hash.ToLowerInvariant();native=$nativeResults;zipalign_pass=$alignmentPass;signature_pass=$signaturePass;runtime_16kb='NOT VERIFIED: supported 16KB device/emulator run recorded separately';install_update='NOT VERIFIED: no connected phone'} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $artifactRoot 'inspection.json')
 if(-not $alignmentPass -or -not $signaturePass -or $nativeResults.Count -eq 0 -or @($nativeResults | Where-Object {-not $_.static_16kb_pass}).Count -gt 0){throw 'Android static artifact check failed; inspect inspection.json.'}
 Write-Output "ANDROID STATIC ARTIFACT CHECKS PASSED: $Apk. Runtime/device compatibility remains separate."

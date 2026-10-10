@@ -1,0 +1,32 @@
+﻿Log: milestone1-final-regression.log
+SHIFTBOUND KEYBOARD SHIFT PASSED: left/right Shift with W+Space; real checkpoint support; normal WorldSwitcher.Update; one toggle per press.
+SHIFTBOUND REGRESSION PASSED: motor cases at 30/60/120/144 Hz and variable dt; Shift timing; checkpoint trigger and recovery. Run route regression for goal traversal.
+Log: milestone1-final-smoke.log
+SHIFTBOUND SMOKE PASSED: blocked shift, safe ground shift, midair shift, material slots, jumps at 30/60/120/144 steps, checkpoint respawn, goal.
+Log: milestone1-final-reach.log
+Log: candidate-phone-regression.log
+SHIFTBOUND PHONE REGRESSION PASSED: synthetic Touchscreen events through production touch/input/motor/camera; simultaneous actions, UI ownership, cancellation, suspend/resume/retry. Physical Android gate remains open.
+Log: retry-regression22.log
+SHIFTBOUND RETRY CYCLE PASSED: 0 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY CYCLE PASSED: 1 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY CYCLE PASSED: 2 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY CYCLE PASSED: 3 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY REGRESSION PASSED
+Log: milestone1-final-route-30.log
+SHIFTBOUND FULL ROUTE PASSED: rate=30 frames=344 input=direct Step actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-final-route-60.log
+SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=705 input=direct Step actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-final-route-120.log
+SHIFTBOUND FULL ROUTE PASSED: rate=120 frames=1424 input=direct Step actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-final-route-144.log
+SHIFTBOUND FULL ROUTE PASSED: rate=144 frames=1702 input=direct Step actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-final-route-0.log
+SHIFTBOUND FULL ROUTE PASSED: rate=0 frames=720 input=direct Step actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-production-route-30.log
+SHIFTBOUND FULL ROUTE PASSED: rate=30 frames=339 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-production-route-60.log
+SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=696 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-production-route-120.log
+SHIFTBOUND FULL ROUTE PASSED: rate=120 frames=1398 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.
+Log: milestone1-production-route-144.log
+SHIFTBOUND FULL ROUTE PASSED: rate=144 frames=1683 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.

@@ -5,6 +5,7 @@ using System.IO;
 using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 namespace Shiftbound
 {
@@ -28,10 +29,16 @@ namespace Shiftbound
         private bool collecting, useTiming = true;
         private int shiftMarker;
         private WorldSwitcher worlds;
+        readonly List<string> warnings=new List<string>();
         public bool Collecting => collecting;
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-        private static void Install()
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void Register()
+        {
+            SceneManager.sceneLoaded-=Install;
+            SceneManager.sceneLoaded+=Install;
+        }
+        private static void Install(Scene scene,LoadSceneMode mode)
         {
             string[] args = Environment.GetCommandLineArgs();
             int i = Array.IndexOf(args, "-shiftboundGameplayProfile");
@@ -45,7 +52,9 @@ namespace Shiftbound
             QualitySettings.vSyncCount = sync >= 0 ? 1 : 0;
             if (Array.IndexOf(args, "-shiftboundNoPost") >= 0 && Camera.main != null)
                 Camera.main.GetUniversalAdditionalCameraData().renderPostProcessing = false;
-            probe.Begin(args[i + 1]);
+            bool repeating=Array.IndexOf(args,"-shiftboundRepeatRoute")>=0;
+            if(repeating)probe.duration=0;
+            probe.Begin(repeating?Path.Combine(args[i+1],"route-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss-fff")):args[i + 1]);
         }
 
         public void Begin(string path = null)
@@ -60,7 +69,13 @@ namespace Shiftbound
             worlds = FindFirstObjectByType<WorldSwitcher>();
             if (worlds != null) worlds.ShiftAttempted += MarkShift;
             collecting = true;
+            Application.logMessageReceived+=RecordWarning;
             Debug.Log("SHIFTBOUND GAMEPLAY PROFILE START: " + destination);
+        }
+        void RecordWarning(string message,string trace,LogType type)
+        {
+            if(type==LogType.Warning||type==LogType.Error||message.Contains("GfxDeviceD3D11Base::PresentFrame"))
+                warnings.Add((Time.realtimeSinceStartupAsDouble-started).ToString("F6",CultureInfo.InvariantCulture)+","+Time.frameCount+",\""+message.Replace("\"","\"\"").Replace("\n"," ").Replace("\r"," ")+"\"");
         }
         private void MarkShift(WorldSwitcher.ShiftResult result) { shiftMarker = (int)result + 1; }
         private void LateUpdate()
@@ -89,9 +104,11 @@ namespace Shiftbound
         {
             if (!collecting) return;
             collecting = false;
+            Application.logMessageReceived-=RecordWarning;
             if (worlds != null) worlds.ShiftAttempted -= MarkShift;
             draws.Dispose(); triangles.Dispose(); gc.Dispose(); memory.Dispose();
             Directory.CreateDirectory(destination);
+            warnings.Insert(0,"elapsed_s,frame,message");File.WriteAllLines(Path.Combine(destination,"warnings.csv"),warnings);
             using (var csv = new StreamWriter(Path.Combine(destination, "gameplay.csv")))
             {
                 csv.WriteLine("elapsed_s,callback_ms,cpu_ms,main_ms,render_ms,gpu_ms,draws,triangles,gc_bytes,memory_bytes,shift_result,input_event_to_motor_ms");

@@ -24,6 +24,9 @@
 *.log
 .DS_Store
 Thumbs.db
+__pycache__/
+*.pyc
+*.blend1
 /.validation/
 UnityProject/Assets/Shiftbound/Resources/CandidateIdentity.json
 UnityProject/Assets/Shiftbound/Resources/CandidateIdentity.json.meta

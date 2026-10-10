@@ -1,0 +1,60 @@
+﻿{
+  "duration_s": 222.578,
+  "sustained_status": "NOT VERIFIED",
+  "intervals": 12918,
+  "p50_ms": 16.9234,
+  "p95_ms": 17.0025,
+  "p99_ms": 33.8615,
+  "max_ms": 35.396249,
+  "over_100ms": 0,
+  "estimated_missed_slot_fraction": 0.02667269439421338,
+  "pss_mb_range": [
+    398.7041015625,
+    409.2998046875
+  ],
+  "battery_c_range": [
+    35.7,
+    38.8
+  ],
+  "max_thermal_status": 1,
+  "sampling_gaps": 0,
+  "polls_without_new_frames": 0,
+  "errors": 0,
+  "conditions": "USB connected/charging; automated repeated complete route; no video/readback; 1 s ADB presentation sampling and 30 s mem/thermal sampling. Synthetic input is not physical responsiveness.",
+  "route_completions": 8,
+  "workload_verified": false,
+  "minutes": [
+    {
+      "minute": 1,
+      "intervals": 3564,
+      "p50_ms": 16.9148,
+      "p95_ms": 16.9855,
+      "p99_ms": 33.8334,
+      "over_50ms": 0
+    },
+    {
+      "minute": 2,
+      "intervals": 3415,
+      "p50_ms": 16.9205,
+      "p95_ms": 17.0131,
+      "p99_ms": 33.8529,
+      "over_50ms": 0
+    },
+    {
+      "minute": 3,
+      "intervals": 3424,
+      "p50_ms": 16.9273,
+      "p95_ms": 17.0251,
+      "p99_ms": 33.8738,
+      "over_50ms": 0
+    },
+    {
+      "minute": 4,
+      "intervals": 2515,
+      "p50_ms": 16.9321,
+      "p95_ms": 16.9967,
+      "p99_ms": 33.8752,
+      "over_50ms": 0
+    }
+  ]
+}

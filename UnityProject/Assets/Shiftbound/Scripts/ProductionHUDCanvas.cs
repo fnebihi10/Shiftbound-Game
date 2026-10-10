@@ -15,6 +15,7 @@ namespace Shiftbound
         readonly Text[] rows=new Text[11];
         readonly Image[] tracks=new Image[5],fills=new Image[5];
         float feedbackUntil,lessonUntil; bool learnedAir,bridgeSeen;
+        int restartSequence;
         WorldSwitcher.ShiftResult result;
         readonly Color amber=new Color(1,.73f,.29f),cyan=new Color(.48f,.89f,.85f);
         void Start()
@@ -22,8 +23,8 @@ namespace Shiftbound
             phone=GetComponent<PhoneControls>();font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             disc=Shape(0);ring=Shape(1);rounded=Shape(2);
             var root=new GameObject("Shiftbound interface",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler));
-            root.transform.SetParent(transform,false);canvas=root.GetComponent<Canvas>();
-            canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=Camera.main;canvas.planeDistance=.4f;canvas.sortingOrder=100;
+            root.transform.SetParent(transform,false);root.layer=5;canvas=root.GetComponent<Canvas>();
+            canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=100;
             scaler=root.GetComponent<CanvasScaler>();scaler.uiScaleMode=CanvasScaler.ScaleMode.ConstantPixelSize;
             safe=Area(root.transform,"Safe area",new Rect(0,0,phone.Width,720));
             var box=Box(safe,"World",new Rect(20,20,210,61));
@@ -65,6 +66,8 @@ namespace Shiftbound
         {
             if(canvas==null || GameFlow.Instance==null)return;
             var flow=GameFlow.Instance;phone.Layout();scaler.scaleFactor=phone.Scale;
+            if(restartSequence!=flow.RestartSequence)
+            {restartSequence=flow.RestartSequence;learnedAir=bridgeSeen=false;lessonUntil=feedbackUntil=0;}
             Place(safe,new Rect(Screen.safeArea.x/phone.Scale,(Screen.height-Screen.safeArea.yMax)/phone.Scale,phone.Width,720));
             worldText.text=flow.worlds.IsAltered?"OVERGROWN":"PRESENT";
             Color worldColor=flow.worlds.IsAltered?cyan:amber;worldText.color=worldColor;
@@ -106,7 +109,7 @@ namespace Shiftbound
             string[] text={flow.IsComplete?"YOUR TIME   "+PremiumHUD.FormatTime(flow.Elapsed):"RESUME RUN",flow.IsComplete?"RUN AGAIN":"RESTART FROM BEGINNING",
                 "Control size","Horizontal inset","Control height","Camera sensitivity","Volume", "Camera follow   "+(PlayerPreferences.CameraAssist?"ON":"OFF"),
                 "Invert vertical   "+(PlayerPreferences.InvertY?"ON":"OFF"),PlayerPreferences.LowPower?"Battery mode   30 FPS":"Smooth mode   60 FPS","QA frame recording"};
-            float[] values={Mathf.InverseLerp(.8f,1.35f,PlayerPreferences.ControlScale),PlayerPreferences.ControlInset/90,PlayerPreferences.ControlHeight/100,Mathf.InverseLerp(.3f,2.5f,PlayerPreferences.TouchSensitivity),PlayerPreferences.Volume};
+            float[] values={Mathf.InverseLerp(.8f,1.35f,PlayerPreferences.ControlScale),PlayerPreferences.ControlInset/90,PlayerPreferences.ControlHeight/100,Mathf.InverseLerp(.3f,2.5f,phone.Visible?PlayerPreferences.TouchSensitivity:PlayerPreferences.MouseSensitivity),PlayerPreferences.Volume};
             for(int row=0;row<11;row++)
             {
                 rows[row].transform.parent.gameObject.SetActive(flow.IsComplete?row<4:row<10||phone.ShowDiagnostics);Place((RectTransform)rows[row].transform.parent,phone.MenuRect(row));
@@ -129,7 +132,7 @@ namespace Shiftbound
             }
             t.Apply();return Sprite.Create(t,new Rect(0,0,n,n),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,kind==2?new Vector4(9,9,9,9):Vector4.zero);
         }
-        static RectTransform Area(Transform parent,string name,Rect area){var o=new GameObject(name,typeof(RectTransform));o.transform.SetParent(parent,false);var r=o.GetComponent<RectTransform>();Place(r,area);return r;}
+        static RectTransform Area(Transform parent,string name,Rect area){var o=new GameObject(name,typeof(RectTransform));o.layer=parent.gameObject.layer;o.transform.SetParent(parent,false);var r=o.GetComponent<RectTransform>();Place(r,area);return r;}
         static void Place(RectTransform r,Rect a){r.anchorMin=r.anchorMax=new Vector2(0,1);r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(a.x,-a.y);r.sizeDelta=a.size;}
         Image Box(Transform p,string n,Rect a){var i=Area(p,n,a).gameObject.AddComponent<Image>();i.sprite=rounded;i.type=Image.Type.Sliced;i.color=new Color(.035f,.066f,.084f,.83f);i.raycastTarget=false;return i;}
         Image Disc(Transform p,string n,Rect a,bool stroke){var i=Box(p,n,a);i.type=Image.Type.Simple;i.sprite=stroke?ring:disc;i.color=new Color(.85f,.94f,.94f,.38f);return i;}

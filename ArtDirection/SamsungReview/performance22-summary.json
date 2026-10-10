@@ -1,0 +1,24 @@
+{
+  "measured_seconds": 223.578,
+  "observed_frames": 12919,
+  "interval_count": 12918,
+  "route_completions": 8,
+  "workload_verified": false,
+  "planned_seconds": 1200,
+  "completed_duration": false,
+  "stopped_by_request": true,
+  "refresh_ns": 16666666.0,
+  "display_interval_ms": {
+    "p50": 16.923386,
+    "p95": 17.0024558,
+    "p99": 33.86152664,
+    "max": 35.396249
+  },
+  "estimated_missed_target_slots": 354,
+  "missed_slot_fraction": 0.02667269439421338,
+  "intervals_over_50ms": 0,
+  "intervals_over_100ms": 0,
+  "sampling_gaps": 0,
+  "adb_errors": 0,
+  "limitation": "Observed display intervals only. Estimated missed slots are not FrameTimeline deadline attribution. Sampling gaps are excluded from interval statistics; coverage must be reviewed. USB charging and automated input must accompany conclusions."
+}

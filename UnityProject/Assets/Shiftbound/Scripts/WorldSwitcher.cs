@@ -33,6 +33,10 @@ namespace Shiftbound
 
         public bool IsAltered => activeWorld == 1;
         public bool IsReady => Time.unscaledTime >= nextSwitch;
+        public void ResetForRun()
+        {
+            activeWorld=0;nextSwitch=0;rejectionFlash=0;Apply();
+        }
 
         private void Awake()
         {

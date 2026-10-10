@@ -41,11 +41,11 @@ namespace Shiftbound
                     Texture2D frame;
                     if(Application.isBatchMode)
                     {
-                        // Render the shipping camera and camera-space Canvas;
-                        // hidden batch players do not present a backbuffer.
+                        // Hidden batch players do not present a backbuffer.
+                        // Composite the shipped scene and native overlay Canvas.
                         var camera=Camera.main; var target=new RenderTexture(Screen.width,Screen.height,24);
                         var oldTarget=camera.targetTexture; var oldActive=RenderTexture.active;
-                        Canvas.ForceUpdateCanvases(); camera.targetTexture=target; camera.Render(); RenderTexture.active=target;
+                        GameplayFrameCapture.Render(camera,target);RenderTexture.active=target;
                         frame=new Texture2D(Screen.width,Screen.height,TextureFormat.RGB24,false);
                         frame.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0); frame.Apply();
                         camera.targetTexture=oldTarget; RenderTexture.active=oldActive; Destroy(target);

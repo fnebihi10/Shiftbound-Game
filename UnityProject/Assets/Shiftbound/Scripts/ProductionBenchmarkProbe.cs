@@ -76,7 +76,7 @@ namespace Shiftbound
                         yield return new WaitForSecondsRealtime(3f);
                         collect = false;
                     }
-                    else Capture(phase);
+                    else yield return Capture(phase);
                 }
                 if (!profile)
                 {
@@ -84,13 +84,13 @@ namespace Shiftbound
                     {
                         follow.SetInspectionOrbit(0f, pitch);
                         yield return new WaitForSecondsRealtime(0.5f);
-                        Capture((world == 0 ? "present" : "overgrown") + "-pitch-" + pitch);
+                        yield return Capture((world == 0 ? "present" : "overgrown") + "-pitch-" + pitch);
                     }
                     motor.Teleport(new Vector3(0f, 0.08f, 10f));
                     motor.Step(1f / 60f, Vector2.zero, false, false);
                     follow.SetInspectionOrbit(0f, 18f);
                     yield return new WaitForSecondsRealtime(0.5f);
-                    Capture((world == 0 ? "present" : "overgrown") + "-first-lesson");
+                    yield return Capture((world == 0 ? "present" : "overgrown") + "-first-lesson");
                     motor.Teleport(new Vector3(0f, 0.08f, 1f));
                     motor.Step(1f / 60f, Vector2.zero, false, false);
                 }
@@ -111,7 +111,12 @@ namespace Shiftbound
                     "\nProtocol=stationary start roof; four orbits per world; 1.5s settle then 3s sample; no readbacks\n");
                 Debug.Log("SHIFTBOUND RENDER PROFILE COMPLETE: rows=" + (samples.Count - 1));
             }
-            else Debug.Log("SHIFTBOUND BENCHMARK CAPTURES COMPLETE: " + destination);
+            else
+            {
+                // The capture API writes asynchronously after the normal frame.
+                yield return new WaitForSecondsRealtime(1f);
+                Debug.Log("SHIFTBOUND BENCHMARK CAPTURES COMPLETE: " + destination);
+            }
             Application.Quit(0);
         }
 
@@ -132,27 +137,18 @@ namespace Shiftbound
         private static string Number(double value) => value.ToString("F5", CultureInfo.InvariantCulture);
         private static string Count(ProfilerRecorder recorder) => recorder.Valid ? recorder.LastValue.ToString(CultureInfo.InvariantCulture) : "unavailable";
 
-        private void Capture(string name)
+        private IEnumerator Capture(string name)
         {
-            Camera camera = Camera.main;
-            var render = new RenderTexture(Screen.width, Screen.height, 24);
-            RenderTexture oldTarget = camera.targetTexture, oldActive = RenderTexture.active;
-            var image = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-            try
-            {
-                camera.targetTexture = render;
-                RenderTexture.active = render;
-                camera.Render();
-                image.ReadPixels(new Rect(0, 0, render.width, render.height), 0, 0);
-                image.Apply();
-                File.WriteAllBytes(Path.Combine(destination, name + ".png"), image.EncodeToPNG());
-            }
-            finally
-            {
-                camera.targetTexture = oldTarget;
-                RenderTexture.active = oldActive;
-                Destroy(render); Destroy(image);
-            }
+            // Capture the normal presented frame, including native overlay HUD.
+            // A second StandardRequest camera stack crashed Windows RenderGraph
+            // and also bypassed the actual mobile scaling path.
+            // Keep the pose unchanged until the rendered frame is available;
+            // asynchronous filename requests captured the NEXT inspection orbit.
+            yield return new WaitForEndOfFrame();
+            var image=ScreenCapture.CaptureScreenshotAsTexture();
+            if(image==null)throw new InvalidOperationException("No presented screenshot; run capture in a visible player, without batchmode");
+            File.WriteAllBytes(Path.Combine(destination,name+".png"),image.EncodeToPNG());
+            Destroy(image);
         }
 
         private void OnDestroy()

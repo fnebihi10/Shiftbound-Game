@@ -34,6 +34,7 @@ namespace Shiftbound
         public event System.Action<float> Landed;
         public float LastLandingSpeed { get; private set; }
         public int LandingSequence { get; private set; }
+        public int TakeoffSequence { get; private set; }
         // Support may bridge the controller's contact skin, never an extra radius.
         public float SupportTolerance => Mathf.Min(groundProbeDistance, controller.skinWidth + 0.02f);
 
@@ -81,6 +82,7 @@ namespace Shiftbound
             bool tookOff = jumpIntent.TryConsume(out bool held);
             if (tookOff)
             {
+                TakeoffSequence++;
                 verticalVelocity = Mathf.Sqrt(2f * gravity * jumpHeight) *
                     (held ? 1f : releasedJumpMultiplier);
                 IsGrounded = false;

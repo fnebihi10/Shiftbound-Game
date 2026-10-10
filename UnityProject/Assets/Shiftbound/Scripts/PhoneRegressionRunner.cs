@@ -86,7 +86,33 @@ namespace Shiftbound
                 "two-thumb slide Shift preserves held Jump and movement")) yield break;
             Send(9, TouchPhase.Ended, phone.Router.Stick.center);
             Send(8, TouchPhase.Ended, phone.Router.Jump.center);
-            yield return null;
+            yield return null;yield return null;yield return null;
+            flow.TogglePause();yield return null;yield return null;
+            int saves=PlayerPreferences.SaveCount;float oldSize=PlayerPreferences.ControlScale,oldInset=PlayerPreferences.ControlInset;
+            // A stationary text contact owns the menu. A second contact must
+            // neither acquire a slider nor trigger repeated preference writes.
+            Vector2 textPoint=new Vector2(phone.MenuRect(2).x+25,phone.MenuRect(2).center.y);
+            Send(20,TouchPhase.Began,textPoint);yield return null;
+            Send(21,TouchPhase.Began,new Vector2(phone.MenuRect(3).xMax-10,phone.MenuRect(3).center.y));
+            for(int i=0;i<75;i++)yield return null;
+            if(!Check(PlayerPreferences.ControlScale==oldSize&&PlayerPreferences.ControlInset==oldInset&&PlayerPreferences.SaveCount==saves,
+                "stationary menu and secondary contact cause zero preference writes"))yield break;
+            Send(20,TouchPhase.Ended,textPoint);Send(21,TouchPhase.Ended,phone.MenuRect(3).center);
+            yield return null;yield return null;
+            Vector2 track=new Vector2(phone.MenuRect(2).x+375,phone.MenuRect(2).center.y);
+            Send(22,TouchPhase.Began,track);yield return null;yield return null;
+            for(int i=0;i<60;i++)yield return null;
+            if(!Check(PlayerPreferences.ControlScale!=oldSize&&PlayerPreferences.SaveCount==saves,"slider adjusts without per-frame disk writes"))yield break;
+            Send(22,TouchPhase.Canceled,track);yield return null;yield return null;
+            if(!Check(PlayerPreferences.SaveCount==saves+1,"cancelled owned slider commits once"))yield break;
+            phone.Cancel();PlayerPreferences.Save();
+            if(!Check(PlayerPreferences.SaveCount==saves+1,"unchanged interruption persistence is idempotent"))yield break;
+            PlayerPreferences.ControlScale=oldSize;PlayerPreferences.ControlInset=oldInset;PlayerPreferences.Save();
+            flow.Complete();yield return null;yield return null;yield return null;
+            saves=PlayerPreferences.SaveCount;
+            Send(23,TouchPhase.Began,track);for(int i=0;i<20;i++)yield return null;
+            Send(23,TouchPhase.Ended,track);yield return null;yield return null;
+            if(!Check(PlayerPreferences.ControlScale==oldSize&&PlayerPreferences.SaveCount==saves,"completion message rows cannot change settings"))yield break;
             Debug.Log("SHIFTBOUND PHONE REGRESSION PASSED: synthetic Touchscreen events through production touch/input/motor/camera; simultaneous actions, UI ownership, cancellation, suspend/resume/retry. Physical Android gate remains open.");
             InputSystem.RemoveDevice(screen); screen = null;
             Application.Quit(0);

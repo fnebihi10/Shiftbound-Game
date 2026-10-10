@@ -36,8 +36,8 @@ public static class AndroidDelivery
     public static void Configure()
     {
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "com.shiftboundproject.shiftbound");
-        PlayerSettings.bundleVersion = "0.2.0";
-        PlayerSettings.Android.bundleVersionCode = 2;
+        PlayerSettings.bundleVersion = "0.3.0";
+        PlayerSettings.Android.bundleVersionCode = 3;
         PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel26;
         PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)36;
         PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
@@ -64,7 +64,8 @@ public static class AndroidDelivery
 
     public static void BuildApk() => Build(false);
     public static void BuildBundle() => Build(true);
-    private static void Build(bool bundle)
+    public static void BuildEmulatorApk() => Build(false,true);
+    private static void Build(bool bundle,bool emulator=false)
     {
         Configure();
         SliceDelivery.ValidateScene();
@@ -75,10 +76,17 @@ public static class AndroidDelivery
         Directory.CreateDirectory(dir);
         EditorUserBuildSettings.buildAppBundle = bundle;
         bool release = Environment.GetEnvironmentVariable("SHIFTBOUND_RELEASE_SIGNING") == "1";
-        CandidateProvenance.Manifest identity = CandidateProvenance.Begin("Android", release ? "external-release" : "debug-QA");
+        if(emulator&&release)throw new Exception("Emulator diagnostic must use debug QA signing");
+        CandidateProvenance.Manifest identity = CandidateProvenance.Begin(emulator?"Android-x86_64-16KB-diagnostic":"Android", release ? "external-release" : "debug-QA");
         string builtOutput = null;
+        string originalIl2CppArgs=PlayerSettings.GetAdditionalIl2CppArgs();
         try
         {
+            PlayerSettings.SetAdditionalIl2CppArgs(originalIl2CppArgs+" --linker-flags=\"-Wl,-z,max-page-size=16384 -Wl,-z,common-page-size=16384\"");
+            // A separate, explicitly labelled diagnostic for Google's Windows
+            // x86_64 16 KB image. Primary artifacts and authored settings stay
+            // ARM64. The manifest records this build-method override.
+            if(emulator)PlayerSettings.Android.targetArchitectures=AndroidArchitecture.X86_64;
             if (release)
             {
                 PlayerSettings.Android.keystoreName = Required("SHIFTBOUND_KEYSTORE");
@@ -90,7 +98,7 @@ public static class AndroidDelivery
             BuildReport report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
                 scenes = new[] { Scene }, target = BuildTarget.Android,
-                locationPathName = Path.Combine(dir, bundle ? "Shiftbound-QA.aab" : "Shiftbound-QA.apk"),
+                locationPathName = Path.Combine(dir, emulator?"Shiftbound-16KB-x86-QA.apk":bundle ? "Shiftbound-QA.aab" : "Shiftbound-QA.apk"),
                 options = BuildOptions.None
             });
             if (report.summary.result != BuildResult.Succeeded)
@@ -99,6 +107,8 @@ public static class AndroidDelivery
         }
         finally
         {
+            PlayerSettings.SetAdditionalIl2CppArgs(originalIl2CppArgs);
+            PlayerSettings.Android.targetArchitectures=AndroidArchitecture.ARM64;
             PlayerSettings.Android.keystorePass = "";
             PlayerSettings.Android.keyaliasPass = "";
             PlayerSettings.Android.keystoreName = "";

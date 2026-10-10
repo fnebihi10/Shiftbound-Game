@@ -18,6 +18,8 @@ namespace Shiftbound
         private float landingUntil;
         private bool wasGrounded;
         private float takeoffUntil;
+        private float walkCycle, jogCycle, sprintCycle;
+        private int takeoffSequence;
         private static readonly int Walk = Animator.StringToHash("Base Layer.Walk");
         private static readonly int Takeoff = Animator.StringToHash("Base Layer.Takeoff");
         private static readonly int Fall = Animator.StringToHash("Base Layer.Fall");
@@ -33,6 +35,16 @@ namespace Shiftbound
             animator.applyRootMotion = false;
             currentState = Idle;
             landingSequence = motor != null ? motor.LandingSequence : 0;
+            takeoffSequence = motor != null ? motor.TakeoffSequence : 0;
+            foreach (var clip in animator.runtimeAnimatorController.animationClips)
+            {
+                if (clip.name.Contains("Walk")) walkCycle = clip.length;
+                if (clip.name.Contains("Jog")) jogCycle = clip.length;
+                if (clip.name.Contains("Sprint") || clip.name.Contains("Run")) sprintCycle = clip.length;
+            }
+            if (walkCycle <= 0) walkCycle = .8f;
+            if (jogCycle <= 0) jogCycle = .7f;
+            if (sprintCycle <= 0) sprintCycle = .65f;
         }
 
         private void Update()
@@ -40,7 +52,14 @@ namespace Shiftbound
             if (motor == null || animator.runtimeAnimatorController == null) return;
             bool grounded = motor.IsGrounded;
             if (grounded && !wasGrounded) takeoffUntil = 0f;
-            if (!grounded && wasGrounded && motor.VerticalVelocity > 0f) takeoffUntil = Time.time + .09f;
+            // A buffered jump can launch on the same motor step as contact.
+            // Use the actual launch event rather than missing that transition.
+            if (motor.TakeoffSequence != takeoffSequence)
+            {
+                takeoffSequence = motor.TakeoffSequence;
+                takeoffUntil = Time.time + .075f;
+                landingUntil = 0f;
+            }
             wasGrounded = grounded;
             if (motor.LandingSequence != landingSequence)
             {
@@ -63,13 +82,18 @@ namespace Shiftbound
                     float phase = Mathf.Repeat(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f);
                     animator.CrossFade(wanted, transitionDuration, 0, phase);
                 }
-                else animator.CrossFadeInFixedTime(wanted, transitionDuration, 0,
-                    wanted == Takeoff ? .65f : wanted == Fall ? .8f : 0f);
+                else animator.CrossFadeInFixedTime(wanted,
+                    wanted == Takeoff ? .025f : wanted == Fall ? .10f :
+                    wanted == Land ? .045f : transitionDuration, 0, 0f);
                 currentState = wanted;
             }
-            animator.speed = wanted == Walk ? Mathf.Clamp(speed / 1.5f, .3f, 1.4f) :
-                wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :
-                wanted == Sprint ? Mathf.Clamp(speed / 4.8f, 0.7f, 1.9f) : 1f;
+            // Distance travelled per authored two-contact cycle, rather than
+            // an arbitrary nominal speed which changes with the clip length.
+            // Runtime avatar foot samples: stance travel per normalized cycle
+            // is about1.42m in Walk and5.2m in these running source clips.
+            animator.speed = wanted == Walk ? Mathf.Clamp(speed * walkCycle / 1.42f, .15f, 2f) :
+                wanted == Jog ? Mathf.Clamp(speed * jogCycle / 5.2f, .2f, 2f) :
+                wanted == Sprint ? Mathf.Clamp(speed * sprintCycle / 5.2f, .3f, 2.3f) : 1f;
         }
     }
 }

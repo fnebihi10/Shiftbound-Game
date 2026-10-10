@@ -1,0 +1,17 @@
+﻿{
+    "build":  "AndroidIteration24",
+    "baseRevision":  "324f3c3bd8e9a251a7d8939845513cc6e7f61d9a",
+    "sourceFingerprint":  "cf11270615e8b97c79bc469a4704313a2041d1adb6763f2d1e71d257149154af",
+    "unity":  "6000.3.25f1",
+    "scene":  "Assets/Shiftbound/Scenes/GoldenRooftops.unity",
+    "createdUtc":  "2026-10-10T19:55:36.7962920Z",
+    "signing":  "debug-QA",
+    "apkSha256":  "d5ffa337afd57df5ba8473267fa300170e0e2780c572ce975f5afa618e1fa74b",
+    "package":  "com.shiftboundproject.shiftbound",
+    "version":  "0.3.0",
+    "versionCode":  3,
+    "compilation":  "PASS: motion authoring, Android and matching Windows builds; final source correspondence",
+    "installUpdate":  "NOT INSTALLED: Samsung disconnected after build; same-key update ready",
+    "deviceVisualAndGameplay":  "NOT VERIFIED: owner stopped tests",
+    "artifactCompatibility":  "NOT VERIFIED on24; known22 vendor RELRO failures remain unresolved"
+}

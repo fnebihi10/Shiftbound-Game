@@ -5,6 +5,7 @@ No runtime primitives, cloth simulation, downloaded paid content, or root motion
 import bpy, bmesh, math, os, json, random
 from mathutils import Vector
 from mathutils.kdtree import KDTree
+from mathutils.bvhtree import BVHTree
 from array import array
 
 ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__),'..'))
@@ -62,13 +63,16 @@ def surface(name,predicate,offset,patch):
     remove=[f for f in bm.faces if not predicate(body.matrix_world @ f.calc_center_median())]
     bmesh.ops.delete(bm,geom=remove,context='FACES')
     # Relax anatomy beneath clothing, retaining topology and deformation weights.
-    for i in range(5):bmesh.ops.smooth_vert(bm,verts=list(bm.verts),factor=.35,use_axis_x=True,use_axis_y=True,use_axis_z=True)
+    for i in range(16 if name=='Technical jacket' else 5):bmesh.ops.smooth_vert(bm,verts=list(bm.verts),factor=.25,use_axis_x=True,use_axis_y=True,use_axis_z=True)
     bm.normal_update()
     for v in bm.verts:
         world=obj.matrix_world @ v.co
         amount=offset
         if name=='Technical jacket':
             amount+=.006*math.sin(world.z*52+world.x*18)*math.exp(-((world.z-1.1)/.24)**2)
+            # The lower torso is an outer garment, with room at the waist and
+            # a supported hem rather than an anatomical skin-tight silhouette.
+            amount+=.023*math.exp(-((world.z-1.10)/.13)**2)*max(0,1-abs(world.x)/.24)
         if name=='Tapered trousers':
             amount+=.006*math.sin(world.z*63+world.x*20)*math.exp(-((world.z-.57)/.12)**2)
         v.co+=v.normal*amount
@@ -121,21 +125,27 @@ for r in range(4):
     for i in range(24):a=r*25+i;faces.append((a,a+1,a+26,a+25))
 mesh('Folded storm hood',verts,faces,0,'spine_03')
 
-def ribbon(name,points,width,patch=4,rigid=None,normal=(0,1,0)):
+cloth_bm=bmesh.new();cloth_bm.from_mesh(jacket.data);cloth_bm.transform(jacket.matrix_world)
+cloth_surface=BVHTree.FromBMesh(cloth_bm);cloth_bm.free()
+def ribbon(name,points,width,patch=4,rigid=None,normal=(0,1,0),garment=False):
     pts=[Vector(p) for p in points];verts=[];faces=[]
     for i,p in enumerate(pts):
         tangent=pts[min(i+1,len(pts)-1)]-pts[max(0,i-1)]
         side=tangent.cross(Vector(normal)).normalized()*width*.5
-        verts.extend([p-side,p+side])
+        for q in (p-side,p+side):
+            if garment:
+                hit,n,_,distance=cloth_surface.find_nearest(q)
+                if hit is not None and distance<.13:q=hit+n*.004
+            verts.append(q)
     for i in range(len(pts)-1):faces.append((i*2,i*2+1,i*2+3,i*2+2))
     return mesh(name,verts,faces,patch,rigid)
 
 # Zipper, tailored panel boundaries and cuff seams follow the garment, not torso boxes.
-ribbon('Central weatherproof zipper',[(0,.095,1.055),(0,.133,1.19),(0,.123,1.33),(0,.075,1.46)],.009,4)
+ribbon('Central weatherproof zipper',[(0,.095,1.055),(0,.133,1.19),(0,.123,1.33),(0,.075,1.46)],.009,4,garment=True)
 for s in [-1,1]:
-    ribbon('Raglan reflective seam',[(s*.03,.073,1.46),(s*.115,.084,1.435),(s*.21,.07,1.40),(s*.29,.034,1.40)],.007,7)
-    ribbon('Diagonal pocket zip',[(s*.067,.113,1.15),(s*.112,.108,1.21),(s*.14,.096,1.24)],.011,4)
-    ribbon('Bag shoulder webbing',[(s*.125,-.169,1.14),(s*.14,-.157,1.30),(s*.15,-.139,1.43),(s*.145,-.03,1.50),(s*.14,.073,1.40),(s*.113,.131,1.28),(s*.09,.109,1.16)],.036,4)
+    ribbon('Raglan reflective seam',[(s*.03,.073,1.46),(s*.115,.084,1.435),(s*.21,.07,1.40),(s*.29,.034,1.40)],.007,7,garment=True)
+    ribbon('Diagonal pocket zip',[(s*.067,.113,1.15),(s*.112,.108,1.21),(s*.14,.096,1.24)],.011,4,garment=True)
+    ribbon('Bag shoulder webbing',[(s*.125,-.169,1.14),(s*.14,-.157,1.30),(s*.15,-.139,1.43),(s*.145,-.03,1.50),(s*.14,.073,1.40),(s*.113,.131,1.28),(s*.09,.109,1.16)],.036,4,garment=True)
     ribbon('Trouser outer seam',[(s*.173,-.018,.98),(s*.184,-.01,.82),(s*.153,-.026,.60),(s*.153,-.045,.43),(s*.138,-.06,.22)],.008,2)
 
 # Delivery bag: tapered sewn shell, depth, rolled upper lip and overlapping flap.

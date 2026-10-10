@@ -42,7 +42,7 @@ public static class CandidateProvenance
         string extension = Path.GetExtension(path).ToLowerInvariant();
         // Explicit text formats only. .asset can be binary: Unity YAML is recognized
         // by its header, so mesh/texture payloads never lose byte-integrity checks.
-        bool text = new[] { ".cs", ".shader", ".hlsl", ".cginc", ".json", ".meta", ".txt", ".md", ".xml", ".asmdef", ".asmref" }.Contains(extension) ||
+        bool text = new[] { ".cs", ".shader", ".hlsl", ".cginc", ".compute", ".json", ".inputactions", ".shadergraph", ".shadersubgraph", ".uxml", ".uss", ".meta", ".txt", ".md", ".xml", ".asmdef", ".asmref" }.Contains(extension) ||
             ((extension == ".asset" || extension == ".mat" || extension == ".prefab" || extension == ".unity" || extension == ".controller") &&
              bytes.Length >= 5 && Encoding.ASCII.GetString(bytes, 0, 5) == "%YAML");
         if (text) bytes = new UTF8Encoding(false, true).GetBytes(new UTF8Encoding(false, true).GetString(bytes).TrimStart('\uFEFF').Replace("\r\n", "\n").Replace("\r", "\n"));

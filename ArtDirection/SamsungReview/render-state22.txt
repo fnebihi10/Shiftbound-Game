@@ -1,0 +1,57 @@
+utc=2026-10-10T19:39:09.3451700Z
+unity=6000.3.25f1
+model=samsung SM-G975U
+os=Android OS 11 / API-30 (RP1A.200720.012/G975USQS5GUF1)
+cpu=ARM64 FP ASIMD AES
+gpu=Adreno (TM) 640
+graphicsAPI=OpenGLES3
+driver=OpenGL ES 3.2 V@0502.0 (GIT@559e78c, Ib9d997268a, 1602617665) (Date:10/13/20)
+ramMB=7395
+gpuMemoryMB=2048
+quality=Mobile
+pipeline=Shiftbound phone runtime budget
+rendererType=UnityEngine.Rendering.Universal.UniversalRenderer
+screen=2280x1080
+cameraPixelRect=(x:0.00, y:0.00, width:2280.00, height:1080.00)
+URP_ScaledScreenParams=(1536.00, 727.00, 1.00, 1.00)
+renderScale=0.6736842
+upscaling=FSR
+MSAA=2
+cameraAA=None
+dynamicResolution=False
+HDR=True
+grading=HighDynamicRange
+postProcessing=True
+shadowDistance=35
+shadowResolution=1024
+shadowCascades=1
+softShadows=False
+skinWeights=FourBones
+mipLimit=0
+lodBias=1
+textureStreaming=False
+textureCurrentBytes=32677137
+textureDesiredBytes=0
+frameCap=60
+vSync=0
+refresh=60
+safeArea=(x:0.00, y:0.00, width:2173.00, height:1080.00)
+controlScale=1.212417
+controlInset=35.96165
+controlHeight=16.47727
+touchSensitivity=1
+volume=0.8
+cameraAssist=True
+lowPower=False
+fog=True Linear 48..205
+volume=Phone rendering budget priority=100 weight=1 profile=
+volume=Production benchmark - authored opening priority=0 weight=1 profile=Opening grade
+volume=Color and bloom priority=0 weight=1 profile=none
+texture=IvyCutout 1024x2048 format=ASTC_4x4 mipCount=12 loadedMip=0
+texture=DistantCity-v1 2048x1024 format=ASTC_6x6 mipCount=12 loadedMip=0
+texture=IvyLeaf-v1 512x512 format=ASTC_6x6 mipCount=10 loadedMip=0
+texture=LimestonePaving-v1 1024x1024 format=ASTC_6x6 mipCount=11 loadedMip=0
+texture=Ivy_Hanging 1024x2048 format=ASTC_6x6 mipCount=12 loadedMip=0
+material=City panorama overgrown shader=Shiftbound/Registered far city supported=True
+material=City panorama present shader=Shiftbound/Registered far city supported=True
+material=Rooted leaves shader=Shiftbound/Rooted foliage supported=True

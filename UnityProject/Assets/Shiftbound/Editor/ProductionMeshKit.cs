@@ -17,6 +17,13 @@ public sealed class ProductionMeshKit
         float w=Vector3.Distance(a,b)*.5f,h=Vector3.Distance(b,c)*.5f;uv.AddRange(new[]{Vector2.zero,new Vector2(w,0),new Vector2(w,h),new Vector2(0,h)});
         colors.AddRange(new[]{color,color,color,color});slots[slot].AddRange(new[]{k,k+1,k+2,k,k+2,k+3});
     }
+    public void Triangle(Vector3 a,Vector3 b,Vector3 c,int slot=0,Color color=default)
+    {
+        if(color==default)color=Color.white;int k=vertices.Count;vertices.AddRange(new[]{a,b,c});
+        // Planar roof coordinates keep material scale continuous across the fan.
+        uv.AddRange(new[]{new Vector2(a.x,a.z)*.5f,new Vector2(b.x,b.z)*.5f,new Vector2(c.x,c.z)*.5f});
+        colors.AddRange(new[]{color,color,color});slots[slot].AddRange(new[]{k,k+1,k+2});
+    }
     public void Box(Vector3 c,Vector3 s,int slot=0)
     {
         Vector3 P(float x,float y,float z)=>c+Vector3.Scale(new Vector3(x,y,z)*.5f,s);
@@ -33,8 +40,8 @@ public sealed class ProductionMeshKit
             int j=(i+1)%8;Vector3 topA=a[i]*.99f,topB=a[j]*.99f;
             Quad(c+a[j]+Vector3.down*y,c+a[i]+Vector3.down*y,c+a[i]+Vector3.up*(y-r),c+a[j]+Vector3.up*(y-r),slot);
             Quad(c+a[j]+Vector3.up*(y-r),c+a[i]+Vector3.up*(y-r),c+topA+Vector3.up*y,c+topB+Vector3.up*y,slot);
-            Quad(c+Vector3.up*y,c+topB+Vector3.up*y,c+topA+Vector3.up*y,c+Vector3.up*y,slot);
-            Quad(c+Vector3.down*y,c+a[i]+Vector3.down*y,c+a[j]+Vector3.down*y,c+Vector3.down*y,slot);
+            Triangle(c+Vector3.up*y,c+topB+Vector3.up*y,c+topA+Vector3.up*y,slot);
+            Triangle(c+Vector3.down*y,c+a[i]+Vector3.down*y,c+a[j]+Vector3.down*y,slot);
         }
     }
     public void Tube(Vector3 a,Vector3 b,float radius,int slot=0,Color color=default,int sides=6)
@@ -45,11 +52,19 @@ public sealed class ProductionMeshKit
     }
     public void Leaf(Vector3 center,Quaternion rotation,float size,Color color)
     {
-        // Folded heart-shaped leaf with a real central ridge and irregular lobes.
-        Vector3[] edge={new Vector3(0,0,-.34f),new Vector3(-.42f,.02f,-.52f),new Vector3(-.64f,-.025f,-.22f),new Vector3(-.48f,-.02f,.26f),new Vector3(0,0,.82f),new Vector3(.48f,-.02f,.26f),new Vector3(.64f,-.025f,-.22f),new Vector3(.42f,.02f,-.52f)};
-        Vector3 P(Vector3 p)=>center+rotation*(p*size);
-        for(int i=0;i<8;i++){int j=(i+1)%8;Color c=color*(i<4?.94f:1.04f);c.a=1;Quad(P(new Vector3(0,.085f,0)),P(edge[i]),P(edge[j]),P(new Vector3(0,.085f,0)),0,c);}
-        Color vein=color*1.35f;vein.a=.8f;Tube(P(new Vector3(0,.088f,-.32f)),P(new Vector3(0,.023f,.65f)),size*.009f,0,vein,3);
+        // Four folded quadrants preserve volume. The veined ivy alpha supplies
+        // the botanical lobes; UVs never depend on world position or stem UVs.
+        for(int y=0;y<2;y++)for(int x=0;x<2;x++)
+        {
+            int k=vertices.Count;
+            foreach(Vector2 t in new[]{new Vector2(x*.5f,y*.5f),new Vector2((x+1)*.5f,y*.5f),new Vector2((x+1)*.5f,(y+1)*.5f),new Vector2(x*.5f,(y+1)*.5f)})
+            {
+                float fold=(1-Mathf.Abs(t.x*2-1))*(1-Mathf.Abs(t.y*2-1))*.10f;
+                vertices.Add(center+rotation*(new Vector3((t.x-.5f)*1.35f,fold,(t.y-.4f)*1.35f)*size));
+                uv.Add(t);colors.Add(color);
+            }
+            slots[0].AddRange(new[]{k,k+1,k+2,k,k+2,k+3});
+        }
     }
     public Mesh Create(string name)
     {

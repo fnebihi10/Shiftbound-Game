@@ -11,6 +11,9 @@ namespace Shiftbound
         public Transform target;
         public GameInput input;
         public PlayerMotor motor;
+        // Serialized reference retains the real Android pipeline in comparison
+        // builds even when Mobile is excluded from Standalone quality levels.
+        public UniversalRenderPipelineAsset mobileDiagnosticPipeline;
         [Range(2f, 10f)] public float distance = 5.4f;
         [Range(0.5f, 3f)] public float lookHeight = 1.65f;
         [Range(0f, 3f)] public float lookAhead = 0f;
@@ -26,12 +29,17 @@ namespace Shiftbound
         private readonly Collider[] overlaps = new Collider[16];
         private SphereCollider collisionProbe;
         private float lastManualOrbit;
+        private Camera viewCamera;
+        private float restingFov;
+        private float focusHeight;
+        private bool focusInitialized;
         public float OrbitYaw => yaw;
         public float OrbitPitch => pitch;
 
         private void Awake()
         {
-            GetComponent<Camera>().GetUniversalAdditionalCameraData().renderPostProcessing = true;
+            viewCamera=GetComponent<Camera>();restingFov=viewCamera.fieldOfView;
+            viewCamera.GetUniversalAdditionalCameraData().renderPostProcessing = true;
             EnsureProbe();
         }
 
@@ -84,6 +92,12 @@ namespace Shiftbound
             }
             pitch = Mathf.Clamp(pitch, -15f, 58f);
 
+            // A small, eased speed response gives running room without an
+            // abrupt zoom on Jump/Shift. Manual yaw/pitch remain independent.
+            float pace=motor!=null?Mathf.Clamp01(motor.HorizontalVelocity.magnitude/motor.maxSpeed):0;
+            viewCamera.fieldOfView=Mathf.Lerp(viewCamera.fieldOfView,restingFov+3f*pace,
+                1f-Mathf.Exp(-4f*Time.deltaTime));
+
             Vector3 focus = Focus();
             Quaternion orbit = Quaternion.Euler(pitch, yaw, 0f);
             Vector3 rayDirection = orbit * Vector3.back;
@@ -100,6 +114,13 @@ namespace Shiftbound
         {
             Vector3 focus = target.position + Vector3.up * lookHeight +
                 Quaternion.Euler(0f, yaw, 0f) * Vector3.forward * lookAhead;
+            if(!focusInitialized){focusHeight=focus.y;focusInitialized=true;}
+            float followRate=motor!=null&&!motor.IsGrounded&&motor.VerticalVelocity>0?5f:18f;
+            focusHeight=Mathf.Lerp(focusHeight,focus.y,1f-Mathf.Exp(-followRate*Time.deltaTime));
+            focusHeight=Mathf.Clamp(focusHeight,focus.y-.45f,focus.y+.20f);
+            // Keep the landing surface steadier as the courier rises; the
+            // bounded lag prevents losing the character on a tall jump.
+            focus.y=focusHeight;
             if (motor != null)
             {
                 Vector3 velocity = motor.ActualVelocity;
@@ -114,6 +135,7 @@ namespace Shiftbound
             EnsureProbe();
             if (direction.sqrMagnitude < 0.001f) direction = Quaternion.Euler(pitch, yaw, 0f) * Vector3.back;
             float allowed = Mathf.Max(minimumDistance, requested);
+            allowed=CameraArchitectureVolume.ClipDistance(focus,direction,allowed,collisionRadius);
             if (Physics.SphereCast(focus, collisionRadius, direction, out RaycastHit hit,
                 allowed, obstacleMask, QueryTriggerInteraction.Ignore))
                 allowed = Mathf.Max(0.05f, hit.distance - 0.08f);
@@ -143,6 +165,8 @@ namespace Shiftbound
         public void Snap()
         {
             if (target == null) return;
+            focusHeight=target.position.y+lookHeight;focusInitialized=true;
+            if(viewCamera!=null)viewCamera.fieldOfView=restingFov;
             Vector3 focus = Focus();
             transform.position = Resolve(focus, Quaternion.Euler(pitch, yaw, 0f) * Vector3.back, distance);
             transform.LookAt(focus);

@@ -20,6 +20,7 @@ namespace Shiftbound
         private float maxDt;
         private InputSettings originalSettings;
         private InputSettings testSettings;
+        private static InputSettings baselineSettings;
         public string Timing => "samples=" + frames + " meanDt=" + (totalDt / Mathf.Max(1, frames)).ToString("F5") +
             " minDt=" + minDt.ToString("F5") + " maxDt=" + maxDt.ToString("F5");
 
@@ -28,7 +29,15 @@ namespace Shiftbound
             // Only this opt-in synthetic driver ignores focus. Shipping input
             // retains normal interruption handling. Inactive window diagnostics
             // must not silently discard queued gamepad events.
-            originalSettings = InputSystem.settings;
+            // InputManager destroys a replaced HideAndDontSave settings object.
+            // Keep a DontSave baseline that it does not own, across retries.
+            // Shipping sessions never instantiate this diagnostic driver.
+            if(baselineSettings==null)
+            {
+                baselineSettings=Instantiate(InputSystem.settings);
+                baselineSettings.hideFlags=HideFlags.DontSave;
+            }
+            originalSettings = baselineSettings;
             testSettings = Instantiate(originalSettings);
             testSettings.hideFlags = HideFlags.DontSave;
 #if UNITY_EDITOR

@@ -17,7 +17,7 @@ function Get-CandidateSource([string]$Root) {
 function Get-CandidateFileHash([string]$Path) {
     $candidateBytes = [IO.File]::ReadAllBytes($Path)
     $candidateExtension = [IO.Path]::GetExtension($Path).ToLowerInvariant()
-    $candidateIsText = $candidateExtension -in @('.cs','.shader','.hlsl','.cginc','.json','.meta','.txt','.md','.xml','.asmdef','.asmref') -or
+    $candidateIsText = $candidateExtension -in @('.cs','.shader','.hlsl','.cginc','.compute','.json','.inputactions','.shadergraph','.shadersubgraph','.uxml','.uss','.meta','.txt','.md','.xml','.asmdef','.asmref') -or
         ($candidateExtension -in @('.asset','.mat','.prefab','.unity','.controller') -and $candidateBytes.Length -ge 5 -and [Text.Encoding]::ASCII.GetString($candidateBytes,0,5) -eq '%YAML')
     if ($candidateIsText) {
         $candidateUtf8 = [Text.UTF8Encoding]::new($false,$true)

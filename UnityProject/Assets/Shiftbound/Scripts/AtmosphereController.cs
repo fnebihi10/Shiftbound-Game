@@ -22,8 +22,8 @@ namespace Shiftbound
             if (RenderSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight)
             {
                 RenderSettings.ambientSkyColor = Color.Lerp(RenderSettings.ambientSkyColor, wantedAmbient, t);
-                RenderSettings.ambientEquatorColor = Color.Lerp(RenderSettings.ambientEquatorColor, wantedAmbient * 0.6f, t);
-                RenderSettings.ambientGroundColor = Color.Lerp(RenderSettings.ambientGroundColor, wantedAmbient * 0.28f, t);
+                RenderSettings.ambientEquatorColor = Color.Lerp(RenderSettings.ambientEquatorColor, wantedAmbient * 0.82f, t);
+                RenderSettings.ambientGroundColor = Color.Lerp(RenderSettings.ambientGroundColor, wantedAmbient * 0.48f, t);
             }
             if (worlds.sun != null)
                 worlds.sun.color = Color.Lerp(worlds.sun.color,

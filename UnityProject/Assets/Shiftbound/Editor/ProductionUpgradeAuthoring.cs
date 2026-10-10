@@ -9,6 +9,13 @@ using Shiftbound;
 
 public static partial class ProductionUpgradeAuthoring
 {
+    public static void Presentation()
+    {
+        City();
+        Motion();
+        Surfaces();
+        Debug.Log("SHIFTBOUND PRESENTATION AUTHORING PASSED");
+    }
     const string Root = "Assets/Shiftbound/ProductionUpgrade";
     const string Scene = "Assets/Shiftbound/Scenes/GoldenRooftops.unity";
     static Material Material(string name, Color color, float smooth = .2f, float metal = 0)
@@ -118,6 +125,7 @@ public static partial class ProductionUpgradeAuthoring
     {
         Courier();
         City();
+        Motion();
         Debug.Log("SHIFTBOUND PRODUCTION INTEGRATION PASSED");
     }
 }
