@@ -24,6 +24,15 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 public static class BenchmarkRecorder {
+ public delegate bool WindowVisitor(IntPtr window,IntPtr state);
+ [DllImport("user32.dll")] public static extern bool EnumWindows(WindowVisitor visitor,IntPtr state);
+ [DllImport("user32.dll",CharSet=CharSet.Unicode)] public static extern int GetClassName(IntPtr w,System.Text.StringBuilder name,int size);
+ [DllImport("user32.dll",CharSet=CharSet.Unicode)] public static extern int GetWindowText(IntPtr w,System.Text.StringBuilder name,int size);
+ public static IntPtr OwnedWindow(int processId) {
+  IntPtr found=IntPtr.Zero;
+  EnumWindows((w,s)=>{uint pid;GetWindowThreadProcessId(w,out pid);if(pid!=(uint)processId)return true;var name=new System.Text.StringBuilder(128);GetClassName(w,name,name.Capacity);var title=new System.Text.StringBuilder(128);GetWindowText(w,title,title.Capacity);if(name.ToString()=="UnityWndClass"&&title.ToString()=="Shiftbound"){found=w;return false;}return true;},IntPtr.Zero);
+  return found;
+ }
  [StructLayout(LayoutKind.Sequential)] public struct Rect { public int Left,Top,Right,Bottom; }
  [StructLayout(LayoutKind.Sequential)] public struct Point { public int X,Y; }
  [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr w,out Rect r);
@@ -70,6 +79,7 @@ public static class BenchmarkRecorder {
      int remaining=deadline-(int)watch.ElapsedMilliseconds;
      if(remaining>0)Thread.Sleep(remaining);
      if(!IsWindow(handle))break; // An observed route can complete and close normally.
+     if(observe && GetForegroundWindow()!=handle)Focus(handle);
      if(GetForegroundWindow()!=handle)throw new InvalidOperationException("Benchmark player lost focus (expected="+handle+",actual="+GetForegroundWindow()+"). No further input sent.");
      long elapsed=watch.ElapsedMilliseconds;
      while(!observe && eventIndex<ms.Length && elapsed>=ms[eventIndex]) {
@@ -102,7 +112,7 @@ $benchmarkLaunch="-force-d3d11 -screen-width $Width -screen-height $Height -scre
 $benchmarkPlayer=Start-Process -FilePath $Player -ArgumentList $benchmarkLaunch -WindowStyle Hidden -PassThru
 try {
  Start-Sleep -Seconds 3
- $benchmarkHandle=[BenchmarkRecorder]::FindWindow('UnityWndClass','Shiftbound')
+ $benchmarkHandle=[BenchmarkRecorder]::OwnedWindow($benchmarkPlayer.Id)
  $benchmarkPid=0
  [void][BenchmarkRecorder]::GetWindowThreadProcessId($benchmarkHandle,[ref]$benchmarkPid)
  if($benchmarkPid -ne $benchmarkPlayer.Id){throw 'Cannot identify the owned benchmark player window.'}

@@ -54,7 +54,7 @@ namespace Shiftbound
         private bool DiagnosticSession => System.Array.Exists(System.Environment.GetCommandLineArgs(),
             arg => arg=="-shiftboundCompareRun"||arg=="-shiftboundRegression"||arg=="-shiftboundSmoke"||arg=="-shiftboundReachProbe"||
                 arg=="-shiftboundPhoneRegression"||arg=="-shiftboundMenuRegression"||arg=="-shiftboundOrbitScenario"||
-                arg=="-shiftboundBenchmarkCaptures"||arg=="-shiftboundProfile"||arg=="-shiftboundCourierPoses"||arg=="-shiftboundRetryRegression");
+                arg=="-shiftboundBenchmarkCaptures"||arg=="-shiftboundProfile"||arg=="-shiftboundCourierPoses"||arg=="-shiftboundRetryRegression"||arg=="-shiftboundDistrictFrames");
 
         private void Awake()
         {

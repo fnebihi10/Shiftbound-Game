@@ -1,0 +1,33 @@
+﻿{
+    "candidate":  35,
+    "sourceFingerprint":  "5ff864643318b866655c43451d8e42651773152d71a5b3d37214b612add42c1a",
+    "sourceHashPolicy":  "utf8-lf-v1; binary files retain exact SHA256",
+    "baseRevisionAtBuild":  "749d570a56ce56e5cc2c2990b279186071c00884",
+    "sourceWasDirtyAtBuild":  true,
+    "unity":  "6000.3.25f1",
+    "createdUtc":  "2026-10-11T07:27:30.0801632Z",
+    "package":  "com.shiftboundproject.shiftbound",
+    "version":  "0.3.0",
+    "versionCode":  3,
+    "apkSha256":  "2bd7f9bbf38f24ef270380a0981ea475b08bd4d34b22e5aef0756adf69f6b38b",
+    "signing":  "unchanged debug-QA",
+    "signingCertificateSha256":  "ef7f8620e6876fc2188a156b09f9312ed1ce0cbd632af55cf6127875647279ad",
+    "apkLocalPath":  ".validation/ProductionUpgrade/AndroidIteration35/Shiftbound-QA.apk",
+    "windowsLocalPath":  ".validation/ProductionUpgrade/WindowsIteration35/Shiftbound.exe",
+    "phoneInstalled":  false,
+    "deviceTesting":  "paused by owner instruction",
+    "localRoute":  "PASS:35 actual production input, airborne Shift, checkpoints and completion",
+    "localRetry":  "PASS:four cycles34;35 gameplay scripts/scene unchanged by manifest comparison",
+    "desktopVideo":  {
+                         "seconds":  18,
+                         "width":  1280,
+                         "height":  720,
+                         "captureFps":  30,
+                         "input":  "automated",
+                         "performanceEvidence":  false
+                     },
+    "artifactCompatibility":  "FAIL:RELRO libc++_shared.so/libmain.so/libunity.so;ZIP/signature/LOAD pass",
+    "sustainedSamsungPerformance":  "NOT VERIFIED",
+    "humanTwoThumbComfort":  "NOT VERIFIED",
+    "overallRating":  null
+}

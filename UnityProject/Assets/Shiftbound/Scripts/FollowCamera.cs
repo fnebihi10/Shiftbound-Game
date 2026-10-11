@@ -115,9 +115,11 @@ namespace Shiftbound
             Vector3 focus = target.position + Vector3.up * lookHeight +
                 Quaternion.Euler(0f, yaw, 0f) * Vector3.forward * lookAhead;
             if(!focusInitialized){focusHeight=focus.y;focusInitialized=true;}
-            float followRate=motor!=null&&!motor.IsGrounded&&motor.VerticalVelocity>0?5f:18f;
+            // Use the same airborne damping through rise and fall. Switching
+            // from5 to18 at apex abruptly caught up with the courier in24.
+            float followRate=motor!=null&&!motor.IsGrounded?8f:12f;
             focusHeight=Mathf.Lerp(focusHeight,focus.y,1f-Mathf.Exp(-followRate*Time.deltaTime));
-            focusHeight=Mathf.Clamp(focusHeight,focus.y-.45f,focus.y+.20f);
+            focusHeight=Mathf.Clamp(focusHeight,focus.y-.35f,focus.y+.35f);
             // Keep the landing surface steadier as the courier rises; the
             // bounded lag prevents losing the character on a tall jump.
             focus.y=focusHeight;

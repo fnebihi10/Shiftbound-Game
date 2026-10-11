@@ -7,6 +7,13 @@ using UnityEngine.Rendering;
 
 public static partial class ProductionUpgradeAuthoring
 {
+    public static void RefineSurfaces()
+    {
+        Folders();EditorSceneManager.OpenScene(Scene);
+        facadeRenders=Array.ConvertAll(new[]{"Ivory mineral render","Warm terracotta render","Cool limestone render"},
+            name=>AssetDatabase.LoadAssetAtPath<Material>(Root+"/Materials/"+name+".mat"));
+        Surfaces();Debug.Log("SHIFTBOUND SURFACE REFINEMENT PASSED");
+    }
     // Offline authored maps and environment reflection. No runtime generators,
     // extra lights, camera effects or reflection capture on the phone.
     static void Surfaces()
@@ -55,11 +62,40 @@ public static partial class ProductionUpgradeAuthoring
             material.SetFloat("_BumpScale",.4f);material.EnableKeyword("_NORMALMAP");
             EditorUtility.SetDirty(material);
         }
+        // Original brick bond at physical scale: the mesh UVs repeat every 2m.
+        // Mortar remains neutral rather than being tinted by the facade colour.
+        float BrickHeight(float u,float v)
+        {
+            int row=Mathf.FloorToInt(v*24);
+            float x=Mathf.Repeat(u*8+(row%2)*.5f,1),y=Mathf.Repeat(v*24,1);
+            return Mathf.SmoothStep(0,1,Mathf.Clamp01(Mathf.Min(x,1-x)/.055f))*
+                Mathf.SmoothStep(0,1,Mathf.Clamp01(Mathf.Min(y,1-y)/.10f));
+        }
+        var brick=Write("CourtyardBrickBond-v3",(u,v)=>
+        {
+            float height=BrickHeight(u,v);
+            float variation=1+Mineral(u,v)*.065f;
+            return Color.Lerp(new Color(.49f,.46f,.40f),new Color(.53f,.29f,.20f)*variation,height);
+        });
+        var brickNormal=Write("CourtyardBrickNormal-v3",(u,v)=>
+        {
+            const float step=1f/size;
+            var n=new Vector3((BrickHeight(u-step,v)-BrickHeight(u+step,v))*.55f,
+                (BrickHeight(u,v-step)-BrickHeight(u,v+step))*.55f,1).normalized;
+            return new Color(n.x*.5f+.5f,n.y*.5f+.5f,n.z*.5f+.5f,1);
+        },true);
+        foreach(string name in new[]{"Warm terracotta render","District weathered brick"})
+        {
+            var material=AssetDatabase.LoadAssetAtPath<Material>(Root+"/Materials/"+name+".mat");
+            material.SetColor("_BaseColor",Color.white);material.SetTexture("_BaseMap",brick);
+            material.SetTexture("_BumpMap",brickNormal);material.SetFloat("_BumpScale",.6f);
+            material.EnableKeyword("_NORMALMAP");EditorUtility.SetDirty(material);
+        }
         var enamel=Write("ServiceEnamel-v2",(u,v)=>
         {
             // Sparse paint wear; broad colour fields remain clean at game scale.
             float scratch=Mathf.Abs(Mathf.Sin((u*5+v*2)*Mathf.PI*2));
-            float patch=Mathf.SmoothStep(.91f,.99f,Mathf.Sin(u*Mathf.PI*6)*Mathf.Sin(v*Mathf.PI*4));
+            float patch=Mathf.SmoothStep(0,1,Mathf.InverseLerp(.91f,.99f,Mathf.Sin(u*Mathf.PI*6)*Mathf.Sin(v*Mathf.PI*4)));
             float value=.98f-Mineral(u,v)*.018f-patch*(scratch<.07f?.28f:.025f);
             return new Color(value,value,value,1);
         });
@@ -85,7 +121,7 @@ public static partial class ProductionUpgradeAuthoring
                 d.Normalize();
                 Color sky=Color.Lerp(new Color(.70f,.76f,.78f),new Color(.22f,.43f,.69f),Mathf.Clamp01(d.y));
                 Color ground=Color.Lerp(new Color(.23f,.25f,.23f),new Color(.55f,.52f,.43f),Mathf.Clamp01(d.y+1));
-                Color c=Color.Lerp(ground,sky,Mathf.SmoothStep(-.12f,.15f,d.y));
+                Color c=Color.Lerp(ground,sky,Mathf.SmoothStep(0,1,Mathf.InverseLerp(-.12f,.15f,d.y)));
                 float glow=Mathf.Pow(Mathf.Max(0,Vector3.Dot(d,new Vector3(-.6f,.45f,.65f).normalized)),20);
                 c+=new Color(.65f,.38f,.12f,0)*glow;c.a=1;pixels[y*64+x]=c;
             }

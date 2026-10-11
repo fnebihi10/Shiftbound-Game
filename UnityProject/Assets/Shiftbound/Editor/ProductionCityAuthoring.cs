@@ -284,6 +284,7 @@ public static partial class ProductionUpgradeAuthoring
     }
     static void Building(ProductionMeshKit kit,Bounds b,bool distant,bool route=false)
     {
+        if(distant){DistrictSilhouette(kit,b);return;}
         // Near walls have real openings/reveals. A recessed core closes the
         // interior at bounded cost; the outer facade is built around each pane.
         kit.Box(b.center,distant?b.size:b.size-new Vector3(.34f,0,.34f),0);
@@ -376,6 +377,66 @@ public static partial class ProductionUpgradeAuthoring
             kit.Bevel(pavilion+Vector3.up*1.27f,new Vector3(b.size.x*.58f,.22f,b.size.z*.62f),.07f,1);
             for(int floor=1;floor<floors;floor++)
                 kit.Box(new Vector3(b.center.x,b.min.y+floor*b.size.y/floors,b.center.z),new Vector3(b.size.x+.14f,.08f,b.size.z+.14f),0);
+        }
+    }
+    static void DistrictSilhouette(ProductionMeshKit kit,Bounds b)
+    {
+        // Three building typologies, not a single window stamp stretched onto
+        // every skyline mass. All details stay within the existing footprint.
+        int type=Mathf.Abs(Mathf.RoundToInt(b.center.x+b.center.z*2))%3;
+        float baseHeight=type==0?b.size.y*.72f:type==1?b.size.y*.84f:Mathf.Max(b.size.y*.85f,b.size.y-5);
+        float roof=b.min.y+baseHeight;
+        kit.Box(new Vector3(b.center.x,b.min.y+baseHeight*.5f,b.center.z),new Vector3(b.size.x,baseHeight,b.size.z),0);
+        kit.Bevel(new Vector3(b.center.x,roof+.10f,b.center.z),new Vector3(b.size.x+.18f,.22f,b.size.z+.18f),.04f,4);
+        if(type==0)
+        {
+            // Commercial upper storeys have two real setbacks and a narrow
+            // lift core. Their glass fields read differently from housing.
+            float upper=b.max.y-roof;
+            kit.Box(new Vector3(b.center.x,roof+upper*.35f,b.center.z),new Vector3(b.size.x*.78f,upper*.7f,b.size.z*.72f),0);
+            kit.Box(new Vector3(b.center.x,roof+upper*.85f,b.center.z),new Vector3(b.size.x*.48f,upper*.3f,b.size.z*.42f),1);
+            for(int face=0;face<4;face++)
+            {
+                Quaternion rot=Quaternion.Euler(0,face*90,0);
+                float width=(face%2==0?b.size.x:b.size.z)*.72f,depth=(face%2==0?b.size.z:b.size.x)*.36f;
+                for(int level=0;level<3;level++)
+                {
+                    float y=roof+upper*(.12f+level*.19f);
+                    Vector3 P(float x,float h)=>new Vector3(b.center.x,y,b.center.z)+rot*new Vector3(x,h,depth+.01f);
+                    kit.Quad(P(-width*.5f,-.5f),P(width*.5f,-.5f),P(width*.5f,.5f),P(-width*.5f,.5f),2);
+                }
+            }
+        }
+        else if(type==1)
+        {
+            // Housing roof ridge and chimney instead of another square crown.
+            float ridge=b.max.y;
+            kit.Quad(new Vector3(b.min.x,ridge,b.center.z),new Vector3(b.max.x,ridge,b.center.z),new Vector3(b.max.x,roof,b.min.z),new Vector3(b.min.x,roof,b.min.z),3);
+            kit.Quad(new Vector3(b.min.x,roof,b.max.z),new Vector3(b.max.x,roof,b.max.z),new Vector3(b.max.x,ridge,b.center.z),new Vector3(b.min.x,ridge,b.center.z),3);
+            kit.Triangle(new Vector3(b.min.x,roof,b.max.z),new Vector3(b.min.x,ridge,b.center.z),new Vector3(b.min.x,roof,b.min.z),0);
+            kit.Triangle(new Vector3(b.max.x,roof,b.min.z),new Vector3(b.max.x,ridge,b.center.z),new Vector3(b.max.x,roof,b.max.z),0);
+            kit.Box(new Vector3(b.center.x+b.size.x*.23f,ridge-.4f,b.center.z),new Vector3(.7f,2,.9f),0);
+        }
+        else
+        {
+            // Paired terraced penthouses around a recessed roof court.
+            foreach(float side in new[]{-1f,1f})
+                kit.Box(new Vector3(b.center.x+side*b.size.x*.30f,(roof+b.max.y)*.5f,b.center.z),new Vector3(b.size.x*.32f,b.max.y-roof,b.size.z*.64f),0);
+        }
+        for(int side=0;side<4;side++)
+        {
+            Quaternion rot=Quaternion.Euler(0,side*90,0);
+            float width=side%2==0?b.size.x:b.size.z,depth=(side%2==0?b.size.z:b.size.x)*.5f;
+            int columns=Mathf.Max(2,Mathf.FloorToInt(width/(type==0?3.8f:2.8f)));
+            for(float y=b.min.y+2.8f;y<roof-1;y+=type==0?3.5f:3.05f)
+            for(int col=0;col<columns;col++)
+            {
+                float x=-width*.5f+(col+.5f)*width/columns;
+                float w=type==0?2.2f:1.15f,h=type==2?1.35f:1.7f;
+                Vector3 P(float xx,float yy,float zz)=>b.center+rot*new Vector3(xx,yy-b.center.y,zz);
+                kit.Quad(P(x-w*.5f,y-h*.5f,depth+.016f),P(x+w*.5f,y-h*.5f,depth+.016f),P(x+w*.5f,y+h*.5f,depth+.016f),P(x-w*.5f,y+h*.5f,depth+.016f),2);
+                if(type!=0)kit.Quad(P(x-w*.6f,y-h*.5f-.13f,depth+.04f),P(x+w*.6f,y-h*.5f-.13f,depth+.04f),P(x+w*.6f,y-h*.5f-.03f,depth+.04f),P(x-w*.6f,y-h*.5f-.03f,depth+.04f),4);
+            }
         }
     }
     static void IvyMass(ProductionMeshKit kit,Vector3 root,float outward,float length,float scale)

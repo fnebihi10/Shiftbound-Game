@@ -1,0 +1,13 @@
+﻿Build35 Windows and Android: PASS; exact source fingerprint recorded in build35.json.
+Build35 camera-readback route (recording overhead; nominal rate60, not measured60FPS):
+SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=682 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.
+Build35 owned normal-window recording: two full production-input routes;18s/1280x720/30 captureFPS.
+SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=698 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.
+SHIFTBOUND FULL ROUTE PASSED: rate=60 frames=697 input=production GameInput/Update/camera actual checkpoints=3; actual goal; stopped completion motion.
+Build34 focused retry; gameplay scripts and scene hashes unchanged in35. Initial hidden-window fresh-jump check failed; owned-focus rerun below passed.
+SHIFTBOUND RETRY CYCLE PASSED: 0 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY CYCLE PASSED: 1 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY CYCLE PASSED: 2 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY CYCLE PASSED: 3 actual checkpoint; pause/completion; held-input suppression; fresh jump; retained scene/settings
+SHIFTBOUND RETRY REGRESSION PASSED
+No35 Samsung installation, performance, lifecycle, physical-input or16KB runtime acceptance. APK static compatibility FAIL;see artifact35.json.

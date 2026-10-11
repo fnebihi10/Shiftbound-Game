@@ -28,6 +28,8 @@ namespace Shiftbound
         private static readonly int Sprint = Animator.StringToHash("Base Layer.Sprint");
         private static readonly int Jump = Animator.StringToHash("Base Layer.Jump");
         private static readonly int Land = Animator.StringToHash("Base Layer.Land");
+        public static float GaitCycleRate(float speed) => speed < 1.8f ? speed/1.42f :
+            speed < 4.2f ? Mathf.Max(.85f,speed/2.8f) : Mathf.Max(1.25f,speed/3.8f);
 
         private void Awake()
         {
@@ -87,13 +89,13 @@ namespace Shiftbound
                     wanted == Land ? .045f : transitionDuration, 0, 0f);
                 currentState = wanted;
             }
-            // Distance travelled per authored two-contact cycle, rather than
-            // an arbitrary nominal speed which changes with the clip length.
-            // Runtime avatar foot samples: stance travel per normalized cycle
-            // is about1.42m in Walk and5.2m in these running source clips.
-            animator.speed = wanted == Walk ? Mathf.Clamp(speed * walkCycle / 1.42f, .15f, 2f) :
-                wanted == Jog ? Mathf.Clamp(speed * jogCycle / 5.2f, .2f, 2f) :
-                wanted == Sprint ? Mathf.Clamp(speed * sprintCycle / 5.2f, .3f, 2.3f) : 1f;
+            // Maintain readable running cadence at partial stick deflection.
+            // The imported running clips include exaggerated swing travel;
+            // treating that as planted stride distance made jogging too slow.
+            float cadence=GaitCycleRate(speed);
+            animator.speed = wanted == Walk ? Mathf.Clamp(cadence*walkCycle,.15f,2f) :
+                wanted == Jog ? Mathf.Clamp(cadence*jogCycle,.2f,2f) :
+                wanted == Sprint ? Mathf.Clamp(cadence*sprintCycle,.3f,2.3f) : 1f;
         }
     }
 }

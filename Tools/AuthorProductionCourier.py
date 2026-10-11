@@ -111,6 +111,38 @@ def loft(name,rings,patch,rigid=None,n=24,cx=0):
 
 loft('Ribbed jacket hem',[(1.025,.163,.128,-.035,.85),(1.038,.173,.132,-.035,.85),(1.056,.171,.130,-.035,.85),(1.069,.168,.128,-.035,.85)],4)
 loft('Cyan raised collar',[(1.47,.108,.095,-.037,1),(1.495,.103,.089,-.037,1),(1.515,.093,.080,-.037,1),(1.53,.091,.078,-.037,1)],2, 'neck_01')
+# Replace the copied anatomical jacket with a cut garment. The torso has
+# continuous shoulder/waist rings; sleeves use the licensed T-pose bone axis.
+# Skin weights transfer from the original body, preserving the established rig.
+bpy.data.objects.remove(jacket,do_unlink=True)
+jacket=loft('Technical jacket',[
+    (1.055,.176,.143,-.025,.82),(1.10,.185,.149,-.023,.86),
+    (1.19,.192,.151,-.021,.90),(1.31,.206,.151,-.031,.91),
+    (1.40,.216,.144,-.038,.91),(1.455,.194,.127,-.041,.94),
+    (1.49,.129,.105,-.039,1)],0,n=32)
+for s,side in [(-1,'l'),(1,'r')]:
+    verts=[];faces=[];segments=16
+    # Room at the upper sleeve, articulated elbow and tapered wrist.
+    rings=[(.185,.092,.093),(.235,.086,.088),(.34,.078,.084),
+           (.435,.073,.081),(.47,.070,.077),(.51,.066,.073),
+           (.59,.060,.069),(.67,.054,.063),(.706,.051,.059)]
+    for row,(x,ry,rz) in enumerate(rings):
+        for n in range(segments):
+            a=2*math.pi*n/segments
+            crease=1+.035*math.sin(a*3+row*1.7)
+            verts.append((s*x,-.066+math.cos(a)*ry*crease,1.4555+math.sin(a)*rz*crease))
+    for row in range(len(rings)-1):
+        for n in range(segments):
+            j=(n+1)%segments;f=(row*segments+n,row*segments+j,(row+1)*segments+j,(row+1)*segments+n)
+            faces.append(f if s>0 else tuple(reversed(f)))
+    sleeve=mesh('Articulated jacket sleeve '+side,verts,faces,0)
+    # Dark elbow reinforcement belongs to the sleeve, with the same weights.
+    patchVerts=[]
+    for x in [.435,.47,.51]:
+        for a in [math.pi*.80,math.pi,math.pi*1.20]:
+            patchVerts.append((s*x,-.066+math.cos(a)*.078,1.4555+math.sin(a)*.084))
+    mesh('Elbow reinforcement '+side,patchVerts,
+         [(r*3+i,r*3+i+1,(r+1)*3+i+1,(r+1)*3+i) for r in range(2) for i in range(2)],4)
 for s,side in [(-1,'l'),(1,'r')]:
     loft('Trail sole '+side,[(.012,.062,.137,-.014,.65),(.026,.064,.139,-.014,.65),(.045,.061,.137,-.014,.65)],6,'foot_'+side,32,cx=s*.1143)
     loft('Trouser ankle binding '+side,[(.168,.052,.059,-.063,1),(.179,.054,.060,-.063,1),(.193,.054,.060,-.063,1)],4,'calf_'+side,24,cx=s*.1143)
