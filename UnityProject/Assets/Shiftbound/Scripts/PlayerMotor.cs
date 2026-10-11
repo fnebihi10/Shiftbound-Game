@@ -34,7 +34,6 @@ namespace Shiftbound
         public event System.Action<float> Landed;
         public float LastLandingSpeed { get; private set; }
         public int LandingSequence { get; private set; }
-        public int TakeoffSequence { get; private set; }
         // Support may bridge the controller's contact skin, never an extra radius.
         public float SupportTolerance => Mathf.Min(groundProbeDistance, controller.skinWidth + 0.02f);
 
@@ -82,7 +81,6 @@ namespace Shiftbound
             bool tookOff = jumpIntent.TryConsume(out bool held);
             if (tookOff)
             {
-                TakeoffSequence++;
                 verticalVelocity = Mathf.Sqrt(2f * gravity * jumpHeight) *
                     (held ? 1f : releasedJumpMultiplier);
                 IsGrounded = false;
@@ -123,11 +121,9 @@ namespace Shiftbound
             if (IsGrounded && flatTravel.sqrMagnitude > 0.0001f)
             {
                 stepTravel += flatTravel.magnitude;
-                // The courier's calibrated sprint cycle covers 3.2 m (two contacts).
-                float footDistance = Mathf.Lerp(.62f, 1.6f, Mathf.Clamp01(horizontalVelocity.magnitude / maxSpeed));
-                if (stepTravel >= footDistance)
+                if (stepTravel >= 1.6f)
                 {
-                    stepTravel %= footDistance;
+                    stepTravel = 0f;
                     GameFlow.Instance?.feedback?.Footstep();
                 }
             }
@@ -149,7 +145,8 @@ namespace Shiftbound
             {
                 LastLandingSpeed = Mathf.Max(0f, -verticalVelocity);
                 LandingSequence++;
-                // Impact is a pose/contact response; never squash human anatomy.
+                if (visual != null) visual.localScale = new Vector3(
+                    visualBaseScale.x * 1.025f, visualBaseScale.y * 0.96f, visualBaseScale.z * 1.025f);
                 Landed?.Invoke(LastLandingSpeed);
                 if (LastLandingSpeed > 4f)
                     GameFlow.Instance?.feedback?.Landing(LastLandingSpeed > 11f);

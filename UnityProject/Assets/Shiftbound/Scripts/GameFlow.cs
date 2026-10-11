@@ -16,8 +16,6 @@ namespace Shiftbound
         public float fallHeight = -12f;
         private Vector3 checkpoint;
         private float checkpointYaw;
-        private Vector3 startPosition;
-        private float startYaw;
         private Transform shiftBridgeLessonExit;
         private Vector3 shiftBridgeLessonEnd;
         public bool HasShiftBridgeGuidance
@@ -36,8 +34,6 @@ namespace Shiftbound
         }
         public Vector3 CheckpointPosition => checkpoint;
         public int CheckpointSequence { get; private set; }
-        public int RecoverySequence { get; private set; }
-        public int RestartSequence { get; private set; }
         public string CheckpointHint { get; private set; } = "";
         private bool paused;
         private bool completed;
@@ -52,9 +48,7 @@ namespace Shiftbound
         public string ActiveNotice => Time.unscaledTime < noticeUntil ? notice : "";
         public bool showLegacyHud = true;
         private bool DiagnosticSession => System.Array.Exists(System.Environment.GetCommandLineArgs(),
-            arg => arg=="-shiftboundCompareRun"||arg=="-shiftboundRegression"||arg=="-shiftboundSmoke"||arg=="-shiftboundReachProbe"||
-                arg=="-shiftboundPhoneRegression"||arg=="-shiftboundMenuRegression"||arg=="-shiftboundOrbitScenario"||
-                arg=="-shiftboundBenchmarkCaptures"||arg=="-shiftboundProfile"||arg=="-shiftboundCourierPoses"||arg=="-shiftboundRetryRegression"||arg=="-shiftboundDistrictFrames");
+            arg => arg.StartsWith("-shiftbound", System.StringComparison.Ordinal) && arg != "-shiftboundTouchUI");
 
         private void Awake()
         {
@@ -64,7 +58,6 @@ namespace Shiftbound
             AudioListener.pause = false;
             checkpoint = player.transform.position;
             checkpointYaw = player.transform.eulerAngles.y;
-            startPosition=checkpoint;startYaw=checkpointYaw;
         }
 
         private void Start()
@@ -93,7 +86,6 @@ namespace Shiftbound
         public void ApplyFrameTier()
         {
             if (Application.isMobilePlatform) Application.targetFrameRate = PlayerPreferences.LowPower ? 30 : 60;
-            MobileRenderingBudget.Apply();
         }
 
         private void OnApplicationPause(bool interrupted) { if (interrupted && !DiagnosticSession) Suspend(); }
@@ -149,7 +141,6 @@ namespace Shiftbound
 
         public void Respawn()
         {
-            RecoverySequence++;
             input?.CancelGameplayInput();
             player.Teleport(checkpoint);
             player.transform.rotation = Quaternion.Euler(0f, checkpointYaw, 0f);
@@ -180,22 +171,11 @@ namespace Shiftbound
 
         public void Restart()
         {
-            if(!DiagnosticSession){PlayerPrefs.DeleteKey("sb.checkpoint"); PlayerPrefs.Save();}
+            PlayerPrefs.DeleteKey("sb.checkpoint"); PlayerPrefs.Save();
             input?.CancelGameplayInput();
             AudioListener.pause = false;
             Time.timeScale = 1f;
-            // Reset the existing slice instead of unloading and reconstructing
-            // its city, UI, input, audio and render resources on every retry.
-            completed=paused=false;elapsed=0;notice="";noticeUntil=0;
-            checkpoint=startPosition;checkpointYaw=startYaw;CheckpointSequence=0;
-            CheckpointHint="";shiftBridgeLessonExit=null;shiftBridgeLessonEnd=Vector3.zero;
-            foreach(var trigger in FindObjectsByType<StageTrigger>(FindObjectsSortMode.None))trigger.ResetForRun();
-            worlds.ResetForRun();
-            player.Teleport(startPosition);player.transform.rotation=Quaternion.Euler(0,startYaw,0);
-            if(player.visual!=null)player.visual.rotation=player.transform.rotation;
-            cameraRig?.Recover(startYaw);feedback?.ResetForRun();
-            RestartSequence++;
-            Debug.Log("SHIFTBOUND INSTANT RETRY: sequence="+RestartSequence+" scene retained; start="+startPosition);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void TogglePause()

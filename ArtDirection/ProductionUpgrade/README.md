@@ -1,6 +1,6 @@
 # Production upgrade sources and provenance
 
-Work in progress. See `../../CONTINUATION_PRODUCTION_UPGRADE.md` for review defects and unfinished acceptance.
+Historical production pass, superseded by the owner-directed WindowsPolished restoration. Its source remains in Git history through 821ee36; removed active Unity assets are intentionally preserved there and in the local backup. Review the current main source and evidence at [WindowsPolishedPort](../WindowsPolishedPort/README.md). The descriptions below concern the historical pass.
 
 The replacement courier uses the **Quaternius Universal Base Characters Standard** CC0 humanoid anatomy/rig already present in this repository (`UnityProject/Assets/Shiftbound/ThirdParty/Quaternius/Character/Superhero_Male_FullBody.fbx`) and CC0 hairstyle from the existing downloaded standard source archive. Existing Quaternius and source texture licensing is retained in `THIRD_PARTY.md` and the third-party directories. Clothing, textile atlas, bag, trim, footwear additions and skin-weight integration are authored in `Tools/AuthorProductionCourier.py` with Blender4.5.14LTS. Editable source is `Sources/ShiftboundCourier.blend`. No purchased assets or runtime cloth.
 

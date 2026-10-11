@@ -1,5 +1,7 @@
 # Shiftbound
 
+**Current review checkpoint (11 October 2026):** [WindowsPolished restored in Unity and on Samsung](ArtDirection/WindowsPolishedPort/README.md). This is the owner-preferred baseline, with actual Samsung screenshots, automated footage, exact build identity and unresolved acceptance gates. Earlier reviews below are historical; no independent overall rating or sustained 60 FPS acceptance is established.
+
 The [AI project review](AI_REVIEW.md) records code findings, current verification, visual gaps and the next acceptance gate for Milestone 1.
 
 Current implementation: [Milestone 1 — reliable traversal and recovery](MILESTONE_1_PROGRESS.md). Unity import, a current Windows build, input/physics regressions and the complete scripted route succeeded in this task. Run `Tools/VerifyMilestone1.ps1 -Build` to reproduce checks (see the graphics-enabled fallback in [AI_REVIEW.md](AI_REVIEW.md) if headless licensing fails); the local player is `UnityProject/Builds/WindowsPolished/Shiftbound.exe`. Actual current [Present](ArtDirection/Milestone1/present.png) and [Overgrown](ArtDirection/Milestone1/overgrown.png) renders are available. Human playtesting and audiovisual polish remain open.

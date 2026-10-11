@@ -10,7 +10,7 @@ namespace Shiftbound
         [Min(0f)] public float jogThreshold = 0.25f;
         [Min(0f)] public float sprintThreshold = 4.2f;
         [Min(0f)] public float landingDuration = 0.18f;
-        [Min(0f)] public float transitionDuration = 0.085f;
+        [Min(0f)] public float transitionDuration = 0.12f;
 
         private Animator animator;
         private int currentState;
@@ -18,8 +18,6 @@ namespace Shiftbound
         private float landingUntil;
         private bool wasGrounded;
         private float takeoffUntil;
-        private float walkCycle, jogCycle, sprintCycle;
-        private int takeoffSequence;
         private static readonly int Walk = Animator.StringToHash("Base Layer.Walk");
         private static readonly int Takeoff = Animator.StringToHash("Base Layer.Takeoff");
         private static readonly int Fall = Animator.StringToHash("Base Layer.Fall");
@@ -28,8 +26,6 @@ namespace Shiftbound
         private static readonly int Sprint = Animator.StringToHash("Base Layer.Sprint");
         private static readonly int Jump = Animator.StringToHash("Base Layer.Jump");
         private static readonly int Land = Animator.StringToHash("Base Layer.Land");
-        public static float GaitCycleRate(float speed) => speed < 1.8f ? speed/1.42f :
-            speed < 4.2f ? Mathf.Max(.85f,speed/2.8f) : Mathf.Max(1.25f,speed/3.8f);
 
         private void Awake()
         {
@@ -37,16 +33,6 @@ namespace Shiftbound
             animator.applyRootMotion = false;
             currentState = Idle;
             landingSequence = motor != null ? motor.LandingSequence : 0;
-            takeoffSequence = motor != null ? motor.TakeoffSequence : 0;
-            foreach (var clip in animator.runtimeAnimatorController.animationClips)
-            {
-                if (clip.name.Contains("Walk")) walkCycle = clip.length;
-                if (clip.name.Contains("Jog")) jogCycle = clip.length;
-                if (clip.name.Contains("Sprint") || clip.name.Contains("Run")) sprintCycle = clip.length;
-            }
-            if (walkCycle <= 0) walkCycle = .8f;
-            if (jogCycle <= 0) jogCycle = .7f;
-            if (sprintCycle <= 0) sprintCycle = .65f;
         }
 
         private void Update()
@@ -54,14 +40,7 @@ namespace Shiftbound
             if (motor == null || animator.runtimeAnimatorController == null) return;
             bool grounded = motor.IsGrounded;
             if (grounded && !wasGrounded) takeoffUntil = 0f;
-            // A buffered jump can launch on the same motor step as contact.
-            // Use the actual launch event rather than missing that transition.
-            if (motor.TakeoffSequence != takeoffSequence)
-            {
-                takeoffSequence = motor.TakeoffSequence;
-                takeoffUntil = Time.time + .075f;
-                landingUntil = 0f;
-            }
+            if (!grounded && wasGrounded && motor.VerticalVelocity > 0f) takeoffUntil = Time.time + .09f;
             wasGrounded = grounded;
             if (motor.LandingSequence != landingSequence)
             {
@@ -84,18 +63,13 @@ namespace Shiftbound
                     float phase = Mathf.Repeat(animator.GetCurrentAnimatorStateInfo(0).normalizedTime, 1f);
                     animator.CrossFade(wanted, transitionDuration, 0, phase);
                 }
-                else animator.CrossFadeInFixedTime(wanted,
-                    wanted == Takeoff ? .025f : wanted == Fall ? .10f :
-                    wanted == Land ? .045f : transitionDuration, 0, 0f);
+                else animator.CrossFadeInFixedTime(wanted, transitionDuration, 0,
+                    wanted == Takeoff ? .65f : wanted == Fall ? .8f : 0f);
                 currentState = wanted;
             }
-            // Maintain readable running cadence at partial stick deflection.
-            // The imported running clips include exaggerated swing travel;
-            // treating that as planted stride distance made jogging too slow.
-            float cadence=GaitCycleRate(speed);
-            animator.speed = wanted == Walk ? Mathf.Clamp(cadence*walkCycle,.15f,2f) :
-                wanted == Jog ? Mathf.Clamp(cadence*jogCycle,.2f,2f) :
-                wanted == Sprint ? Mathf.Clamp(cadence*sprintCycle,.3f,2.3f) : 1f;
+            animator.speed = wanted == Walk ? Mathf.Clamp(speed / 1.5f, .3f, 1.4f) :
+                wanted == Jog ? Mathf.Clamp(speed / 3f, 0.75f, 1.5f) :
+                wanted == Sprint ? Mathf.Clamp(speed / 7f, 0.75f, 1.2f) : 1f;
         }
     }
 }

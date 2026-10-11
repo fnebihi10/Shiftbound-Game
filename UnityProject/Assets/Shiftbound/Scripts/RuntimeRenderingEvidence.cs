@@ -56,10 +56,10 @@ namespace Shiftbound
             foreach(var volume in UnityEngine.Object.FindObjectsByType<Volume>(FindObjectsSortMode.None))
                 Row("volume",volume.name+" priority="+volume.priority+" weight="+volume.weight+" profile="+(volume.sharedProfile!=null?volume.sharedProfile.name:"none"));
             foreach(var texture in Resources.FindObjectsOfTypeAll<Texture2D>())
-                if(texture.name.Contains("Ivy")||texture.name.Contains("Limestone")||texture.name.Contains("DistantCity"))
+                if(texture.name.Contains("Skyline")||texture.name.Contains("Ivy")||texture.name.Contains("Limestone")||texture.name.Contains("DistantCity"))
                     Row("texture",texture.name+" "+texture.width+"x"+texture.height+" format="+texture.format+" mipCount="+texture.mipmapCount+" loadedMip="+texture.loadedMipmapLevel);
             foreach(var material in Resources.FindObjectsOfTypeAll<Material>())
-                if(material.name.Contains("Rooted leaves")||material.name.Contains("panorama"))
+                if(material.name.Contains("Skyline")||material.name.Contains("Rooted leaves")||material.name.Contains("panorama"))
                     Row("material",material.name+" shader="+(material.shader!=null?material.shader.name:"NULL")+" supported="+(material.shader!=null&&material.shader.isSupported));
             var identity=Resources.Load<TextAsset>("CandidateIdentity");
             if(identity!=null)File.WriteAllText(Path.Combine(Application.persistentDataPath,"render-build-identity.json"),identity.text);

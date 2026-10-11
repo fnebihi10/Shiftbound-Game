@@ -33,10 +33,6 @@ namespace Shiftbound
 
         public bool IsAltered => activeWorld == 1;
         public bool IsReady => Time.unscaledTime >= nextSwitch;
-        public void ResetForRun()
-        {
-            activeWorld=0;nextSwitch=0;rejectionFlash=0;Apply();
-        }
 
         private void Awake()
         {
@@ -71,8 +67,7 @@ namespace Shiftbound
                 for (int i = 0; i < renderSets[world].Length; i++)
                 {
                     materialSets[world][i] = renderSets[world][i].sharedMaterials;
-                    var skin = renderSets[world][i].GetComponent<WorldSurfaceSkin>();
-                    previewEligible[world][i] = renderSets[world][i].GetComponent<Collider>() != null || skin != null && skin.collisionSurface != null;
+                    previewEligible[world][i] = renderSets[world][i].GetComponent<Collider>() != null;
                     originalVisibility[world][i] = renderSets[world][i].enabled;
                     ghostSets[world][i] = new Material[materialSets[world][i].Length];
                     for (int slot = 0; slot < ghostSets[world][i].Length; slot++)

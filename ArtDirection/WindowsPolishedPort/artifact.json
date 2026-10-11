@@ -1,0 +1,112 @@
+﻿{
+    "apk_sha256":  "872cb7420201950a38fd341c41c629e4d6888c9611a0e3028a1b6545274bc622",
+    "native":  [
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "lib_burst_generated.so",
+                       "sha256":  "c7b668321c7d53450144541a27fefe96e3d08701496ad8aa6584416a1c52d061",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   },
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "libc++_shared.so",
+                       "sha256":  "4397241b4bd20a8e579bfb41d21107857e12985f6a01ca0c2a5f83380d1270b4",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   },
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "libgame.so",
+                       "sha256":  "fe2b028f16ba62cfc939e0d5f6403be0e0ed27195fece8019f9d09f0956c3033",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   },
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "libil2cpp.so",
+                       "sha256":  "3b8bb6a33f11f3c3b3cccc5c2eb2b3401cb4f492ac2571bc4d7f79ae6edf0231",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   },
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "libmain.so",
+                       "sha256":  "8c63eeda160250bc1e8a882a2f9298514a2d8a3a718e5cd0fa4f8150fae7a68b",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 false
+                                             ],
+                       "static_16kb_pass":  false
+                   },
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "libswappywrapper.so",
+                       "sha256":  "5e56a0d451b9100f5269e97458028bf4c0cff038dde91391e060bc30e39877ce",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   },
+                   {
+                       "abi":  "arm64-v8a",
+                       "library":  "libunity.so",
+                       "sha256":  "6cb917d944b112f71196c43753d5bd784c9f353f41d7d8fa01b7329db9a4cc0c",
+                       "load_alignments":  [
+                                               16384,
+                                               16384,
+                                               16384,
+                                               16384
+                                           ],
+                       "relro_end_aligned":  [
+                                                 true
+                                             ],
+                       "static_16kb_pass":  true
+                   }
+               ],
+    "zipalign_pass":  true,
+    "signature_pass":  true,
+    "runtime_16kb":  "NOT VERIFIED: no supported separate16KB runtime evidence",
+    "install_update":  "PASS: authorized Samsung same-key update-r,0.3.1/code4; original firstInstallTime preserved; build fingerprint verified"
+}

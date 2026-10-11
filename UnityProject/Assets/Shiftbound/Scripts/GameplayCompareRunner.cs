@@ -2,7 +2,6 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Shiftbound
 {
@@ -14,14 +13,8 @@ namespace Shiftbound
         private string motionDirectory;
         private int motionFrame;
         private bool productionInput;
-        private bool repeatRoute;
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void Register()
-        {
-            SceneManager.sceneLoaded-=OnSceneLoaded;
-            SceneManager.sceneLoaded+=OnSceneLoaded;
-        }
-        private static void OnSceneLoaded(Scene scene,LoadSceneMode mode)
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        private static void MaybeRun()
         {
             string[] args = Environment.GetCommandLineArgs();
             int index = Array.IndexOf(args, "-shiftboundCompareRun");
@@ -29,7 +22,6 @@ namespace Shiftbound
             var runner = new GameObject("Full route regression").AddComponent<GameplayCompareRunner>();
             runner.capturePath = args[index + 1];
             runner.productionInput = Array.IndexOf(args, "-shiftboundProductionInput") >= 0;
-            runner.repeatRoute = Array.IndexOf(args, "-shiftboundRepeatRoute") >= 0;
             int hz = Array.IndexOf(args, "-shiftboundStepRate");
             if (hz >= 0 && hz + 1 < args.Length && int.TryParse(args[hz + 1], out int value)) runner.rate = value;
             int motion = Array.IndexOf(args, "-shiftboundMotionFrames");
@@ -50,8 +42,7 @@ namespace Shiftbound
             if (motor == null || worlds == null || flow == null || rate < 0 || rate > 1000)
             { Fail("Missing systems or invalid step rate"); yield break; }
             motor.enabled = productionInput;
-            ProductionInputDriver driver = productionInput ? GetComponent<ProductionInputDriver>() : null;
-            if(productionInput&&driver==null)driver=gameObject.AddComponent<ProductionInputDriver>();
+            ProductionInputDriver driver = productionInput ? gameObject.AddComponent<ProductionInputDriver>() : null;
             if (driver != null) driver.editorFrameRate = rate > 0 ? rate : 60;
             if (productionInput)
             {
@@ -59,29 +50,6 @@ namespace Shiftbound
                 // Accelerated capture clocks can simulate movement during a real cooldown.
                 QualitySettings.vSyncCount = 0;
                 Application.targetFrameRate = rate > 0 ? rate : 60;
-            }
-            if(driver!=null&&repeatRoute&&Array.IndexOf(Environment.GetCommandLineArgs(),"-shiftboundSustainedCoverage")>=0)
-            {
-                // Actual production input, not teleportation: inspect foliage
-                // and corresponding skyline in both worlds, then fall over the
-                // opening parapet and exercise the real checkpoint recovery.
-                foreach(bool altered in new[]{false,true})
-                {
-                    if(worlds.IsAltered!=altered)
-                    {driver.Set(Vector2.zero,false,true);yield return new WaitForSecondsRealtime(.8f);driver.Set(Vector2.zero,false);}
-                    driver.SetLook(new Vector2(.6f,0));yield return new WaitForSecondsRealtime(5.22f);
-                    driver.SetLook(Vector2.zero);
-                }
-                driver.Set(Vector2.zero,false,true);yield return new WaitForSecondsRealtime(.8f);driver.Set(Vector2.zero,false);
-                int recovery=flow.RecoverySequence;
-                driver.Set(Vector2.left,true);yield return new WaitForSecondsRealtime(.65f);
-                driver.Set(Vector2.left,false);
-                float until=Time.realtimeSinceStartup+5;
-                while(flow.RecoverySequence==recovery&&Time.realtimeSinceStartup<until)yield return null;
-                driver.Set(Vector2.zero,false);yield return null;yield return null;
-                if(flow.RecoverySequence==recovery||Vector3.Distance(motor.transform.position,flow.CheckpointPosition)>.25f)
-                {Fail("Repeated workload failed actual fall/recovery coverage");yield break;}
-                Debug.Log("SHIFTBOUND SUSTAINED COVERAGE PASSED: both-world full orbit; actual input-driven fall and checkpoint recovery");
             }
             if (motionDirectory != null)
             {
@@ -229,17 +197,6 @@ namespace Shiftbound
                 " input=" + (productionInput ? "production GameInput/Update/camera" : "direct Step") +
                 " actual checkpoints=3; actual goal; stopped completion motion.");
             if (driver != null) Debug.Log("SHIFTBOUND PRODUCTION TIMING: requestedRate=" + rate + " " + driver.Timing);
-            if(repeatRoute)
-            {
-                // Explicit device-rendering workload. Uses the complete route,
-                // real motor, required airborne Shift, goal and shipped menu.
-                // Automated input does not establish physical touch comfort.
-                yield return new WaitForSecondsRealtime(2);
-                flow.Restart();
-                // Retry now retains the actual scene and resources. Reuse the
-                // diagnostic input device and continue the telemetry buffer.
-                StartCoroutine(Start());yield break;
-            }
             Application.Quit(0);
         }
         private void Capture(Camera camera)
@@ -270,8 +227,9 @@ namespace Shiftbound
             RenderTexture previousActive = RenderTexture.active;
             try
             {
-                GameplayFrameCapture.Render(camera,target);
+                camera.targetTexture = target;
                 RenderTexture.active = target;
+                camera.Render();
                 var image = new Texture2D(1280, 720, TextureFormat.RGB24, false);
                 image.ReadPixels(new Rect(0, 0, 1280, 720), 0, 0);
                 image.Apply();

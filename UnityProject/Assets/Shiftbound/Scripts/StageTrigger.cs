@@ -15,7 +15,6 @@ namespace Shiftbound
         public Transform shiftBridgeLessonExit;
         public bool HasFired => fired;
         private bool fired;
-        public void ResetForRun() => fired=false;
 
         private void OnTriggerEnter(Collider other)
         {
