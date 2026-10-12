@@ -1,0 +1,96 @@
+{
+    "sourceFingerprint":  "731a000106663427099248e204e218ad2da0b384055a8cfcdea3243f221f48ef",
+    "checks":  [
+                   {
+                       "log":  "milestone1-final-regression.log",
+                       "lastWriteUtc":  "2026-10-11T13:36:05.2323347Z",
+                       "marker":  "SHIFTBOUND REGRESSION PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-smoke.log",
+                       "lastWriteUtc":  "2026-10-11T13:36:08.1710731Z",
+                       "marker":  "SHIFTBOUND SMOKE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-reach.log",
+                       "lastWriteUtc":  "2026-10-11T13:36:11.4506466Z",
+                       "marker":  "SHIFTBOUND REACH AUDIT COMPLETE",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "candidate-phone-regression.log",
+                       "lastWriteUtc":  "2026-10-11T13:36:14.8740347Z",
+                       "marker":  "SHIFTBOUND PHONE REGRESSION PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "upgrade-unity-playmode.log",
+                       "lastWriteUtc":  "2026-10-11T13:34:23.5722799Z",
+                       "marker":  "SHIFTBOUND UNITY PLAY MODE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-route-30.log",
+                       "lastWriteUtc":  "2026-10-11T13:36:24.9192696Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-route-60.log",
+                       "lastWriteUtc":  "2026-10-11T13:36:42.1253369Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-route-120.log",
+                       "lastWriteUtc":  "2026-10-11T13:37:13.7159869Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-route-144.log",
+                       "lastWriteUtc":  "2026-10-11T13:37:50.8589345Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-final-route-0.log",
+                       "lastWriteUtc":  "2026-10-11T13:38:08.3622310Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-production-route-30.log",
+                       "lastWriteUtc":  "2026-10-11T13:38:23.6620790Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-production-route-60.log",
+                       "lastWriteUtc":  "2026-10-11T13:38:38.8980143Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-production-route-120.log",
+                       "lastWriteUtc":  "2026-10-11T13:38:53.9994311Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   },
+                   {
+                       "log":  "milestone1-production-route-144.log",
+                       "lastWriteUtc":  "2026-10-11T13:39:09.0560265Z",
+                       "marker":  "SHIFTBOUND FULL ROUTE PASSED",
+                       "pass":  true
+                   }
+               ],
+    "jumpIntentAssertions":  11,
+    "touchRouterAssertions":  18,
+    "recordedRoutes":  2,
+    "recordedRecovery":  2,
+    "recordedReset":  true,
+    "recordedGameplayExceptions":  0,
+    "scope":  "Technical automated checks only. Synthetic input does not establish human comfort, quality, or Samsung performance."
+}

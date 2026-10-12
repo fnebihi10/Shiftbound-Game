@@ -34,6 +34,8 @@ namespace Shiftbound
         public event System.Action<float> Landed;
         public float LastLandingSpeed { get; private set; }
         public int LandingSequence { get; private set; }
+        public int MotionResetSequence { get; private set; }
+        public bool HasContactAudio { get; set; }
         // Support may bridge the controller's contact skin, never an extra radius.
         public float SupportTolerance => Mathf.Min(groundProbeDistance, controller.skinWidth + 0.02f);
 
@@ -118,7 +120,7 @@ namespace Shiftbound
             else IsGrounded = false;
             Vector3 flatTravel = transform.position - before;
             flatTravel.y = 0f;
-            if (IsGrounded && flatTravel.sqrMagnitude > 0.0001f)
+            if (!HasContactAudio && IsGrounded && flatTravel.sqrMagnitude > 0.0001f)
             {
                 stepTravel += flatTravel.magnitude;
                 if (stepTravel >= 1.6f)
@@ -145,8 +147,6 @@ namespace Shiftbound
             {
                 LastLandingSpeed = Mathf.Max(0f, -verticalVelocity);
                 LandingSequence++;
-                if (visual != null) visual.localScale = new Vector3(
-                    visualBaseScale.x * 1.025f, visualBaseScale.y * 0.96f, visualBaseScale.z * 1.025f);
                 Landed?.Invoke(LastLandingSpeed);
                 if (LastLandingSpeed > 4f)
                     GameFlow.Instance?.feedback?.Landing(LastLandingSpeed > 11f);
@@ -169,6 +169,7 @@ namespace Shiftbound
 
         public void Teleport(Vector3 position)
         {
+            MotionResetSequence++;
             controller.enabled = false;
             transform.position = position;
             controller.enabled = true;

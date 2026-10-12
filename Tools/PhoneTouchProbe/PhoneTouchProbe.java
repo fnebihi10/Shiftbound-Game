@@ -61,6 +61,8 @@ public final class PhoneTouchProbe extends Instrumentation {
             capture("00-before");
             if (scenario.equals("interaction")) interactions();
             else if (scenario.equals("orbit")) orbit();
+            else if (scenario.equals("jump-review")) jumpReview();
+            else if (scenario.equals("jump-video")) jumpVideo();
             else throw new IllegalArgumentException("Unknown scenario: " + scenario);
             result.putString("result", "DELIVERED: review screenshots/events; no automatic artistic or comfort PASS");
         } catch (Throwable error) {
@@ -71,6 +73,34 @@ public final class PhoneTouchProbe extends Instrumentation {
             if (log != null) log.close();
             finish(result.containsKey("error") ? 1 : 0, result);
         }
+    }
+    private void jumpReview() throws Exception {
+        float bottom=684-controlHeight;
+        float moveX=34+controlInset+96*controlSize, moveY=bottom-96*controlSize;
+        float jumpX=width-40-controlInset-62*controlSize, jumpY=bottom-62*controlSize;
+        log.println("Jump review captures alter frame pacing; exclude this window from performance acceptance.");
+        press(0,jumpX,jumpY);waitMs(160);capture("jump-stationary-ascent");
+        waitMs(100);capture("jump-stationary-apex");
+        release(0);waitMs(500);capture("jump-stationary-recovery");
+        waitMs(400);
+        press(0,moveX,moveY);move(0,moveX,moveY-65,140);waitMs(450);
+        press(1,jumpX,jumpY);waitMs(160);capture("jump-moving-ascent");
+        waitMs(100);capture("jump-moving-apex");
+        waitMs(150);release(1);waitMs(300);capture("jump-moving-landing");
+        release(0);waitMs(500);capture("jump-moving-stop");
+        log.println("DELIVERED native multi-touch moving and stationary hold jumps; screenshot phase labels are intended timing, inspect actual pose.");
+    }
+    private void jumpVideo() throws Exception {
+        float bottom=684-controlHeight;
+        float moveX=34+controlInset+96*controlSize, moveY=bottom-96*controlSize;
+        float jumpX=width-40-controlInset-62*controlSize, jumpY=bottom-62*controlSize;
+        // No screenshots interrupt the arc; separate screenrecord supplies
+        // the motion evidence. Starts on the opening roof with reset camera.
+        press(0,jumpX,jumpY);waitMs(750);release(0);waitMs(450);
+        press(0,moveX,moveY);move(0,moveX,moveY-65,100);waitMs(760);
+        press(1,jumpX,jumpY);waitMs(720);release(1);
+        waitMs(180);release(0);waitMs(600);
+        log.println("Jump video: stationary held jump, then moving held jump toward first gap; evaluate actual landing, no success assertion.");
     }
     private void interactions() throws Exception {
         // Starts PLAYING at a stationary rooftop, default control layout.

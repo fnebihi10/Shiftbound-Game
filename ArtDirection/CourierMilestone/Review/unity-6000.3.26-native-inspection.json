@@ -1,0 +1,36 @@
+{
+    "unity":  "6000.3.26f1",
+    "module_url":  "https://download.unity3d.com/download_unity/de8167e7440c/MacEditorTargetInstaller/UnitySetup-Android-Support-for-Editor-6000.3.26f1.pkg",
+    "archive_sha256":  "9cf29a4be890bdf83a10431ca2814ab6315659bbd24d525dc224bcadbe5c667c",
+    "scope":  "Read-only inspection of official non-Windows module ARM64 vendor binaries. No Editor installed, no source migration, no runtime test, no vendor libraries copied into the game. Windows module installer attempts exited 2; owner dismissed dialogs.",
+    "libraries":  [
+                      {
+                          "path":  "C:\\Users\\Admin\\Desktop\\LINDI\\Shiftbound-Game\\.validation\\CourierMilestone\\Unity6000.3.26\\VendorInspection\\Variations\\il2cpp\\Development\\Libs\\arm64-v8a\\libmain.so",
+                          "sha256":  "c06e942d65401ad72d91c651e4811c190004212c158555027ab897ea86926d50",
+                          "relro_start":  "0x8f20",
+                          "relro_memsz":  "0x10e0",
+                          "relro_end":  "0xa000",
+                          "end_mod_16kb":  "0x2000",
+                          "static_relro_pass":  false
+                      },
+                      {
+                          "path":  "C:\\Users\\Admin\\Desktop\\LINDI\\Shiftbound-Game\\.validation\\CourierMilestone\\Unity6000.3.26\\VendorInspection\\Variations\\il2cpp\\Release\\Libs\\arm64-v8a\\libmain.so",
+                          "sha256":  "3d7941fdee44d77662bd51a3a8196ce72866b82ffc5b098ae1e16a41732601ca",
+                          "relro_start":  "0x8f20",
+                          "relro_memsz":  "0x10e0",
+                          "relro_end":  "0xa000",
+                          "end_mod_16kb":  "0x2000",
+                          "static_relro_pass":  false
+                      },
+                      {
+                          "path":  "C:\\Users\\Admin\\Desktop\\LINDI\\Shiftbound-Game\\.validation\\CourierMilestone\\Unity6000.3.26\\VendorInspection\\Variations\\il2cpp\\Release_ThinLTO\\Libs\\arm64-v8a\\libmain.so",
+                          "sha256":  "3d7941fdee44d77662bd51a3a8196ce72866b82ffc5b098ae1e16a41732601ca",
+                          "relro_start":  "0x8f20",
+                          "relro_memsz":  "0x10e0",
+                          "relro_end":  "0xa000",
+                          "end_mod_16kb":  "0x2000",
+                          "static_relro_pass":  false
+                      }
+                  ],
+    "result":  "FAIL: all inspected ARM64 libmain variants have unaligned RELRO ends; a version increment alone does not resolve the recorded check."
+}

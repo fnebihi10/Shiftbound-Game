@@ -1,12 +1,13 @@
 param(
  [Parameter(Mandatory=$true)][string]$Output,
  [ValidateSet(30,60,120,144)][int]$Rate=60,
+ [string]$Player='',
  [switch]$NoTiming,[switch]$NoPost,[switch]$Record
 )
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
 . (Join-Path $PSScriptRoot 'CandidateSource.ps1')
-$player=Join-Path $root 'UnityProject/Builds/WindowsPolished/Shiftbound.exe'
+$player=if($Player){[IO.Path]::GetFullPath($Player)}else{Join-Path $root 'UnityProject/Builds/WindowsPolished/Shiftbound.exe'}
 $identity=Get-Content ($player+'.manifest.json') -Raw | ConvertFrom-Json
 if($identity.sourceFingerprint -ne (Get-CandidateSource $root)){throw 'Source changed: rebuild before profiling.'}
 foreach($binary in $identity.binaries){

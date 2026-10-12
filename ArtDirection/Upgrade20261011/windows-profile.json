@@ -1,0 +1,68 @@
+{
+    "hardware":  [
+                     "Unity=6000.3.25f1",
+                     "Device=System Product Name (ASUS)",
+                     "OS=Windows 11  (10.0.26300)",
+                     "CPU=AMD Ryzen 5 5600X 6-Core Processor ",
+                     "GPU=AMD Radeon RX 7600",
+                     "Driver/API=Direct3D 11.0 [level 11.1]",
+                     "SystemRAMMB=32657",
+                     "Screen=1280x720",
+                     "Refresh=240",
+                     "Quality=PC",
+                     "RenderScale=1",
+                     "VSync=0",
+                     "FrameCap=60",
+                     "FrameTiming=True",
+                     "Intervals=LateUpdate callback; NOT presentation deadlines. Zero timing counters unavailable.",
+                     "Input=software Input System timestamp to motor; NOT physical input-to-photon."
+                 ],
+    "samples":  721,
+    "duration_s":  12.0757,
+    "raw_sha256":  "BEAFA3010E80543E8B994E5686CF3A9E1B0706C56CCAD8C8F93838AE62C2F292",
+    "warnings":  0,
+    "warnings_per_minute":  0,
+    "warnings_per_1000_callbacks":  0,
+    "startup_p99_callback_ms":  93.543,
+    "steady":  {
+                   "p50_callback_ms":  16.662,
+                   "p95_callback_ms":  16.817,
+                   "p99_callback_ms":  16.913,
+                   "p95_cpu_ms":  16.67,
+                   "p95_main_ms":  0.66,
+                   "p95_render_ms":  null,
+                   "p95_gpu_ms":  null,
+                   "p50_draws":  null,
+                   "p50_triangles":  null,
+                   "p95_gc_bytes":  null,
+                   "p95_memory_bytes":  124065390
+               },
+    "shift_frames":  [
+                         {
+                             "elapsed_s":  "2.52904",
+                             "callback_ms":  "18.2949",
+                             "shift_result":  "1"
+                         },
+                         {
+                             "elapsed_s":  "4.44435",
+                             "callback_ms":  "17.1198",
+                             "shift_result":  "1"
+                         },
+                         {
+                             "elapsed_s":  "5.34440",
+                             "callback_ms":  "17.1796",
+                             "shift_result":  "1"
+                         },
+                         {
+                             "elapsed_s":  "8.17757",
+                             "callback_ms":  "16.9171",
+                             "shift_result":  "1"
+                         },
+                         {
+                             "elapsed_s":  "11.02759",
+                             "callback_ms":  "16.8675",
+                             "shift_result":  "1"
+                         }
+                     ],
+    "limits":  "Windows callback timing, not Android presentation or physical input latency. Warnings lack per-event timestamps; correlation with individual stalls NOT VERIFIED."
+}

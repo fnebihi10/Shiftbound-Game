@@ -159,6 +159,14 @@ namespace Shiftbound
             return result;
         }
 
+        public void ResetForRun()
+        {
+            activeWorld = 0;
+            nextSwitch = 0f;
+            rejectionFlash = 0f;
+            if (collisionSets != null) Apply();
+        }
+
         private void Apply()
         {
             for (int world = 0; world < 2; world++)

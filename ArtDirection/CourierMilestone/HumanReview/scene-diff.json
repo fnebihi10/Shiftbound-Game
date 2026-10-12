@@ -1,0 +1,17 @@
+{
+    "addedActorBlocks":  5,
+    "changedExistingBlocks":  [
+                                  {
+                                      "before":  "--- !u!1 \u00263355906\nGameObject:\n  m_ObjectHideFlags: 0\n  m_CorrespondingSourceObject: {fileID: 0}\n  m_PrefabInstance: {fileID: 0}\n  m_PrefabAsset: {fileID: 0}\n  serializedVersion: 6\n  m_Component:\n  - component: {fileID: 3355908}\n  - component: {fileID: 3355907}\n  m_Layer: 0\n  m_Name: Sun\n  m_TagString: Untagged\n  m_Icon: {fileID: 0}\n  m_NavMeshLayer: 0\n  m_StaticEditorFlags: 0\n  m_IsActive: 1\n",
+                                      "id":  "3355906",
+                                      "after":  "--- !u!1 \u00263355906\nGameObject:\n  m_ObjectHideFlags: 0\n  m_CorrespondingSourceObject: {fileID: 0}\n  m_PrefabInstance: {fileID: 0}\n  m_PrefabAsset: {fileID: 0}\n  serializedVersion: 6\n  m_Component:\n  - component: {fileID: 3355908}\n  - component: {fileID: 3355907}\n  - component: {fileID: 3355909}\n  m_Layer: 0\n  m_Name: Sun\n  m_TagString: Untagged\n  m_Icon: {fileID: 0}\n  m_NavMeshLayer: 0\n  m_StaticEditorFlags: 0\n  m_IsActive: 1\n"
+                                  },
+                                  {
+                                      "before":  "--- !u!4 \u0026117148207\nTransform:\n  m_ObjectHideFlags: 0\n  m_CorrespondingSourceObject: {fileID: 0}\n  m_PrefabInstance: {fileID: 0}\n  m_PrefabAsset: {fileID: 0}\n  m_GameObject: {fileID: 117148206}\n  serializedVersion: 2\n  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}\n  m_LocalPosition: {x: 0, y: 0, z: 0}\n  m_LocalScale: {x: 1, y: 1, z: 1}\n  m_ConstrainProportionsScale: 0\n  m_Children:\n  - {fileID: 1549148361}\n  m_Father: {fileID: 603412840}\n  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\n",
+                                      "id":  "117148207",
+                                      "after":  "--- !u!4 \u0026117148207\nTransform:\n  m_ObjectHideFlags: 0\n  m_CorrespondingSourceObject: {fileID: 0}\n  m_PrefabInstance: {fileID: 0}\n  m_PrefabAsset: {fileID: 0}\n  m_GameObject: {fileID: 117148206}\n  serializedVersion: 2\n  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}\n  m_LocalPosition: {x: 0, y: 0, z: 0}\n  m_LocalScale: {x: 1, y: 1, z: 1}\n  m_ConstrainProportionsScale: 0\n  m_Children:\n  - {fileID: 1627517929}\n  m_Father: {fileID: 603412840}\n  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}\n"
+                                  }
+                              ],
+    "removedBlocks":  4,
+    "unchangedBlocks":  6179
+}

@@ -1,0 +1,18 @@
+{
+    "matchedFrames":  368,
+    "beforeSource":  "8faef7446031fab6d1183ddca71fee2c883ca8386521f23f355aa46a28936fe8",
+    "resolution":  "1280x720 each",
+    "afterSource":  "54db0b0e246b6c1f2e87566703200c6b72bbe86867cfb75b20647959561899d9",
+    "exactFields":  [
+                        "time_s",
+                        "speed_m_s",
+                        "grounded",
+                        "px",
+                        "py",
+                        "pz",
+                        "cx",
+                        "cy",
+                        "cz"
+                    ],
+    "scope":  "Isolated old/new anatomical jump action comparison. Original jog, world, motor and camera identical. Fixed60sim/30sample. Pause prelude omitted."
+}

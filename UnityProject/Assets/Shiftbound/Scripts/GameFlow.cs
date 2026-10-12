@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Shiftbound
 {
@@ -16,6 +15,11 @@ namespace Shiftbound
         public float fallHeight = -12f;
         private Vector3 checkpoint;
         private float checkpointYaw;
+        private Vector3 startPosition;
+        private float startYaw;
+        private StageTrigger[] runTriggers;
+        private float checkpointNoticeTime;
+        public float CheckpointHintAge => Time.unscaledTime - checkpointNoticeTime;
         private Transform shiftBridgeLessonExit;
         private Vector3 shiftBridgeLessonEnd;
         public bool HasShiftBridgeGuidance
@@ -58,6 +62,9 @@ namespace Shiftbound
             AudioListener.pause = false;
             checkpoint = player.transform.position;
             checkpointYaw = player.transform.eulerAngles.y;
+            startPosition = checkpoint;
+            startYaw = checkpointYaw;
+            runTriggers = FindObjectsByType<StageTrigger>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         }
 
         private void Start()
@@ -70,6 +77,7 @@ namespace Shiftbound
                 checkpoint = trigger.checkpointPosition;
                 checkpointYaw = trigger.checkpointFacingYaw;
                 CheckpointHint = trigger.checkpointHint;
+                checkpointNoticeTime = Time.unscaledTime;
                 shiftBridgeLessonExit = trigger.shiftBridgeLessonExit;
                 if (shiftBridgeLessonExit != null)
                 {
@@ -86,6 +94,9 @@ namespace Shiftbound
         public void ApplyFrameTier()
         {
             if (Application.isMobilePlatform) Application.targetFrameRate = PlayerPreferences.LowPower ? 30 : 60;
+#if UNITY_EDITOR
+            else Application.targetFrameRate = 60;
+#endif
         }
 
         private void OnApplicationPause(bool interrupted) { if (interrupted && !DiagnosticSession) Suspend(); }
@@ -124,6 +135,7 @@ namespace Shiftbound
             checkpoint = position;
             checkpointYaw = facingYaw;
             CheckpointHint = hint;
+            checkpointNoticeTime = Time.unscaledTime;
             shiftBridgeLessonExit = bridgeLessonExit;
             if (bridgeLessonExit != null)
             {
@@ -146,6 +158,8 @@ namespace Shiftbound
             player.transform.rotation = Quaternion.Euler(0f, checkpointYaw, 0f);
             if (player.visual != null) player.visual.rotation = player.transform.rotation;
             cameraRig?.Recover(checkpointYaw);
+            feedback?.Recovery();
+            checkpointNoticeTime = Time.unscaledTime;
             Notify("TRY AGAIN");
         }
 
@@ -171,11 +185,28 @@ namespace Shiftbound
 
         public void Restart()
         {
-            PlayerPrefs.DeleteKey("sb.checkpoint"); PlayerPrefs.Save();
+            if (!DiagnosticSession) { PlayerPrefs.DeleteKey("sb.checkpoint"); PlayerPrefs.Save(); }
             input?.CancelGameplayInput();
             AudioListener.pause = false;
             Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            paused = false;
+            completed = false;
+            elapsed = 0f;
+            CheckpointSequence = 0;
+            CheckpointHint = "";
+            shiftBridgeLessonExit = null;
+            shiftBridgeLessonEnd = Vector3.zero;
+            checkpoint = startPosition;
+            checkpointYaw = startYaw;
+            foreach (var trigger in runTriggers) if (trigger != null) trigger.ResetForRun();
+            worlds?.ResetForRun();
+            player.Teleport(startPosition);
+            player.transform.rotation = Quaternion.Euler(0f, startYaw, 0f);
+            if (player.visual != null) player.visual.rotation = player.transform.rotation;
+            cameraRig?.Recover(startYaw);
+            feedback?.ResetForRun();
+            notice = "";
+            noticeUntil = 0f;
         }
 
         public void TogglePause()

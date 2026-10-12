@@ -49,7 +49,8 @@ foreach ($milestoneRate in @(30, 60, 120, 144, 0)) {
     Run-Checked $milestonePlayer ("-batchmode -nographics -shiftboundCompareRun - -shiftboundStepRate $milestoneRate") (Join-Path $milestoneLogs "milestone1-final-route-$milestoneRate.log") 'SHIFTBOUND FULL ROUTE PASSED'
 }
 foreach ($milestoneRate in @(30, 60, 120, 144)) {
-    Run-Checked $milestonePlayer ("-batchmode -force-d3d11 -screen-width 1280 -screen-height 720 -screen-fullscreen 0 -shiftboundCompareRun - -shiftboundProductionInput -shiftboundStepRate $milestoneRate") (Join-Path $milestoneLogs "milestone1-production-route-$milestoneRate.log") 'SHIFTBOUND FULL ROUTE PASSED'
+    Run-Checked $milestonePlayer ("-batchmode -force-d3d11 -screen-width 1280 -screen-height 720 -screen-fullscreen 0 -shiftboundCompareRun - -shiftboundProductionInput -shiftboundFacingRegression -shiftboundStepRate $milestoneRate") (Join-Path $milestoneLogs "milestone1-production-route-$milestoneRate.log") 'SHIFTBOUND COURIER FACING PASSED'
     if (-not (Get-Content (Join-Path $milestoneLogs "milestone1-production-route-$milestoneRate.log") -Raw).Contains('input=production GameInput/Update/camera')) { throw 'Production input route did not run.' }
 }
+if ($milestoneIdentity.sourceFingerprint -ne (Get-CandidateSource $milestoneRoot)) { throw 'Source changed during verification. Results apply to the recorded binary; rebuild and verify current source before accepting.' }
 Write-Output "CURRENT-SOURCE AUTOMATED VERIFICATION PASSED: $($milestoneIdentity.sourceFingerprint). Physical touch, Android pacing and human review remain separate gates."

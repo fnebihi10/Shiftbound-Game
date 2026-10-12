@@ -1,0 +1,18 @@
+{
+    "scope":  "Isolated original-jog contact comparison; same gameplay position/camera at every sampled frame. Before uses unconstrained foot yaw.",
+    "resolution":  "1280x720 each",
+    "after":  "8faef7446031fab6d1183ddca71fee2c883ca8386521f23f355aa46a28936fe8",
+    "before":  "0605d9d7de129ec498337bc1ae3b21041e2b1336646669bd8f25946049e4fe69",
+    "fieldsEqual":  [
+                        "time_s",
+                        "speed_m_s",
+                        "grounded",
+                        "px",
+                        "py",
+                        "pz",
+                        "cx",
+                        "cy",
+                        "cz"
+                    ],
+    "frames":  140
+}

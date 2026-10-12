@@ -11,10 +11,15 @@ New-Item -ItemType Directory -Force $probeClasses,$probeDex | Out-Null
 $probePlatform=Join-Path $Sdk 'platforms/android-36/android.jar'
 $probeTools=Join-Path $Sdk 'build-tools/36.0.0'
 function Invoke-ProbeTool([string]$File,[string[]]$ToolArgs) {
-    & $File @ToolArgs
-    if($LASTEXITCODE -ne 0){throw "Probe build failed: $File"}
+    $previousPreference=$ErrorActionPreference
+    try {
+        $ErrorActionPreference='Continue'
+        & $File @ToolArgs 2>&1 | ForEach-Object { $_.ToString() }
+        $toolExit=$LASTEXITCODE
+    } finally { $ErrorActionPreference=$previousPreference }
+    if($toolExit -ne 0){throw "Probe build failed ($toolExit): $File"}
 }
-Invoke-ProbeTool (Join-Path $Jdk 'bin/javac.exe') @('-source','8','-target','8','-classpath',$probePlatform,'-d',$probeClasses,(Join-Path $PSScriptRoot 'PhoneTouchProbe/PhoneTouchProbe.java'))
+Invoke-ProbeTool (Join-Path $Jdk 'bin/javac.exe') @('-Xlint:-options','-source','8','-target','8','-classpath',$probePlatform,'-d',$probeClasses,(Join-Path $PSScriptRoot 'PhoneTouchProbe/PhoneTouchProbe.java'))
 $probeJar=Join-Path $probeOutput 'probe.jar'
 Invoke-ProbeTool (Join-Path $Jdk 'bin/jar.exe') @('cf',$probeJar,'-C',$probeClasses,'.')
 Invoke-ProbeTool (Join-Path $Jdk 'bin/java.exe') @('-classpath',(Join-Path $probeTools 'lib/d8.jar'),'com.android.tools.r8.D8','--min-api','26','--lib',$probePlatform,'--output',$probeDex,$probeJar)

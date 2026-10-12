@@ -82,5 +82,18 @@ namespace Shiftbound
             if (hard && hardLandingClip != null) clip = hardLandingClip;
             Play(clip, hard ? .9f : .7f);
         }
+
+        public void ResetForRun()
+        {
+            source.Stop();
+            steps.Stop();
+            stepIndex = 0;
+        }
+
+        public void Recovery()
+        {
+            ResetForRun();
+            Play(blockedClip, .32f);
+        }
     }
 }

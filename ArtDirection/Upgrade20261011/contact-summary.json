@@ -1,0 +1,23 @@
+{
+    "source_csv":  "C:\\Users\\Admin\\Desktop\\LINDI\\Shiftbound-Game\\.validation\\ProductionUpgrade\\Upgrade20261011\\VerifiedProduction\\courier-motion.csv",
+    "rows":  1936,
+    "feet":  [
+                 {
+                     "foot":  "l",
+                     "samples":  11,
+                     "horizontal_speed_m_s_p50":  0.072235120448669587,
+                     "horizontal_speed_m_s_p95":  0.090181741921856712,
+                     "horizontal_speed_m_s_max":  0.09678580730251729,
+                     "sampled_horizontal_travel_m":  0.011447099742855625
+                 },
+                 {
+                     "foot":  "r",
+                     "samples":  20,
+                     "horizontal_speed_m_s_p50":  0,
+                     "horizontal_speed_m_s_p95":  0,
+                     "horizontal_speed_m_s_max":  0,
+                     "sampled_horizontal_travel_m":  0
+                 }
+             ],
+    "scope":  "Consecutive grounded moving samples with IK weight \u003e=0.95. Measures post-animation horizontal foot displacement, including anchor reacquisition. Does not prove contact quality during weight ramps, airborne motion or low-speed transitions. No animation acceptance threshold inferred."
+}

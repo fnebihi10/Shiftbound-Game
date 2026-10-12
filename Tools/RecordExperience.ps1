@@ -1,14 +1,17 @@
 param(
  [Parameter(Mandatory=$true)][string]$Output,
- [ValidateSet('Orbit','Route','Layout')][string]$Scenario='Orbit',
+ [ValidateSet('Orbit','Route','Production','Layout')][string]$Scenario='Orbit',
  [int]$Width=1280,[int]$Height=720,[int]$Seconds=22,
  [string]$Player='',
- [string]$FFmpeg=''
+ [string]$FFmpeg='',
+ [string]$SourceRoot='',
+ [string]$AdditionalArguments=''
 )
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
+if($SourceRoot){$root=[IO.Path]::GetFullPath($SourceRoot)}
 if(-not $Player){$Player=Join-Path $root 'UnityProject/Builds/WindowsPolished/Shiftbound.exe'}
-if(-not $FFmpeg){$FFmpeg=Join-Path $root '.validation/AndroidTooling/ffmpeg.exe'}
+if(-not $FFmpeg){$FFmpeg=Join-Path (Split-Path -Parent $PSScriptRoot) '.validation/AndroidTooling/ffmpeg.exe'}
 . (Join-Path $PSScriptRoot 'CandidateSource.ps1')
 $identity=Get-Content ($Player+'.manifest.json') -Raw | ConvertFrom-Json
 if($identity.sourceFingerprint -ne (Get-CandidateSource $root)){throw 'Capture source differs from build; rebuild first.'}
@@ -18,8 +21,8 @@ foreach($binary in $identity.binaries){
 }
 [void][IO.Directory]::CreateDirectory($Output)
 [IO.File]::WriteAllText((Join-Path $Output 'identity.json'),($identity | ConvertTo-Json -Depth 8))
-$scenarioArgs=if($Scenario -eq 'Orbit'){'-shiftboundOrbitScenario'}elseif($Scenario -eq 'Route'){'-shiftboundCompareRun - -shiftboundProductionInput -shiftboundStepRate 60'}else{''}
-$launch="-batchmode -force-d3d11 -screen-width $Width -screen-height $Height -screen-fullscreen 0 -shiftboundTouchUI -shiftboundExperienceRecord `"$Output`" -shiftboundExperienceSeconds $Seconds $scenarioArgs -logFile `"$Output/player.log`""
+$scenarioArgs=if($Scenario -eq 'Orbit'){'-shiftboundOrbitScenario'}elseif($Scenario -eq 'Production'){'-shiftboundCompareRun - -shiftboundProductionInput -shiftboundStepRate 60 -shiftboundIncludeRecovery -shiftboundRepeatRoute -shiftboundFacingRegression -shiftboundMotionTelemetry "'+(Join-Path $Output 'courier-motion.csv')+'"'}elseif($Scenario -eq 'Route'){'-shiftboundCompareRun - -shiftboundProductionInput -shiftboundStepRate 60'}else{''}
+$launch="-batchmode -force-d3d11 -screen-width $Width -screen-height $Height -screen-fullscreen 0 -shiftboundTouchUI -shiftboundExperienceRecord `"$Output`" -shiftboundExperienceSeconds $Seconds $scenarioArgs $AdditionalArguments -logFile `"$Output/player.log`""
 [IO.File]::WriteAllText((Join-Path $Output 'launch.txt'),$launch)
 $p=Start-Process -FilePath $Player -ArgumentList $launch -WindowStyle Hidden -PassThru
 try {
@@ -27,7 +30,9 @@ try {
  if($p.ExitCode -ne 0){throw 'Experience player failed.'}
  $log=[IO.File]::ReadAllText((Join-Path $Output 'player.log'))
  if(-not $log.Contains('SHIFTBOUND EXPERIENCE CAPTURE COMPLETE') -or -not (Test-Path -LiteralPath (Join-Path $Output 'gameplay.wav'))){throw 'Missing actual video/audio evidence.'}
- if($Scenario -eq 'Route' -and -not $log.Contains('SHIFTBOUND FULL ROUTE PASSED')){throw 'Recorded route did not complete.'}
+ if($Scenario -in @('Route','Production') -and -not $log.Contains('SHIFTBOUND FULL ROUTE PASSED')){throw 'Recorded route did not complete.'}
+ if($Scenario -eq 'Production' -and (-not $log.Contains('SHIFTBOUND RECOVERY PASS') -or -not $log.Contains('SHIFTBOUND RUN RESET PASS') -or ([regex]::Matches($log,'SHIFTBOUND FULL ROUTE PASSED')).Count -ne 2)){throw 'Repeated route or recovery did not pass.'}
+ if($Scenario -eq 'Production' -and ([regex]::Matches($log,'SHIFTBOUND COURIER FACING PASSED')).Count -ne 2){throw 'Recorded anatomical facing did not pass on both runs.'}
  Add-Type -AssemblyName System.Drawing
  $first=[Drawing.Bitmap]::new((Join-Path $Output 'frame-00000.jpg'))
  try {

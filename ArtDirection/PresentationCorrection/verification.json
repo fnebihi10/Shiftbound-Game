@@ -1,0 +1,37 @@
+{
+    "sourceFingerprint":  "c69ca2565508e48ee972307e86ef749091b9313c1e128aefb4bc5b21c1d8a69c",
+    "unityPlayMode":  {
+                          "pass":  true,
+                          "fullRuns":  2,
+                          "recoveries":  2,
+                          "retainedResets":  1,
+                          "facing":  2
+                      },
+    "recordedPlayer":  {
+                           "pass":  true,
+                           "fullRuns":  2,
+                           "recoveries":  2,
+                           "retainedResets":  1,
+                           "facing":  2,
+                           "video_sha256":  "50b6da2190d00f2e1ca673019bfdd0a1a83839af7134f688e7667b9213ae242e"
+                       },
+    "intermediateSuite":  {
+                              "source":  "35abf31eeb092ba65dca0ec47bc0963e6e2634d3e388c09d433fd44b442948f9",
+                              "passed":  true,
+                              "scope":  "Full previous suite. Runtime scripts unchanged; final differs only in Editor correction script and visual scene, independently verified after removal."
+                          },
+    "sourceFileCount":  1148,
+    "source_zip_sha256":  "a1e6ac2af4291fc258c259b56fd5f36df1ff61be9e829835161fb87093fc6a21",
+    "windows_zip_sha256":  "cdeea65a9a74995df9ed9f7e8db374cb2debec929aecec2e783932f74c4dd130",
+    "limits":  "Synthetic input; no physical comfort or human normal-speed/audio acceptance; desktop callbacks not presented FPS; no Samsung device; native vendor RELRO fails.",
+    "sourceArchiveVerified":  true,
+    "audioEvidence":  {
+                          "duration_s":  37.61,
+                          "codec":  "AAC",
+                          "sampleRate":  48000,
+                          "channels":  2,
+                          "mean_db":  -35.2,
+                          "peak_db":  -17.7,
+                          "listeningAcceptance":  "NOT VERIFIED"
+                      }
+}

@@ -61,10 +61,19 @@ namespace Shiftbound
             foreach(var material in Resources.FindObjectsOfTypeAll<Material>())
                 if(material.name.Contains("Skyline")||material.name.Contains("Rooted leaves")||material.name.Contains("panorama"))
                     Row("material",material.name+" shader="+(material.shader!=null?material.shader.name:"NULL")+" supported="+(material.shader!=null&&material.shader.isSupported));
-            var identity=Resources.Load<TextAsset>("CandidateIdentity");
-            if(identity!=null)File.WriteAllText(Path.Combine(Application.persistentDataPath,"render-build-identity.json"),identity.text);
-            File.WriteAllText(Path.Combine(Application.persistentDataPath,"render-state.txt"),text.ToString());
             Debug.Log("SHIFTBOUND RUNTIME RENDER STATE:\n"+text);
+            try
+            {
+                var identity=Resources.Load<TextAsset>("CandidateIdentity");
+                if(identity!=null)File.WriteAllText(Path.Combine(Application.persistentDataPath,"render-build-identity.json"),identity.text);
+                File.WriteAllText(Path.Combine(Application.persistentDataPath,"render-state.txt"),text.ToString());
+            }
+            catch(Exception error) when(error is IOException || error is UnauthorizedAccessException)
+            {
+                // Diagnostic storage failure must not interrupt rendering or
+                // hide the useful snapshot already emitted to the player log.
+                Debug.LogWarning("SHIFTBOUND RENDER SNAPSHOT FILE UNAVAILABLE: "+error.Message);
+            }
         }
     }
 }

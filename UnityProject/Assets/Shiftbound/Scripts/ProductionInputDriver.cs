@@ -29,7 +29,7 @@ namespace Shiftbound
             // retains normal interruption handling. Inactive window diagnostics
             // must not silently discard queued gamepad events.
             originalSettings = InputSystem.settings;
-            testSettings = Instantiate(originalSettings);
+            testSettings = originalSettings != null ? Instantiate(originalSettings) : ScriptableObject.CreateInstance<InputSettings>();
             testSettings.hideFlags = HideFlags.DontSave;
 #if UNITY_EDITOR
             testSettings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
@@ -71,7 +71,7 @@ namespace Shiftbound
         private void OnDestroy()
         {
             if (pad != null) InputSystem.RemoveDevice(pad);
-            if (originalSettings != null) InputSystem.settings = originalSettings;
+            InputSystem.settings = originalSettings != null ? originalSettings : ScriptableObject.CreateInstance<InputSettings>();
             if (testSettings != null) Destroy(testSettings);
         }
     }

@@ -16,6 +16,8 @@ namespace Shiftbound
         public bool HasFired => fired;
         private bool fired;
 
+        public void ResetForRun() => fired = false;
+
         private void OnTriggerEnter(Collider other)
         {
             TryActivate(other);

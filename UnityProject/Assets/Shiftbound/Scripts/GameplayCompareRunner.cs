@@ -13,6 +13,9 @@ namespace Shiftbound
         private string motionDirectory;
         private int motionFrame;
         private bool productionInput;
+        private bool includeRecovery;
+        private int runsRemaining=1;
+        private ProductionInputDriver activeDriver;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void MaybeRun()
         {
@@ -22,6 +25,8 @@ namespace Shiftbound
             var runner = new GameObject("Full route regression").AddComponent<GameplayCompareRunner>();
             runner.capturePath = args[index + 1];
             runner.productionInput = Array.IndexOf(args, "-shiftboundProductionInput") >= 0;
+            runner.includeRecovery=Array.IndexOf(args,"-shiftboundIncludeRecovery")>=0;
+            runner.runsRemaining=Array.IndexOf(args,"-shiftboundRepeatRoute")>=0?2:1;
             int hz = Array.IndexOf(args, "-shiftboundStepRate");
             if (hz >= 0 && hz + 1 < args.Length && int.TryParse(args[hz + 1], out int value)) runner.rate = value;
             int motion = Array.IndexOf(args, "-shiftboundMotionFrames");
@@ -42,7 +47,8 @@ namespace Shiftbound
             if (motor == null || worlds == null || flow == null || rate < 0 || rate > 1000)
             { Fail("Missing systems or invalid step rate"); yield break; }
             motor.enabled = productionInput;
-            ProductionInputDriver driver = productionInput ? gameObject.AddComponent<ProductionInputDriver>() : null;
+            ProductionInputDriver driver = productionInput ? (activeDriver!=null?activeDriver:gameObject.AddComponent<ProductionInputDriver>()) : null;
+            activeDriver=driver;
             if (driver != null) driver.editorFrameRate = rate > 0 ? rate : 60;
             if (productionInput)
             {
@@ -62,6 +68,26 @@ namespace Shiftbound
             }
             Transform oldView = motor.view;
             if (!productionInput) motor.view = null;
+            if(includeRecovery && driver!=null)
+            {
+                driver.Set(Vector2.zero,false);
+                driver.SetLook(new Vector2(.5f,0));yield return new WaitForSeconds(.55f);
+                driver.SetLook(new Vector2(-.5f,0));yield return new WaitForSeconds(.55f);
+                driver.SetLook(Vector2.zero);
+                flow.TogglePause();yield return new WaitForSecondsRealtime(.55f);flow.TogglePause();
+                yield return null;yield return null;
+                driver.Set(Vector2.up*.22f,false);yield return new WaitForSeconds(.55f);
+                driver.Set(Vector2.down*.45f,false);yield return new WaitForSeconds(.35f);
+                driver.Set(Vector2.up,false);yield return new WaitForSeconds(.25f);
+                driver.Set(Vector2.zero,false);yield return new WaitForSeconds(.30f);
+                driver.Set(Vector2.left,false);yield return new WaitForSeconds(.15f);
+                driver.Set(Vector2.right,false);yield return new WaitForSeconds(.15f);
+                driver.Set(Vector2.zero,false);yield return new WaitForSeconds(.3f);
+                driver.Set(Vector2.zero,true);yield return new WaitForSeconds(.9f);
+                driver.Set(Vector2.zero,false);yield return new WaitForSeconds(.15f);
+                if(!motor.IsGrounded){Fail("Opening stationary jump did not recover");yield break;}
+                Debug.Log("SHIFTBOUND MOTION PRELUDE: walk/jog/sprint/brake/reverse/stationary jump through normal input.");
+            }
             string[] roofs = { "Start rooftop", "First landing", "First alternate bridge", "Shift landing",
                 "Midair takeoff", "Midair destination", "Midair landing", "Right route", "Return route",
                 "Route landing", "Final present", "Final alternate", "Goal rooftop" };
@@ -144,6 +170,28 @@ namespace Shiftbound
                     { Fail("First Shift lesson guidance persisted beyond its authored exit"); yield break; }
                 }
                 Debug.Log("SHIFTBOUND ROUTE LEG PASS: " + roofs[leg] + " rate=" + rate + " position=" + motor.transform.position);
+                if(includeRecovery && driver!=null && leg==1)
+                {
+                    int checkpointIdentity=flow.CheckpointSequence;
+                    driver.Set(Vector2.zero,false);yield return null;
+                    driver.Set(Vector2.right,true);
+                    // Recovery advances with gameplay physics. Fixed comparison
+                    // capture may render slower than real time; its wall clock
+                    // must not expire before the simulated fall has occurred.
+                    float deadline=Time.time+5f;
+                    bool fell=false,recovered=false;
+                    while(Time.time<deadline)
+                    {
+                        if(motor.transform.position.y < -2f)fell=true;
+                        if(fell && Vector3.Distance(motor.transform.position,flow.CheckpointPosition)<.5f)
+                        {recovered=true;break;}
+                        yield return null;
+                    }
+                    driver.Set(Vector2.zero,false);yield return null;yield return null;
+                    if(!recovered || flow.CheckpointSequence!=checkpointIdentity || !flow.HasShiftBridgeGuidance)
+                    {Fail("Actual falling/checkpoint recovery failed: fell="+fell+" recovered="+recovered+" player="+motor.transform.position+" checkpoint="+flow.CheckpointPosition);yield break;}
+                    Debug.Log("SHIFTBOUND RECOVERY PASS: actual fall, checkpoint retained, inputs cleared, lesson restored.");
+                }
             }
             for (int i = 0; i < 500 && !flow.IsComplete; i++, frame++)
             {
@@ -173,9 +221,11 @@ namespace Shiftbound
             Vector3 finishCameraPosition = finishCamera.transform.position;
             yield return new WaitForSecondsRealtime(0.3f);
             Animator courierAnimator = motor.GetComponentInChildren<Animator>();
+            var courierDriver=motor.GetComponentInChildren<RiggedCourierAnimator>();
+            int expectedRest=Animator.StringToHash(courierDriver!=null && courierDriver.authoredActions?"Rest":"Idle");
             if (courierAnimator == null ||
                 courierAnimator.GetCurrentAnimatorClipInfo(0).Length == 0 ||
-                courierAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash != Animator.StringToHash("Idle") ||
+                courierAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash != expectedRest ||
                 Vector3.Distance(finishCameraPosition, finishCamera.transform.position) > 0.001f)
             { Fail("Completion animation/camera did not settle into idle/frozen state"); yield break; }
             if (motionDirectory != null)
@@ -197,6 +247,20 @@ namespace Shiftbound
                 " input=" + (productionInput ? "production GameInput/Update/camera" : "direct Step") +
                 " actual checkpoints=3; actual goal; stopped completion motion.");
             if (driver != null) Debug.Log("SHIFTBOUND PRODUCTION TIMING: requestedRate=" + rate + " " + driver.Timing);
+            if(--runsRemaining>0)
+            {
+                driver?.Set(Vector2.zero,false);
+                driver?.SetLook(Vector2.zero);
+                yield return null;yield return null;
+                flow.Restart();
+                yield return null;
+                if(!flow.IsPlaying || flow.IsComplete || flow.IsPaused || flow.CheckpointSequence!=0 || flow.worlds.IsAltered ||
+                    flow.Elapsed>.2f || Array.Exists(FindObjectsByType<StageTrigger>(FindObjectsSortMode.None),t=>t.HasFired))
+                {Fail("Retained-scene reset did not clear the run state");yield break;}
+                Debug.Log("SHIFTBOUND RUN RESET PASS: same scene, all triggers rearmed, Present, cleared completion/checkpoint/input/clock.");
+                yield return Start();
+                yield break;
+            }
             Application.Quit(0);
         }
         private void Capture(Camera camera)

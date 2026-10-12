@@ -290,7 +290,8 @@ namespace Shiftbound
             { motor.Step(Dt(rate, i), Vector2.zero, false, false); peak = Mathf.Max(peak, motor.transform.position.y); }
             Require(motor.IsGrounded && motor.LandingSequence == sequence + 1 && motor.LastLandingSpeed > 0f,
                 "one impact per landing", rate);
-            Require(motor.visual.localScale.y < 1f, "post-move landing squash", rate);
+            Require((motor.visual.localScale - Vector3.one).sqrMagnitude < .00001f,
+                "landing preserves visual scale for rig recovery", rate);
             return peak;
         }
 

@@ -1,0 +1,11 @@
+{
+    "reference_colliders":  67,
+    "candidate_colliders":  67,
+    "changed":  [
+
+                ],
+    "added":  [
+
+              ],
+    "scope":  "Serialized Collider and CharacterController sections, not Transform blocks or runtime assertions"
+}

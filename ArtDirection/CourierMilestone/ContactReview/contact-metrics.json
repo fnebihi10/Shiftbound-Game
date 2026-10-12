@@ -1,0 +1,55 @@
+[
+    {
+        "candidate":  "before",
+        "foot":  "left",
+        "fullyWeightedSamples":  186,
+        "minimumSole":  0,
+        "p95Sole":  0.00233,
+        "maximumSole":  0.05284,
+        "stopAt2_56667":  [
+                              {
+                                  "time_s":  "2.56667",
+                                  "left_sole_distance_m":  "0.05284"
+                              }
+                          ]
+    },
+    {
+        "candidate":  "before",
+        "foot":  "right",
+        "fullyWeightedSamples":  200,
+        "minimumSole":  -0.00058,
+        "p95Sole":  0,
+        "maximumSole":  0,
+        "stopAt2_56667":  [
+
+                          ]
+    },
+    {
+        "candidate":  "after",
+        "foot":  "left",
+        "fullyWeightedSamples":  185,
+        "minimumSole":  0,
+        "p95Sole":  0,
+        "maximumSole":  0.00453,
+        "stopAt2_56667":  [
+                              {
+                                  "time_s":  "2.56667",
+                                  "left_sole_distance_m":  "0.00453"
+                              }
+                          ]
+    },
+    {
+        "candidate":  "after",
+        "foot":  "right",
+        "fullyWeightedSamples":  183,
+        "minimumSole":  0,
+        "p95Sole":  0,
+        "maximumSole":  0,
+        "stopAt2_56667":  [
+                              {
+                                  "time_s":  "2.56667",
+                                  "right_sole_distance_m":  "0.00000"
+                              }
+                          ]
+    }
+]

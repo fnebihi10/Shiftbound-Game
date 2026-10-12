@@ -1,0 +1,31 @@
+{
+    "sourceFingerprint":  "84c74f6bb04571ef455bd3d9995054f9e5aade35f3f758772b7c8319fd51ce7e",
+    "facingResults":  [
+                          {
+                              "rate":  30,
+                              "facingPass":  true,
+                              "routePass":  true,
+                              "evidence":  "SHIFTBOUND COURIER FACING PASSED: samples=310 minimumDot=0.8945619\r"
+                          },
+                          {
+                              "rate":  60,
+                              "facingPass":  true,
+                              "routePass":  true,
+                              "evidence":  "SHIFTBOUND COURIER FACING PASSED: samples=623 minimumDot=0.9011459\r"
+                          },
+                          {
+                              "rate":  120,
+                              "facingPass":  true,
+                              "routePass":  true,
+                              "evidence":  "SHIFTBOUND COURIER FACING PASSED: samples=1255 minimumDot=0.9057301\r"
+                          },
+                          {
+                              "rate":  144,
+                              "facingPass":  true,
+                              "routePass":  true,
+                              "evidence":  "SHIFTBOUND COURIER FACING PASSED: samples=1501 minimumDot=0.900036\r"
+                          }
+                      ],
+    "windowsZipSha256":  "91d7bbaf240ca3643e0383948584a7d7d97a448e59a8a0c99ac78de296f9ed94",
+    "sourceZipSha256":  "68d9b9f8c58e1c25081d6e77491c8570b52ee3c1663b2d618edcf82b7bf42788"
+}

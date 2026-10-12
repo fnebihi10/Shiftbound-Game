@@ -12,7 +12,8 @@ public static class CourierParityAudit
     [InitializeOnLoadMethod]
     private static void RegisterBatchExit()
     {
-        if (Environment.GetCommandLineArgs().Contains("-shiftboundProductionInput"))
+        if (Environment.GetCommandLineArgs().Contains("-shiftboundProductionInput") &&
+            !Environment.GetCommandLineArgs().Contains("-shiftboundRepeatRoute"))
         {
             Application.logMessageReceived -= OnTestMessage;
             Application.logMessageReceived += OnTestMessage;

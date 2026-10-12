@@ -36,8 +36,8 @@ public static class AndroidDelivery
     public static void Configure()
     {
         PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, "com.shiftboundproject.shiftbound");
-        PlayerSettings.bundleVersion = "0.3.1";
-        PlayerSettings.Android.bundleVersionCode = 4;
+        PlayerSettings.bundleVersion = "0.4.0";
+        PlayerSettings.Android.bundleVersionCode = 5;
         PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel26;
         PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)36;
         PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);

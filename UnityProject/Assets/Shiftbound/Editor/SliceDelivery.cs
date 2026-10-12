@@ -42,7 +42,7 @@ public static class SliceDelivery
         ValidateScene();
         string outputRoot = Environment.GetEnvironmentVariable("SHIFTBOUND_BUILD_DIR");
         if (string.IsNullOrEmpty(outputRoot))
-            outputRoot = Path.GetFullPath(Path.Combine(Application.dataPath, "../Builds/WindowsPolished"));
+            outputRoot = Path.GetFullPath(Path.Combine(Application.dataPath, "../Builds/WindowsCandidate"));
         Directory.CreateDirectory(outputRoot);
         CandidateProvenance.Manifest identity = CandidateProvenance.Begin("Windows");
         BuildReport report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
@@ -81,8 +81,13 @@ public static class SliceDelivery
         worlds.SynchronizeProbe();
         Physics.SyncTransforms();
         RiggedCourierAnimator courier = UnityEngine.Object.FindFirstObjectByType<RiggedCourierAnimator>();
-        AnimatorController motion = courier != null ?
-            courier.GetComponent<Animator>().runtimeAnimatorController as AnimatorController : null;
+        RuntimeAnimatorController runtimeMotion=courier!=null?courier.GetComponent<Animator>().runtimeAnimatorController:null;
+        if(runtimeMotion!=null)
+            foreach(var clip in runtimeMotion.animationClips)
+                if(clip==null || clip.length<=0 || !clip.isHumanMotion || clip.name.StartsWith("__preview__",StringComparison.Ordinal))
+                    throw new Exception("Courier runtime controller contains an invalid action clip.");
+        while(runtimeMotion is AnimatorOverrideController replacement)runtimeMotion=replacement.runtimeAnimatorController;
+        AnimatorController motion=runtimeMotion as AnimatorController;
         if (motion == null || motion.layers.Length == 0)
             throw new Exception("Courier animation controller is missing.");
         bool uprightIdle = false;

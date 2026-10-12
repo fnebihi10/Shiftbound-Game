@@ -1,0 +1,23 @@
+{
+    "source_csv":  "C:\\Users\\Admin\\Desktop\\LINDI\\Shiftbound-Game\\.validation\\CourierMilestone\\IntegratedHuman\\FinalGameplay\\courier-motion.csv",
+    "rows":  1944,
+    "feet":  [
+                 {
+                     "foot":  "l",
+                     "samples":  76,
+                     "horizontal_speed_m_s_p50":  0,
+                     "horizontal_speed_m_s_p95":  0.0589318479581464,
+                     "horizontal_speed_m_s_max":  0.16428353012508093,
+                     "sampled_horizontal_travel_m":  0.012960790038948006
+                 },
+                 {
+                     "foot":  "r",
+                     "samples":  123,
+                     "horizontal_speed_m_s_p50":  0,
+                     "horizontal_speed_m_s_p95":  0,
+                     "horizontal_speed_m_s_max":  0.075987149761440789,
+                     "sampled_horizontal_travel_m":  0.00391955508533259
+                 }
+             ],
+    "scope":  "Consecutive grounded moving samples with IK weight \u003e=0.95. Measures post-animation horizontal foot displacement, including anchor reacquisition. Does not prove contact quality during weight ramps, airborne motion or low-speed transitions. No animation acceptance threshold inferred."
+}

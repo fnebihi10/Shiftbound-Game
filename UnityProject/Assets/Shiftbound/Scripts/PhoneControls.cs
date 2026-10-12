@@ -18,11 +18,12 @@ namespace Shiftbound
         private GUIStyle label;
         private Texture2D disc;
         private int diagnosticTaps;
+        private PhoneHUDCanvas hud;
         public double LastEventTime { get; private set; }
         public int EventFrame { get; private set; } = -1;
 
         private void OnEnable() { EnhancedTouchSupport.Enable(); }
-        private void Start() { if (Visible) gameObject.AddComponent<PhoneHUDCanvas>(); }
+        private void Start() { if (Visible) hud=gameObject.AddComponent<PhoneHUDCanvas>(); }
         private void OnDisable() { Router.Reset(); EnhancedTouchSupport.Disable(); }
         public void Cancel() { Router.Reset(); suppressed = true; }
         public Vector2 ToUI(Vector2 screen) => new Vector2((screen.x - Screen.safeArea.x) / Scale,
@@ -67,6 +68,7 @@ namespace Shiftbound
         private void OnGUI()
         {
             if (!Visible || GameFlow.Instance == null) return;
+            if (hud != null && hud.Ready) return;
             if (GameFlow.Instance.IsPlaying) return; // Canvas owns the play HUD.
             Layout();
             Matrix4x4 old = GUI.matrix;
@@ -95,7 +97,7 @@ namespace Shiftbound
             else DrawMenu();
             GUI.matrix = old;
         }
-        private Rect MenuRect(int row) => new Rect(Width * .5f - 250f, 126f + row * 51f, 500f, 46f);
+        public Rect MenuRect(int row) => new Rect(Width * .5f - 250f, 126f + row * 51f, 500f, 46f);
         private void MenuTouch(Vector2 p, bool began)
         {
             if (began && new Rect(Width*.5f-250f,80f,500f,42f).Contains(p)) diagnosticTaps++;
@@ -123,7 +125,7 @@ namespace Shiftbound
             }
             PlayerPreferences.Save();
         }
-        private bool ShowDiagnostics => diagnosticTaps >= 5 || Debug.isDebugBuild || Array.IndexOf(Environment.GetCommandLineArgs(), "-shiftboundQA") >= 0;
+        public bool ShowDiagnostics => diagnosticTaps >= 5 || Debug.isDebugBuild || Array.IndexOf(Environment.GetCommandLineArgs(), "-shiftboundQA") >= 0;
         private void DrawMenu()
         {
             GUI.Box(new Rect(Width * .5f - 270f, 78f, 540f, ShowDiagnostics ? 615f : 565f), GUIContent.none);

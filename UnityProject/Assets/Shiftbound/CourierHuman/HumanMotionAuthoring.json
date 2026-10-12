@@ -1,0 +1,68 @@
+[
+  {
+    "name": "CourierIdle",
+    "duration": 2.0,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierWalk",
+    "duration": 0.9,
+    "nominalSpeed": 1.5,
+    "stance": 0.55
+  },
+  {
+    "name": "CourierRun",
+    "duration": 0.64,
+    "nominalSpeed": 3.6,
+    "stance": 0.32
+  },
+  {
+    "name": "CourierSprint",
+    "duration": 0.45,
+    "nominalSpeed": 7.5,
+    "stance": 0.23
+  },
+  {
+    "name": "CourierJumpStanding",
+    "duration": 1.0,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierJumpMoving",
+    "duration": 1.0,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierJumpLightStanding",
+    "duration": 1.0,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierJumpLightMoving",
+    "duration": 1.0,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierFall",
+    "duration": 0.8,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierLandSoft",
+    "duration": 0.42,
+    "nominalSpeed": 0,
+    "stance": 0
+  },
+  {
+    "name": "CourierLandHard",
+    "duration": 0.55,
+    "nominalSpeed": 0,
+    "stance": 0
+  }
+]

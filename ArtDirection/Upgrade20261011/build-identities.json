@@ -1,0 +1,11 @@
+{
+    "sourceFingerprint":  "731a000106663427099248e204e218ad2da0b384055a8cfcdea3243f221f48ef",
+    "windowsSource":  "731a000106663427099248e204e218ad2da0b384055a8cfcdea3243f221f48ef",
+    "androidSource":  "731a000106663427099248e204e218ad2da0b384055a8cfcdea3243f221f48ef",
+    "allMatch":  true,
+    "windowsBuiltUtc":  "2026-10-11T13:34:37.2773587Z",
+    "androidBuiltUtc":  "2026-10-11T13:35:17.2301108Z",
+    "apkSha256":  "6767ee0dfa7fd325ca650539b953e6337854db63fa95048124a921684a9f0f80",
+    "unity":  "6000.3.25f1",
+    "revision":  "e7af46e0d6ee366a8413171348b0105825564200"
+}
